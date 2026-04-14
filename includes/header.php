@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +28,20 @@
             <li>Inicio</li>
             <li>Acerca de</li>
             <li>Productos</li>
+            <?php
+            if(isset($_SESSION['rol'])){
+            echo '<li>Ofertas</li>';
+            }
+            ?>
             <li>Contacto</li>
-            <li><a href="login.php"></a>Login</li>
+            <?php
+            if(isset($_SESSION['rol'])){
+            echo '<li><a href="logout.php">Logout</a></li>';
+            }else{
+            echo '<li><a href="login.php">Login</a></li>';
+            }
+            ?>
+            
         </ul>
     </nav>
 </header>
