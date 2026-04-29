@@ -27,7 +27,6 @@ session_start();
         <ul class="menu">
             <li><a href="index.php">Inicio</a></li>
             <li><a href="Acercade.php">Acerca de</a></li>
-            <li><a href="Productos.php">Productos</a></li>
             <?php
             if(isset($_SESSION['rol'])){
             echo '<li><a href="exclusivas.php">Exclusivas</a></li>';
