@@ -132,7 +132,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
         <div class="form-grupo">
             <label>Imagen</label>
-            <input type="file" name="imagen" accept="image/*">
+            <input type="file" name="imagen" accept="image/*" required>
         </div>
 
         <div class="form-botones">
