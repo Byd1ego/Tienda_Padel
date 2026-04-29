@@ -30,7 +30,7 @@ session_start();
             <li><a href="Productos.php">Productos</a></li>
             <?php
             if(isset($_SESSION['rol'])){
-            echo '<li>Ofertas</li>';
+            echo '<li><a href="exclusivas.php">Exclusivas</a></li>';
             }
             ?>
             <li><a href="Contacto.php">Contacto</a></li>
