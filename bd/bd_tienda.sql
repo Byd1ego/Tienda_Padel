@@ -15,9 +15,10 @@ CREATE TABLE producto (
     marca VARCHAR(100),
     nivel ENUM('principiante', 'intermedio', 'avanzado'),
     forma ENUM('redonda', 'lagrima', 'diamante'),
-    peso INT, -- en gramos
+    peso INT,
     pvp DECIMAL(10,2) NOT NULL,
-    oferta BOOLEAN DEFAULT FALSE
+    oferta BOOLEAN DEFAULT FALSE,
+    imagen VARCHAR(255)
 );
 
 -- =========================
@@ -42,16 +43,3 @@ CREATE TABLE stock (
     FOREIGN KEY (tienda) REFERENCES tienda(cod)
 );
 
--- =========================
--- TABLA: usuarios
--- =========================
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    telefono VARCHAR(15),
-    direccion TEXT,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    es_admin BOOLEAN DEFAULT FALSE
-);

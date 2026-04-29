@@ -41,6 +41,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
     if (count($productos) > 0) {
         echo "<table border='1' class='tabla-admin'>";
+
         echo "<tr>
                 <th>Imagen</th>
                 <th>Código</th>

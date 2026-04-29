@@ -43,9 +43,11 @@ include_once 'includes/header.php';
                 <p>🕐 Lunes - Viernes: 9:00 - 20:00</p>
             </div>
 
-        </div><!-- fin contacto-bloque -->
 
-    </div><!-- fin contacto-contenedor -->
+        </div>
+
+    </div>
+
 </main>
 
 <script>
