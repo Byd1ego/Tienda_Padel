@@ -1,200 +1,288 @@
 * {
-            padding: 0;
-            margin: 0;
-        }
+    padding: 0;
+    margin: 0;
+}
 
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px;
-            background-color: black;
-            color: white;
-        }
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: black;
+    color: white;
+}
 
-        footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: black;
-            color: white;
-            padding: 10px;
-        }
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
 
-        footer>p:nth-child(2) {
-            align-self: flex-end;
-        }
+footer>p:nth-child(2) {
+    align-self: flex-end;
+}
 
-        .contenedor>div>img {
-            background-color: gray;
-        }
+main {
+    background-color: lightgray;
+    padding: 20px;
+}
 
-        main {
-            background-color: lightgray;
-            text-align: center;
-            padding: 20px;
-        }
+main>h2 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 
-        .contenedorgrid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+.contenedorgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
 
-        main>h2 {
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
+/* ── MENÚ ── */
+.menu {
+    list-style: none;
+    position: absolute;
+    top: 8em;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    z-index: 1000;
+}
 
-        .menu {
-            list-style: none;
-            position: absolute;
-            top: 80px;
-            left: 0;
-            background-color: black;
-            width: 100%;
-            display: none;
-            flex-direction: column;
-            text-align: center;
-            z-index: 1000;
-            top: 8em;
+.menu li {
+    padding: 15px;
+    border-top: 1px solid #333;
+}
 
+.menu>li>a {
+    color: white;
+    text-decoration: none;
+}
 
-        }
+#hamburguesa {
+    display: none;
+}
 
-        .menu li {
-            padding: 15px;
-            border-top: 1px solid #333;
-            
-        }
-
-
-        #hamburguesa:checked~.menu {
-            display: flex;
-        }
-
-
-        #icono {
-            cursor: pointer;
-        }
-        .menu>li>a{
-            color: white;
-            text-decoration: none;
-            
-        }
-
-        .card {
-            background-color: white;
-            border-radius: 16px;
-            padding: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin: auto;
-            max-width: 320px;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
-        }
-        #hamburguesa {
-            display: none;
-        }
-
-        .card img {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            font-size: 18px;
-            font-weight: bold;
-            color: #111;
-        }
-        #icono {
+#icono {
     cursor: pointer;
     font-size: 39px;
     user-select: none;
 }
 
-#hamburguesa:checked ~ nav .menu {
+#hamburguesa:checked~.menu {
     display: flex;
 }
 
+#hamburguesa:checked~nav .menu {
+    display: flex;
+}
+
+/* ── CARDS ── */
+.card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: auto;
+    max-width: 320px;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #111;
+}
+
+/* ── CONTACTO ── */
+.contacto-contenedor {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.contacto-titulo {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.contacto-bloque {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.contacto-formulario {
+    flex: 2;
+}
+
+.contacto-formulario h2 {
+    margin-bottom: 20px;
+}
+
+.contacto-info {
+    flex: 1;
+}
+
+.contacto-info h2 {
+    margin-bottom: 20px;
+}
+
+.contacto-info p {
+    margin: 12px 0;
+}
+
+.contacto-info a {
+    color: #111;
+    text-decoration: none;
+}
+
+.contacto-info a:hover {
+    text-decoration: underline;
+}
+
+.contacto-mapa {
+    height: 350px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#mapa {
+    height: 100%;
+    width: 100%;
+}
+
+.contacto-ok {
+    background: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+/* ── FORMULARIO ── */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-grupo label {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.form-grupo input,
+.form-grupo textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-grupo textarea {
+    resize: vertical;
+}
+
+.form-botones {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.boton-nuevo {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.boton-nuevo:hover {
+    background-color: #333;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .contacto-bloque {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 768px) {
+    .contenedorgrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #icono { display: none; }
+
+    .menu {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        width: auto;
+        gap: 20px;
+        background: none;
+    }
+
+    .menu li {
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 1200px) {
+    .contenedorgrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #icono { display: none; }
+
+    .menu {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        width: auto;
+        gap: 20px;
+        background: none;
+    }
+
+    .menu li {
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+}
 
 
-        @media (min-width:768px) {
-            .contenedorgrid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            #hamburguesa {
-            display: none;
-        }
-
-            #icono {
-                font-size: 39px;
-                cursor: pointer;
-                user-select: none;
-                display: none;
-            }
-
-
-            .menu {
-                position: static;
-                display: flex !important;
-                flex-direction: row;
-                width: auto;
-                gap: 20px;
-                background: none;
-            }
-
-            .menu li {
-                border: none;
-                padding: 0;
-                cursor: pointer;
-            }
-
-        }
-
-        @media (min-width:1200px) {
-            .contenedorgrid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-                
-            }
-            #hamburguesa {
-            display: none;
-        }
-            
-
-            #icono {
-                font-size: 39px;
-                cursor: pointer;
-                user-select: none;
-                display: none;
-            }
-
-
-            .menu {
-                position: static;
-                display: flex !important;
-                flex-direction: row;
-                width: auto;
-                gap: 20px;
-                background: none;
-                
-            }
-
-            .menu li {
-                border: none;
-                padding: 0;
-                cursor: pointer;
-                top: 20em;
-            }
-
-           
-        }
+        
