@@ -13,7 +13,7 @@ include_once 'includes/header.php';
         odio optio provident porro distinctio quaerat deleniti. Quas quidem dignissimos ex expedita, cum
         veritatis dolorum quisquam impedit quis?</p>
 
-    <h2>OFERTAS</h2>
+    <h2>Algunos de nuestros productos</h2>
 
     <?php
     require_once 'includes/conexion.php';
