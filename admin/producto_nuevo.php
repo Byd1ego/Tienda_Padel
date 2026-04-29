@@ -16,8 +16,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 </head>
 <body>
 
-<div class="contenedor">
-    <h1>➕ Nuevo producto</h1>
+<div class="admin-contenedor">
+    <h1 class="admin-titulo">➕ Nuevo producto</h1>
 
     <?php
     require_once '../includes/conexion.php';
@@ -26,27 +26,38 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     // Insertar producto
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $sql = "INSERT INTO producto (cod, nombre, nombre_corto, descripcion, PVP, familia)
-                VALUES (:cod, :nombre, :nombre_corto, :descripcion, :pvp, :familia)";
+        $sql = "INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, oferta)
+                VALUES (:cod, :nombre, :nombre_corto, :descripcion, :marca, :nivel, :forma, :peso, :pvp, :oferta)";
 
         $stmt = $conexion->prepare($sql);
 
-        $stmt->bindValue(':cod', $_POST['cod']);
-        $stmt->bindValue(':nombre', $_POST['nombre']);
+        $stmt->bindValue(':cod',          $_POST['cod']);
+        $stmt->bindValue(':nombre',       $_POST['nombre']);
         $stmt->bindValue(':nombre_corto', $_POST['nombre_corto']);
-        $stmt->bindValue(':descripcion', $_POST['descripcion']);
-        $stmt->bindValue(':pvp', $_POST['pvp'], PDO::PARAM_STR);
-        $stmt->bindValue(':familia', $_POST['familia']);
-
+        $stmt->bindValue(':descripcion',  $_POST['descripcion']);
+        $stmt->bindValue(':marca',        $_POST['marca']);
+        $stmt->bindValue(':nivel',        $_POST['nivel']);
+        $stmt->bindValue(':forma',        $_POST['forma']);
+        $stmt->bindValue(':peso',         $_POST['peso'], PDO::PARAM_INT);
+        $stmt->bindValue(':pvp',          $_POST['pvp'], PDO::PARAM_STR);
+        $stmt->bindValue(':oferta',       isset($_POST['oferta']) ? 1 : 0, PDO::PARAM_INT);
         try {
             $stmt->execute();
             header("Location: productos.php");
             exit();
         } catch (Exception $e) {
-            echo "<p style='color:red'>Error al insertar el producto</p>";
+            echo "<p style='color:red'>Error al insertar el producto: " . $e->getMessage() . "</p>";
         }
     }    
     ?>
+
+    <div class="admin-barra">
+        <div class="admin-botones">
+            <a href="../index.php" class="boton-tienda">Tienda</a>
+            <a href="productos.php" class="boton-nuevo">← Volver a productos</a>
+            <a href="../logout.php" class="boton-cerrar">Cerrar sesión</a>
+        </div>
+    </div>
 
     <form method="post" class="formulario">
 
@@ -71,20 +82,38 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
         </div>
 
         <div class="form-grupo">
+            <label>Marca</label>
+            <input type="text" name="marca">
+        </div>
+
+        <div class="form-grupo">
+            <label>Nivel</label>
+            <input type="text" name="nivel">
+        </div>
+
+        <div class="form-grupo">
+            <label>Forma</label>
+            <input type="text" name="forma">
+        </div>
+
+        <div class="form-grupo">
+            <label>Peso (g)</label>
+            <input type="number" name="peso" min="0">
+        </div>
+
+        <div class="form-grupo">
             <label>Precio (€)</label>
             <input type="number" step="0.01" name="pvp" required>
         </div>
 
         <div class="form-grupo">
-            <label>Familia</label>
-            <?php                
-                echo generarSelect($conexion, 'producto', 'familia', 'familia', '', false);
-            ?>
+            <label>Oferta</label>
+            <input type="checkbox" name="oferta" value="1">
         </div>
 
         <div class="form-botones">
-            <a href="productos.php" class="btn btn-borrar">Cancelar</a>
-            <button type="submit" class="btn btn-nuevo">Guardar</button>
+            <a href="productos.php" class="boton-borrar">Cancelar</a>
+            <button type="submit" class="boton-nuevo">Guardar</button>
         </div>
 
     </form>

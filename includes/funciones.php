@@ -5,15 +5,18 @@
             $html .= " <option value='TODAS'>TODAS</option>\n";
         }
 
-        // Consulta usando PDO
-        $sql = "SELECT DISTINCT $columna FROM $tabla ORDER BY $columna";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute();
+        try {
+            $sql = "SELECT DISTINCT $columna FROM $tabla ORDER BY $columna";
+            $stmt = $conexion->prepare($sql);
+            $stmt->execute();
 
-        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $fila) {
-            $opcion = htmlspecialchars($fila[$columna]);
-            $selected = ($valorSeleccionado === $opcion) ? " selected" : "";
-            $html .= " <option value='$opcion'$selected>$opcion</option>\n";
+            foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $fila) {
+                $opcion = htmlspecialchars($fila[$columna]);
+                $selected = ($valorSeleccionado === $opcion) ? " selected" : "";
+                $html .= " <option value='$opcion'$selected>$opcion</option>\n";
+            }
+        } catch (Exception $e) {
+            $html .= "<option value=''>Error al cargar opciones</option>\n";
         }
 
         $html .= "</select>\n";
