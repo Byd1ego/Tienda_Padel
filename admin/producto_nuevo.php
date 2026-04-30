@@ -24,7 +24,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // Subida de imagen
         $imagen = null;
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
             $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
@@ -39,7 +38,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 VALUES (:cod, :nombre, :nombre_corto, :descripcion, :marca, :nivel, :forma, :peso, :pvp, :exclusiva, :imagen)";
 
         $stmt = $conexion->prepare($sql);
-
         $stmt->bindValue(':cod',          $_POST['cod']);
         $stmt->bindValue(':nombre',       $_POST['nombre']);
         $stmt->bindValue(':nombre_corto', $_POST['nombre_corto']);
@@ -54,6 +52,13 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
         try {
             $stmt->execute();
+
+            $sql_stock = "INSERT INTO stock (producto, tienda, unidades) VALUES (:cod, 1, :unidades)";
+            $stmt_stock = $conexion->prepare($sql_stock);
+            $stmt_stock->bindValue(':cod',      $_POST['cod']);
+            $stmt_stock->bindValue(':unidades', $_POST['unidades'] ?? 0, PDO::PARAM_INT);
+            $stmt_stock->execute();
+
             header("Location: productos.php");
             exit();
         } catch (Exception $e) {
@@ -76,27 +81,22 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             <label>Código</label>
             <input type="text" name="cod" required>
         </div>
-
         <div class="form-grupo">
             <label>Nombre</label>
             <input type="text" name="nombre">
         </div>
-
         <div class="form-grupo">
             <label>Nombre corto</label>
             <input type="text" name="nombre_corto" required>
         </div>
-
         <div class="form-grupo">
             <label>Descripción</label>
             <textarea name="descripcion" rows="4"></textarea>
         </div>
-
         <div class="form-grupo">
             <label>Marca</label>
             <input type="text" name="marca">
         </div>
-
         <div class="form-grupo">
             <label>Nivel</label>
             <select name="nivel">
@@ -105,7 +105,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 <option value="avanzado">Avanzado</option>
             </select>
         </div>
-
         <div class="form-grupo">
             <label>Forma</label>
             <select name="forma">
@@ -114,22 +113,22 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 <option value="diamante">Diamante</option>
             </select>
         </div>
-
         <div class="form-grupo">
             <label>Peso (g)</label>
             <input type="number" name="peso" min="0">
         </div>
-
         <div class="form-grupo">
             <label>Precio (€)</label>
             <input type="number" step="0.01" name="pvp" required>
         </div>
-
         <div class="form-grupo">
             <label>Exclusiva</label>
             <input type="checkbox" name="exclusiva" value="1">
         </div>
-
+        <div class="form-grupo">
+            <label>Stock inicial</label>
+            <input type="number" name="unidades" min="0" value="0">
+        </div>
         <div class="form-grupo">
             <label>Imagen</label>
             <input type="file" name="imagen" accept="image/*" required>

@@ -1,3 +1,5 @@
+INSERT INTO tienda (nombre, tlf) VALUES ('PadelZone Crevillente', '+34600000000');
+
 INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen) VALUES
 ('P001', 'Bullpadel Vertex 03', 'Vertex 03', 'Pala de potencia para jugadores avanzados', 'Bullpadel', 'avanzado', 'diamante', 365, 249.95, TRUE, NULL),
 ('P002', 'Adidas Adipower Control', 'Adipower Ctrl', 'Gran control y precisión en cada golpe', 'Adidas', 'avanzado', 'redonda', 360, 229.95, FALSE, NULL),
@@ -5,7 +7,7 @@ INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, form
 ('P004', 'Nox ML10 Pro Cup', 'ML10 Pro Cup', 'Equilibrio perfecto entre potencia y control', 'Nox', 'intermedio', 'redonda', 365, 179.95, FALSE, NULL),
 ('P005', 'Siux Pegasus', 'Pegasus', 'Pala versátil para nivel intermedio', 'Siux', 'intermedio', 'lagrima', 362, 149.95, TRUE, NULL),
 ('P006', 'Babolat Technical Viper', 'Tech Viper', 'Máxima potencia para jugadores ofensivos', 'Babolat', 'avanzado', 'diamante', 370, 299.95, FALSE, NULL),
-('P007', 'Wilson Blade Elite', 'Blade Elite', 'Control y comodidad para jugadores amateur', 'Wilson', 'principiante', 'redonda', 358, 109.95, TRUE, NULL),
+('P007', 'Wilson Blade Elite', 'Blade Elite','Control y comodidad para jugadores amateur', 'Wilson', 'principiante', 'redonda', 358, 109.95, TRUE, NULL),
 ('P008', 'Drop Shot Conqueror', 'Conqueror', 'Pala de alto rendimiento con gran potencia', 'Drop Shot', 'avanzado', 'diamante', 368, 269.95, TRUE, NULL),
 ('P009', 'Head Evo Sanyo', 'Evo Sanyo', 'Perfecta para iniciarse en el pádel', 'Head', 'principiante', 'lagrima', 360, 79.95, FALSE, NULL),
 ('P010', 'Adidas Drive 3.2', 'Drive 3.2', 'Control y salida de bola fácil', 'Adidas', 'principiante', 'redonda', 355, 69.95, TRUE, NULL),
@@ -19,3 +21,25 @@ INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, form
 ('P018', 'Adidas Metalbone', 'Metalbone', 'Tecnología avanzada y gran potencia', 'Adidas', 'avanzado', 'diamante', 368, 299.95, FALSE, NULL),
 ('P019', 'Bullpadel Indiga Control', 'Indiga Ctrl', 'Perfecta para principiantes', 'Bullpadel', 'principiante', 'redonda', 355, 59.95, TRUE, NULL),
 ('P020', 'Nox X-One Evo', 'X-One Evo', 'Muy manejable y cómoda', 'Nox', 'principiante', 'lagrima', 360, 99.95, FALSE, NULL);
+
+INSERT INTO stock (producto, tienda, unidades) VALUES
+('P001', 1, 5),
+('P002', 1, 8),
+('P003', 1, 12),
+('P004', 1, 6),
+('P005', 1, 9),
+('P006', 1, 3),
+('P007', 1, 15),
+('P008', 1, 4),
+('P009', 1, 10),
+('P010', 1, 20),
+('P011', 1, 2),
+('P012', 1, 7),
+('P013', 1, 11),
+('P014', 1, 6),
+('P015', 1, 8),
+('P016', 1, 9),
+('P017', 1, 3),
+('P018', 1, 5),
+('P019', 1, 14),
+('P020', 1, 10);

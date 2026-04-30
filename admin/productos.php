@@ -32,16 +32,13 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     </div>
 
     <?php
-    $sql = "SELECT cod, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen
-            FROM producto";
-
+    $sql = "SELECT cod, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen FROM producto";
     $stmt = $conexion->prepare($sql);
     $stmt->execute();
     $productos = $stmt->fetchAll();
 
     if (count($productos) > 0) {
         echo "<table border='1' class='tabla-admin'>";
-
         echo "<tr>
                 <th>Imagen</th>
                 <th>Código</th>
@@ -53,10 +50,19 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 <th>Peso</th>
                 <th>PVP</th>
                 <th>Exclusiva</th>
+                <th>Stock</th>
                 <th>Acciones</th>
               </tr>";
 
         foreach ($productos as $p) {
+
+            $sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+            $stmt_stock = $conexion->prepare($sql_stock);
+            $stmt_stock->bindValue(':cod', $p['cod']);
+            $stmt_stock->execute();
+            $stock = $stmt_stock->fetch();
+            $unidades = $stock ? $stock['unidades'] : 0;
+
             echo "<tr>";
             echo "<td>";
             if ($p['imagen']) {
@@ -74,6 +80,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             echo "<td>" . $p['peso'] . " g</td>";
             echo "<td class='precio-admin'>" . number_format($p['pvp'], 2) . " €</td>";
             echo "<td>" . ($p['exclusiva'] ? 'Sí' : 'No') . "</td>";
+            echo "<td>" . $unidades . " ud</td>";
             echo "<td class='acciones-admin'>
                     <a class='boton-editar' href='producto_editar.php?cod=" . $p['cod'] . "'>Editar</a>
                     <a class='boton-borrar' href='producto_borrar.php?cod=" . $p['cod'] . "'>Borrar</a>

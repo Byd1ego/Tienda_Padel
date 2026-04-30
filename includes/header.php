@@ -26,7 +26,7 @@ session_start();
     <nav>
         <ul class="menu">
             <li><a href="index.php">Inicio</a></li>
-            <li><a href="Acercade.php">Acerca de</a></li>
+            <li><a href="foro.php">Foro</a></li>
             <?php
             if(isset($_SESSION['rol'])){
             echo '<li><a href="exclusivas.php">Exclusivas</a></li>';

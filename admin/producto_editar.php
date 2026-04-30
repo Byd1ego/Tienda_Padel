@@ -38,10 +38,16 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
         die("Producto no encontrado.");
     }
 
+    $sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+    $stmt_stock = $conexion->prepare($sql_stock);
+    $stmt_stock->bindValue(':cod', $cod);
+    $stmt_stock->execute();
+    $stock = $stmt_stock->fetch();
+    $unidades = $stock ? $stock['unidades'] : 0;
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        // Subida de imagen
-        $imagen = $producto['imagen']; // mantiene la anterior por defecto
+        $imagen = $producto['imagen'];
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
             $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
             $nombre_archivo = uniqid('pala_') . '.' . $extension;
@@ -65,7 +71,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 WHERE cod = :cod";
 
         $stmt = $conexion->prepare($sql);
-
         $stmt->bindValue(':cod',          $cod);
         $stmt->bindValue(':nombre',       $_POST['nombre']);
         $stmt->bindValue(':nombre_corto', $_POST['nombre_corto']);
@@ -80,6 +85,18 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
         try {
             $stmt->execute();
+
+            if ($stock) {
+                $sql_stock = "UPDATE stock SET unidades = :unidades WHERE producto = :cod AND tienda = 1";
+            } else {
+                $sql_stock = "INSERT INTO stock (producto, tienda, unidades) VALUES (:cod, 1, :unidades)";
+            }
+
+            $stmt_stock = $conexion->prepare($sql_stock);
+            $stmt_stock->bindValue(':cod',      $cod);
+            $stmt_stock->bindValue(':unidades', $_POST['unidades'], PDO::PARAM_INT);
+            $stmt_stock->execute();
+
             header("Location: productos.php");
             exit();
         } catch (Exception $e) {
@@ -102,27 +119,22 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             <label>Código</label>
             <input type="text" value="<?php echo htmlspecialchars($producto['cod']); ?>" disabled>
         </div>
-
         <div class="form-grupo">
             <label>Nombre</label>
             <input type="text" name="nombre" value="<?php echo htmlspecialchars($producto['nombre']); ?>">
         </div>
-
         <div class="form-grupo">
             <label>Nombre corto</label>
             <input type="text" name="nombre_corto" value="<?php echo htmlspecialchars($producto['nombre_corto']); ?>" required>
         </div>
-
         <div class="form-grupo">
             <label>Descripción</label>
             <textarea name="descripcion" rows="4"><?php echo htmlspecialchars($producto['descripcion']); ?></textarea>
         </div>
-
         <div class="form-grupo">
             <label>Marca</label>
             <input type="text" name="marca" value="<?php echo htmlspecialchars($producto['marca']); ?>">
         </div>
-
         <div class="form-grupo">
             <label>Nivel</label>
             <select name="nivel">
@@ -131,31 +143,30 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 <option value="avanzado"     <?php echo $producto['nivel'] === 'avanzado'     ? 'selected' : ''; ?>>Avanzado</option>
             </select>
         </div>
-
         <div class="form-grupo">
             <label>Forma</label>
             <select name="forma">
-                <option value="redonda"   <?php echo $producto['forma'] === 'redonda'   ? 'selected' : ''; ?>>Redonda</option>
-                <option value="lagrima"   <?php echo $producto['forma'] === 'lagrima'   ? 'selected' : ''; ?>>Lágrima</option>
-                <option value="diamante"  <?php echo $producto['forma'] === 'diamante'  ? 'selected' : ''; ?>>Diamante</option>
+                <option value="redonda"  <?php echo $producto['forma'] === 'redonda'  ? 'selected' : ''; ?>>Redonda</option>
+                <option value="lagrima"  <?php echo $producto['forma'] === 'lagrima'  ? 'selected' : ''; ?>>Lágrima</option>
+                <option value="diamante" <?php echo $producto['forma'] === 'diamante' ? 'selected' : ''; ?>>Diamante</option>
             </select>
         </div>
-
         <div class="form-grupo">
             <label>Peso (g)</label>
             <input type="number" name="peso" min="0" value="<?php echo htmlspecialchars($producto['peso']); ?>">
         </div>
-
         <div class="form-grupo">
             <label>Precio (€)</label>
             <input type="number" step="0.01" name="pvp" value="<?php echo htmlspecialchars($producto['pvp']); ?>" required>
         </div>
-
         <div class="form-grupo">
             <label>Exclusiva</label>
             <input type="checkbox" name="exclusiva" value="1" <?php echo $producto['exclusiva'] ? 'checked' : ''; ?>>
         </div>
-
+        <div class="form-grupo">
+            <label>Stock</label>
+            <input type="number" name="unidades" min="0" value="<?php echo $unidades; ?>">
+        </div>
         <div class="form-grupo">
             <label>Imagen actual</label>
             <?php if ($producto['imagen']): ?>

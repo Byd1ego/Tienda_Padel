@@ -231,6 +231,7 @@ main>h2 {
 .boton-nuevo:hover {
     background-color: #333;
 }
+
 /* ── ADMIN PRODUCTOS ── */
 
 .admin-contenedor {
@@ -362,13 +363,57 @@ main>h2 {
     background-color: #e74c3c;
 }
 
+/* ── FORO ── */
+.foro-contenedor {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.foro-formulario {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+}
+
+.comentario {
+    background-color: white;
+    border-radius: 12px;
+    padding:  20px;
+    margin-bottom: 16px;
+    border-left: 4px solid black;
+}
+
+.comentario-fecha {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 6px;
+}
+
+/* ── BIENVENIDA ── */
+#bienvenida {
+    display: none;
+    background-color: #111;
+    color: white;
+    padding: 15px 40px 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#cerrar-bienvenida {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    cursor: pointer;
+}
+
 /* ── RESPONSIVE TABLA ── */
 
 @media (max-width: 768px) {
     .tabla-admin {
         display: block;
-        overflow-x: auto;
-        white-space: nowrap;
     }
 
     .admin-barra {

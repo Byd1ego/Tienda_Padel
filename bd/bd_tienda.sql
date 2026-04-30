@@ -43,3 +43,24 @@ CREATE TABLE stock (
     FOREIGN KEY (tienda) REFERENCES tienda(cod)
 );
 
+-- =========================
+-- TABLA: contacto
+-- =========================
+CREATE TABLE contacto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =========================
+-- TABLA: foro
+-- =========================
+CREATE TABLE foro (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nick VARCHAR(100) NOT NULL,
+    comentario TEXT NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
