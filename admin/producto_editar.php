@@ -50,11 +50,15 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
         $imagen = $producto['imagen'];
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
             $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-            $nombre_archivo = uniqid('pala_') . '.' . $extension;
+            $nombre_original = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME);
+            $nombre_archivo = $nombre_original . '.' . $extension;
             $destino = '../static/img/' . $nombre_archivo;
-            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $destino)) {
-                $imagen = $nombre_archivo;
+
+            if (!file_exists($destino)) {
+                move_uploaded_file($_FILES['imagen']['tmp_name'], $destino);
             }
+
+            $imagen = $nombre_archivo;
         }
 
         $sql = "UPDATE producto
