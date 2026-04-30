@@ -17,7 +17,7 @@ CREATE TABLE producto (
     forma ENUM('redonda', 'lagrima', 'diamante'),
     peso INT,
     pvp DECIMAL(10,2) NOT NULL,
-    oferta BOOLEAN DEFAULT FALSE,
+    exclusiva BOOLEAN DEFAULT FALSE,
     imagen VARCHAR(255)
 );
 

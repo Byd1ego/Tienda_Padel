@@ -1,4 +1,4 @@
-INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, oferta, imagen) VALUES
+INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen) VALUES
 ('P001', 'Bullpadel Vertex 03', 'Vertex 03', 'Pala de potencia para jugadores avanzados', 'Bullpadel', 'avanzado', 'diamante', 365, 249.95, TRUE, NULL),
 ('P002', 'Adidas Adipower Control', 'Adipower Ctrl', 'Gran control y precisión en cada golpe', 'Adidas', 'avanzado', 'redonda', 360, 229.95, FALSE, NULL),
 ('P003', 'Head Flash', 'Head Flash', 'Ideal para jugadores principiantes', 'Head', 'principiante', 'lagrima', 355, 89.95, TRUE, NULL),

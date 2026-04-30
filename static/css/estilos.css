@@ -109,6 +109,7 @@ main>h2 {
     font-size: 18px;
     font-weight: bold;
     color: #111;
+    text-align: center;
 }
 
 /* ── CONTACTO ── */
@@ -230,20 +231,161 @@ main>h2 {
 .boton-nuevo:hover {
     background-color: #333;
 }
+/* ── ADMIN PRODUCTOS ── */
 
-/* ── RESPONSIVE ── */
+.admin-contenedor {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.admin-titulo {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: #111;
+}
+
+.admin-barra {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+.admin-botones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.boton-tienda {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.boton-tienda:hover {
+    background-color: #666;
+}
+
+.boton-cerrar {
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.boton-cerrar:hover {
+    background-color: #e74c3c;
+}
+
+/* ── TABLA ── */
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    font-size: 0.95rem;
+}
+
+.tabla-admin th {
+    background-color: black;
+    color: white;
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.tabla-admin td {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #222;
+    vertical-align: middle;
+}
+
+.tabla-admin tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla-admin tr:hover td {
+    background-color: #f5f5f5;
+}
+
+.precio-admin {
+    font-weight: bold;
+    color: #111;
+    white-space: nowrap;
+}
+
+/* ── ACCIONES ── */
+
+.acciones-admin {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.boton-editar {
+    background-color: #2980b9;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.boton-editar:hover {
+    background-color: #3498db;
+}
+
+.boton-borrar {
+    background-color: #c0392b;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.boton-borrar:hover {
+    background-color: #e74c3c;
+}
+
+/* ── RESPONSIVE TABLA ── */
+
 @media (max-width: 768px) {
-    .contacto-bloque {
-        flex-direction: column;
+    .tabla-admin {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .admin-barra {
+        justify-content: flex-start;
     }
 }
+
+
 
 @media (min-width: 768px) {
     .contenedorgrid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    #icono { display: none; }
+    #icono {
+        display: none;
+    }
 
     .menu {
         position: static;
@@ -266,7 +408,9 @@ main>h2 {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    #icono { display: none; }
+    #icono {
+        display: none;
+    }
 
     .menu {
         position: static;
@@ -283,6 +427,3 @@ main>h2 {
         cursor: pointer;
     }
 }
-
-
-        

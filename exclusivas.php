@@ -13,14 +13,14 @@ if (!isset($_SESSION['usuario'])) {
     <?php
     require_once 'includes/conexion.php';
 
-    $sql  = "SELECT nombre_corto, pvp, imagen FROM producto WHERE oferta = TRUE";
+    $sql  = "SELECT nombre_corto, pvp, imagen FROM producto WHERE exclusiva = TRUE";
     $stmt = $conexion->prepare($sql);
     $stmt->execute();
-    $ofertas = $stmt->fetchAll();
+    $exclusivas = $stmt->fetchAll();
     ?>
 
     <div class="contenedorgrid">
-        <?php foreach ($ofertas as $p): ?>
+        <?php foreach ($exclusivas as $p): ?>
             <div class="card">
                 <?php if ($p['imagen']): ?>
                     <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>" height="300px" width="300px">

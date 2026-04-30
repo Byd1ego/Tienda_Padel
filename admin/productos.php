@@ -32,7 +32,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     </div>
 
     <?php
-    $sql = "SELECT cod, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, oferta, imagen
+    $sql = "SELECT cod, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen
             FROM producto";
 
     $stmt = $conexion->prepare($sql);
@@ -52,7 +52,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                 <th>Forma</th>
                 <th>Peso</th>
                 <th>PVP</th>
-                <th>Oferta</th>
+                <th>Exclusiva</th>
                 <th>Acciones</th>
               </tr>";
 
@@ -73,7 +73,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             echo "<td>" . $p['forma'] . "</td>";
             echo "<td>" . $p['peso'] . " g</td>";
             echo "<td class='precio-admin'>" . number_format($p['pvp'], 2) . " €</td>";
-            echo "<td>" . ($p['oferta'] ? 'Sí' : 'No') . "</td>";
+            echo "<td>" . ($p['exclusiva'] ? 'Sí' : 'No') . "</td>";
             echo "<td class='acciones-admin'>
                     <a class='boton-editar' href='producto_editar.php?cod=" . $p['cod'] . "'>Editar</a>
                     <a class='boton-borrar' href='producto_borrar.php?cod=" . $p['cod'] . "'>Borrar</a>

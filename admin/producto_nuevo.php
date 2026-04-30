@@ -35,8 +35,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             }
         }
 
-        $sql = "INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, oferta, imagen)
-                VALUES (:cod, :nombre, :nombre_corto, :descripcion, :marca, :nivel, :forma, :peso, :pvp, :oferta, :imagen)";
+        $sql = "INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen)
+                VALUES (:cod, :nombre, :nombre_corto, :descripcion, :marca, :nivel, :forma, :peso, :pvp, :exclusiva, :imagen)";
 
         $stmt = $conexion->prepare($sql);
 
@@ -49,7 +49,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
         $stmt->bindValue(':forma',        $_POST['forma']);
         $stmt->bindValue(':peso',         $_POST['peso'], PDO::PARAM_INT);
         $stmt->bindValue(':pvp',          $_POST['pvp'], PDO::PARAM_STR);
-        $stmt->bindValue(':oferta',       isset($_POST['oferta']) ? 1 : 0, PDO::PARAM_INT);
+        $stmt->bindValue(':exclusiva',    isset($_POST['exclusiva']) ? 1 : 0, PDO::PARAM_INT);
         $stmt->bindValue(':imagen',       $imagen);
 
         try {
@@ -126,8 +126,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
         </div>
 
         <div class="form-grupo">
-            <label>Oferta</label>
-            <input type="checkbox" name="oferta" value="1">
+            <label>Exclusiva</label>
+            <input type="checkbox" name="exclusiva" value="1">
         </div>
 
         <div class="form-grupo">

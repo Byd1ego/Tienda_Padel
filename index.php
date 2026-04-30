@@ -18,7 +18,7 @@ include_once 'includes/header.php';
     <?php
     require_once 'includes/conexion.php';
 
-    $sql = "SELECT nombre_corto, pvp, imagen FROM producto WHERE oferta = FALSE";
+    $sql = "SELECT nombre_corto, pvp, imagen FROM producto WHERE exclusiva = FALSE";
     $stmt = $conexion->prepare($sql);
     $stmt->execute();
     $ofertas = $stmt->fetchAll();
