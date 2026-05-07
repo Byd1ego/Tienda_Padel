@@ -71,8 +71,7 @@ main>h2 {
 
 #icono {
     cursor: pointer;
-    font-size: 39px;
-    user-select: none;
+    font-size: 29px;
 }
 
 #hamburguesa:checked~.menu {
@@ -81,6 +80,9 @@ main>h2 {
 
 #hamburguesa:checked~nav .menu {
     display: flex;
+}
+main >h2{
+    text-align: center;
 }
 
 /* ── CARDS ── */
@@ -140,9 +142,6 @@ main>h2 {
     margin-bottom: 20px;
 }
 
-.contacto-info {
-    flex: 1;
-}
 
 .contacto-info h2 {
     margin-bottom: 20px;
@@ -198,8 +197,7 @@ main>h2 {
     font-size: 0.9rem;
 }
 
-.form-grupo input,
-.form-grupo textarea {
+.form-grupo input, .form-grupo textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -326,7 +324,6 @@ main>h2 {
 .precio-admin {
     font-weight: bold;
     color: #111;
-    white-space: nowrap;
 }
 
 /* ── ACCIONES ── */

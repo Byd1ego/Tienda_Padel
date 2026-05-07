@@ -28,6 +28,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             <a href="../index.php" class="boton-tienda">Tienda</a>
             <a href="producto_nuevo.php" class="boton-nuevo">➕ Nuevo producto</a>
             <a href="../logout.php" class="boton-cerrar">Cerrar sesión</a>
+            <a href="exportar_pdf.php" class="boton-nuevo">📄 Exportar PDF</a>
         </div>
     </div>
 

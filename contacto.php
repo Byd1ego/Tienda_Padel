@@ -6,16 +6,18 @@ $ok = false;
 $error = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre  = trim($_POST['nombre'] ?? '');
-    $email   = trim($_POST['email'] ?? '');
-    $mensaje = trim($_POST['mensaje'] ?? '');
+    $nombre   = trim($_POST['nombre']   ?? '');
+    $email    = trim($_POST['email']    ?? '');
+    $telefono = trim($_POST['telefono'] ?? '');
+    $mensaje  = trim($_POST['mensaje']  ?? '');
 
-    if ($nombre && $email && $mensaje) {
-        $sql = "INSERT INTO contacto (nombre, email, mensaje) VALUES (:nombre, :email, :mensaje)";
+    if ($nombre && $email && $telefono && $mensaje) {
+        $sql = "INSERT INTO contacto (nombre, email, telefono, mensaje) VALUES (:nombre, :email, :telefono, :mensaje)";
         $stmt = $conexion->prepare($sql);
-        $stmt->bindValue(':nombre',  $nombre);
-        $stmt->bindValue(':email',   $email);
-        $stmt->bindValue(':mensaje', $mensaje);
+        $stmt->bindValue(':nombre',   $nombre);
+        $stmt->bindValue(':email',    $email);
+        $stmt->bindValue(':telefono', $telefono);
+        $stmt->bindValue(':mensaje',  $mensaje);
         try {
             $stmt->execute();
             $ok = true;
@@ -43,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p style="color:red">❌ Error al enviar el mensaje.</p>
                 <?php endif; ?>
 
-                <form method="post" class="formulario">
+                <form method="post" class="formulario" onsubmit="return validarTelefono()">
                     <div class="form-grupo">
                         <label>Nombre</label>
                         <input type="text" name="nombre" placeholder="Tu nombre" required>
@@ -51,6 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-grupo">
                         <label>Email</label>
                         <input type="email" name="email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label>Teléfono</label>
+                        <input type="text" name="telefono" id="telefono" placeholder="600000000" required>
+                        <span id="telefono-error" style="color:red; font-size:0.85em; display:none;">El teléfono debe tener exactamente 9 dígitos y solo números.</span>
                     </div>
                     <div class="form-grupo">
                         <label>Mensaje</label>
@@ -73,5 +80,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 </main>
+
+<script>
+function validarTelefono() {
+    const telefono = document.getElementById('telefono').value;
+    const error    = document.getElementById('telefono-error');
+    const regex    = /^\d{9}$/;
+
+    if (!regex.test(telefono)) {
+        error.style.display = 'block';
+        return false;
+    }
+
+    error.style.display = 'none';
+    return true;
+}
+</script>
 
 <?php include_once 'includes/footer.php'; ?>

@@ -1,8 +1,12 @@
 <?php
 session_start();
 
-if (isset($_SESSION['usuario'])) {
-    header("Location: admin/productos.php");
+if (isset($_SESSION['usuario']) && !isset($_GET['redirigido'])) {
+    if ($_SESSION['rol'] === 'admin') {
+        header("Location: admin/productos.php");
+    } else {
+        header("Location: index.php");
+    }
     exit();
 }
 
@@ -64,5 +68,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 </body>
-</html>
 </html>
