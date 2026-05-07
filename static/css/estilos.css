@@ -439,6 +439,39 @@ main >h2{
     margin-bottom: 16px;
     text-align: center;
 }
+/* ── BORRAR PRODUCTO ── */
+
+.borrar-contenedor {
+    max-width: 500px;
+    margin: 80px auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.borrar-contenedor h1 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #111;
+}
+
+.borrar-mensaje {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.borrar-botones {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
 
 /* ── RESPONSIVE TABLA ── */
 

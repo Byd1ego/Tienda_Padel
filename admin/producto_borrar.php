@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Si no hay usuario logeado o no es admin, redirige al login
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {    
     header("Location: ../login.php?redirigido=true");
     exit();
@@ -12,60 +11,60 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <title>Tienda - Borrar producto</title>
-    <link rel="stylesheet" href="../resources/estilos.css">    
+    <link rel="stylesheet" href="../static/css/estilos.css">    
 </head>
 <body>
 
-<div class="contenedor">
-    <h1>🗑️ Borrar producto</h1>
+<?php
+require_once '../includes/conexion.php';
 
-    <?php
-    require_once '../includes/conexion.php';
+if (!isset($_GET['cod'])) {
+    die("Código de producto no especificado.");
+}
 
-    if (!isset($_GET['cod'])) {
-        die("Código de producto no especificado.");
-    }
+$cod = $_GET['cod'];
 
-    $cod = $_GET['cod'];
+$sql = "SELECT cod, nombre_corto FROM producto WHERE cod = :cod";
+$stmt = $conexion->prepare($sql);
+$stmt->bindValue(':cod', $cod);
+$stmt->execute();
+$producto = $stmt->fetch();
 
-    // Cargar producto
-    $sql = "SELECT cod, nombre_corto FROM producto WHERE cod = :cod";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bindValue(':cod', $cod);
-    $stmt->execute();
-    $producto = $stmt->fetch();
+if (!$producto) {
+    die("Producto no encontrado.");
+}
 
-    if (!$producto) {
-        die("Producto no encontrado.");
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        $sql_stock = "DELETE FROM stock WHERE producto = :cod";
+        $stmt_stock = $conexion->prepare($sql_stock);
+        $stmt_stock->bindValue(':cod', $cod);
+        $stmt_stock->execute();
 
-    // Si se confirma el borrado
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "DELETE FROM producto WHERE cod = :cod";
         $stmt = $conexion->prepare($sql);
         $stmt->bindValue(':cod', $cod);
+        $stmt->execute();
 
-        try {
-            $stmt->execute();
-            header("Location: productos.php");
-            exit();
-        } catch (Exception $e) {
-            echo "<p style='color:red'>Error al borrar el producto.</p>";
-        }
+        header("Location: productos.php");
+        exit();
+    } catch (Exception $e) {
+        echo "<p style='color:red'>Error al borrar el producto.</p>";
     }
-    ?>
+}
+?>
 
-    <div class="mensaje">
+<div class="borrar-contenedor">
+    <h1>🗑️ Borrar producto</h1>
+    <div class="borrar-mensaje">
         ¿Estás seguro de que deseas borrar el producto <strong><?php echo htmlspecialchars($producto['nombre_corto']); ?></strong> (código: <?php echo htmlspecialchars($producto['cod']); ?>)?
     </div>
-
     <form method="post">
-        <div class="form-botones">
-            <a href="productos.php" class="btn btn-editar">Cancelar</a>
-            <button type="submit" class="btn btn-borrar">Borrar</button>
+        <div class="borrar-botones">
+            <a href="productos.php" class="boton-tienda">Cancelar</a>
+            <button type="submit" class="boton-borrar">Borrar</button>
         </div>
     </form>
-
 </div>
 
 </body>
