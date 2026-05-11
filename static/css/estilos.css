@@ -33,6 +33,7 @@ main {
 main>h2 {
     margin-top: 30px;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .contenedorgrid {
@@ -81,8 +82,44 @@ main>h2 {
 #hamburguesa:checked~nav .menu {
     display: flex;
 }
-main >h2{
+
+/* ── MENÚ ADMIN ── */
+.menu-admin {
+    list-style: none;
+    position: absolute;
+    top: 8em;
+    left: 0;
+    background-color: black;
+    width: 100%;
+    display: none;
+    flex-direction: column;
     text-align: center;
+    z-index: 1000;
+}
+
+.menu-admin li {
+    padding: 15px;
+    border-top: 1px solid #333;
+}
+
+.menu-admin li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+#hamburguesa-admin {
+    display: none;
+}
+
+#icono-admin {
+    cursor: pointer;
+    font-size: 29px;
+    color: white;
+}
+
+#hamburguesa-admin:checked~nav .menu-admin {
+    display: flex;
 }
 
 /* ── CARDS ── */
@@ -117,34 +154,30 @@ main >h2{
 /* ── CONTACTO ── */
 .contacto-contenedor {
     max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-    text-align: left;
+    margin: 30px auto;
+    padding: 0 16px;
 }
 
 .contacto-titulo {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 40px;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
 }
 
 .contacto-bloque {
     display: flex;
-    gap: 40px;
+    flex-direction: column;
+    gap: 30px;
     margin-bottom: 30px;
 }
 
-.contacto-formulario {
-    flex: 2;
+.contacto-info {
+    text-align: center;
 }
 
-.contacto-formulario h2 {
-    margin-bottom: 20px;
-}
-
-
+.contacto-formulario h2,
 .contacto-info h2 {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .contacto-info p {
@@ -161,7 +194,7 @@ main >h2{
 }
 
 .contacto-mapa {
-    height: 350px;
+    height: 250px;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -197,7 +230,8 @@ main >h2{
     font-size: 0.9rem;
 }
 
-.form-grupo input, .form-grupo textarea {
+.form-grupo input,
+.form-grupo textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -215,6 +249,7 @@ main >h2{
     justify-content: flex-end;
 }
 
+/* ── BOTONES ── */
 .boton-nuevo {
     background-color: black;
     color: white;
@@ -228,32 +263,6 @@ main >h2{
 
 .boton-nuevo:hover {
     background-color: #333;
-}
-
-/* ── ADMIN PRODUCTOS ── */
-
-.admin-contenedor {
-    max-width: 1300px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.admin-titulo {
-    font-size: 2rem;
-    margin-bottom: 24px;
-    color: #111;
-}
-
-.admin-barra {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 24px;
-}
-
-.admin-botones {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
 }
 
 .boton-tienda {
@@ -286,8 +295,58 @@ main >h2{
     background-color: #e74c3c;
 }
 
-/* ── TABLA ── */
+.boton-editar {
+    background-color: #2980b9;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
 
+.boton-editar:hover {
+    background-color: #3498db;
+}
+
+.boton-borrar {
+    background-color: #c0392b;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.boton-borrar:hover {
+    background-color: #e74c3c;
+}
+
+/* ── ADMIN ── */
+.admin-contenedor {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.admin-titulo {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: #111;
+}
+
+.admin-barra {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+.admin-botones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* ── TABLA ── */
 .tabla-admin {
     width: 100%;
     border-collapse: collapse;
@@ -326,121 +385,13 @@ main >h2{
     color: #111;
 }
 
-/* ── ACCIONES ── */
-
 .acciones-admin {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
 }
 
-.boton-editar {
-    background-color: #2980b9;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.85rem;
-}
-
-.boton-editar:hover {
-    background-color: #3498db;
-}
-
-.boton-borrar {
-    background-color: #c0392b;
-    color: white;
-    padding: 6px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.85rem;
-}
-
-.boton-borrar:hover {
-    background-color: #e74c3c;
-}
-
-/* ── FORO ── */
-.foro-contenedor {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.foro-formulario {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    margin-bottom: 30px;
-}
-
-.comentario {
-    background-color: white;
-    border-radius: 12px;
-    padding:  20px;
-    margin-bottom: 16px;
-    border-left: 4px solid black;
-}
-
-.comentario-fecha {
-    font-size: 0.8rem;
-    color: #888;
-    margin-left: 6px;
-}
-
-/* ── BIENVENIDA ── */
-#bienvenida {
-    display: none;
-    background-color: #111;
-    color: white;
-    padding: 15px 40px 15px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-#cerrar-bienvenida {
-    position: absolute;
-    top: 10px;
-    right: 14px;
-    cursor: pointer;
-}
-/* ── LOGIN ── */
-
-.login-contenedor {
-    max-width: 400px;
-    margin: 80px auto;
-    background-color: white;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.login-titulo {
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-}
-
-.alerta {
-    background-color: #fff3cd;
-    color: #856404;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    text-align: center;
-}
 /* ── BORRAR PRODUCTO ── */
-
 .borrar-contenedor {
     max-width: 500px;
     margin: 80px auto;
@@ -473,19 +424,100 @@ main >h2{
     gap: 16px;
 }
 
-/* ── RESPONSIVE TABLA ── */
+/* ── FORO ── */
+.foro-contenedor {
+    max-width: 700px;
+    margin: 0 auto;
+}
 
-@media (max-width: 768px) {
+.foro-formulario {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
+}
+
+.comentario {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border-left: 4px solid black;
+}
+
+.comentario-fecha {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 6px;
+}
+
+/* ── BIENVENIDA ── */
+#bienvenida {
+    display: none;
+    background-color: #111;
+    color: white;
+    padding: 15px 40px 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#cerrar-bienvenida {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    cursor: pointer;
+}
+
+/* ── LOGIN ── */
+.login-contenedor {
+    max-width: 400px;
+    margin: 80px auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.login-titulo {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+}
+
+.alerta {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* ════════════════════════
+   RESPONSIVE
+════════════════════════ */
+
+@media (max-width: 1024px) {
     .tabla-admin {
         display: block;
+        overflow-x: auto;
     }
 
     .admin-barra {
         justify-content: flex-start;
     }
 }
-
-
 
 @media (min-width: 768px) {
     .contenedorgrid {
@@ -496,28 +528,7 @@ main >h2{
         display: none;
     }
 
-    .menu {
-        position: static;
-        display: flex !important;
-        flex-direction: row;
-        width: auto;
-        gap: 20px;
-        background: none;
-    }
-
-    .menu li {
-        border: none;
-        padding: 0;
-        cursor: pointer;
-    }
-}
-
-@media (min-width: 1200px) {
-    .contenedorgrid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    #icono {
+    #icono-admin {
         display: none;
     }
 
@@ -534,5 +545,42 @@ main >h2{
         border: none;
         padding: 0;
         cursor: pointer;
+    }
+
+    .menu-admin {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        width: auto;
+        gap: 20px;
+        background: none;
+    }
+
+    .menu-admin li {
+        border: none;
+        padding: 0;
+    }
+
+    .contacto-bloque {
+        flex-direction: row;
+    }
+
+    .contacto-formulario {
+        flex: 2;
+    }
+
+    .contacto-titulo {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .contacto-mapa {
+        height: 350px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .contenedorgrid {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

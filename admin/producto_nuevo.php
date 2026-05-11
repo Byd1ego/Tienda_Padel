@@ -1,46 +1,28 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: ../login.php?redirigido=true");
-    exit();
-}
+<?php 
+require_once '../includes/header_admin.php';
+require_once '../includes/conexion.php';
+require_once '../includes/funciones.php'; 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tienda - Nuevo producto</title>
-    <link rel="stylesheet" href="../static/css/estilos.css">
-</head>
-<body>
 
 <div class="admin-contenedor">
     <h1 class="admin-titulo">➕ Nuevo producto</h1>
 
     <?php
-    require_once '../includes/conexion.php';
-    require_once '../includes/funciones.php';
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
         $imagen = null;
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
             $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
             $nombre_original = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME);
             $nombre_archivo = $nombre_original . '.' . $extension;
             $destino = '../static/img/' . $nombre_archivo;
-
             if (!file_exists($destino)) {
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $destino);
             }
-
             $imagen = $nombre_archivo;
         }
 
         $sql = "INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen)
                 VALUES (:cod, :nombre, :nombre_corto, :descripcion, :marca, :nivel, :forma, :peso, :pvp, :exclusiva, :imagen)";
-
         $stmt = $conexion->prepare($sql);
         $stmt->bindValue(':cod',          $_POST['cod']);
         $stmt->bindValue(':nombre',       $_POST['nombre']);
@@ -56,13 +38,11 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
         try {
             $stmt->execute();
-
             $sql_stock = "INSERT INTO stock (producto, tienda, unidades) VALUES (:cod, 1, :unidades)";
             $stmt_stock = $conexion->prepare($sql_stock);
             $stmt_stock->bindValue(':cod',      $_POST['cod']);
             $stmt_stock->bindValue(':unidades', $_POST['unidades'] ?? 0, PDO::PARAM_INT);
             $stmt_stock->execute();
-
             header("Location: productos.php");
             exit();
         } catch (Exception $e) {
@@ -71,16 +51,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     }
     ?>
 
-    <div class="admin-barra">
-        <div class="admin-botones">
-            <a href="../index.php" class="boton-tienda">Tienda</a>
-            <a href="productos.php" class="boton-nuevo">← Volver a productos</a>
-            <a href="../logout.php" class="boton-cerrar">Cerrar sesión</a>
-        </div>
-    </div>
-
     <form method="post" class="formulario" enctype="multipart/form-data">
-
         <div class="form-grupo">
             <label>Código</label>
             <input type="text" name="cod" required>
@@ -137,14 +108,11 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             <label>Imagen</label>
             <input type="file" name="imagen" accept="image/*" required>
         </div>
-
         <div class="form-botones">
             <a href="productos.php" class="boton-borrar">Cancelar</a>
             <button type="submit" class="boton-nuevo">Guardar</button>
         </div>
-
     </form>
 </div>
 
-</body>
-</html>
+<?php require_once '../includes/footer_admin.php'; ?>

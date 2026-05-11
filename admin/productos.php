@@ -1,36 +1,11 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: ../login.php?redirigido=true");
-    exit();
-}
+<?php 
+require_once '../includes/header_admin.php';
+require_once '../includes/conexion.php';
+require_once '../includes/funciones.php'; 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tienda - Administración de productos</title>
-    <link rel="stylesheet" href="../static/css/estilos.css">
-</head>
-<body>
 
 <div class="admin-contenedor">
     <h1 class="admin-titulo">🛒 Administración de productos</h1>
-
-    <?php
-    require_once '../includes/conexion.php';
-    require_once '../includes/funciones.php';
-    ?>
-
-    <div class="admin-barra">
-        <div class="admin-botones">
-            <a href="../index.php" class="boton-tienda">Tienda</a>
-            <a href="producto_nuevo.php" class="boton-nuevo">➕ Nuevo producto</a>
-            <a href="../logout.php" class="boton-cerrar">Cerrar sesión</a>
-            <a href="exportar_pdf.php" class="boton-nuevo">📄 Exportar PDF</a>
-        </div>
-    </div>
 
     <?php
     $sql = "SELECT cod, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen FROM producto";
@@ -56,7 +31,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
               </tr>";
 
         foreach ($productos as $p) {
-
             $sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
             $stmt_stock = $conexion->prepare($sql_stock);
             $stmt_stock->bindValue(':cod', $p['cod']);
@@ -88,7 +62,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
                   </td>";
             echo "</tr>";
         }
-
         echo "</table>";
     } else {
         echo "<p>No hay productos para mostrar.</p>";
@@ -96,5 +69,4 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     ?>
 </div>
 
-</body>
-</html>
+<?php require_once '../includes/footer_admin.php'; ?>

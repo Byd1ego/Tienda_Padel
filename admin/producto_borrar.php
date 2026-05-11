@@ -1,23 +1,9 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {    
-    header("Location: ../login.php?redirigido=true");
-    exit();
-}
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Tienda - Borrar producto</title>
-    <link rel="stylesheet" href="../static/css/estilos.css">    
-</head>
-<body>
-
-<?php
+<?php 
+require_once '../includes/header_admin.php';
 require_once '../includes/conexion.php';
+?>
 
+<?php
 if (!isset($_GET['cod'])) {
     die("Código de producto no especificado.");
 }
@@ -67,5 +53,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
-</body>
-</html>
+<?php require_once '../includes/footer_admin.php'; ?>
