@@ -30,23 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main>
     <div class="banner-grid">
-    <div class="banner-imagen">
-        <img src="static/img/contactanos.png" alt="Empieza a jugar al mejor precio">
+        <div class="banner-imagen">
+            <img src="static/img/contactanos.png" alt="Contáctanos">
+        </div>
+        <div class="banner-texto">
+            <h1 class="banner-titulo">Envíanos un mensaje</h1>
+            <p class="banner-desc">Cualquier problema o consulta, no dudes en contactarnos.</p>
+        </div>
     </div>
-    <div class="banner-texto">
-        <h1 class="banner-titulo">Envianos un mensaje</h1>
-        <p class="banner-desc">Cualquier problema, imperfecto o problema con la web no dude en contactarnos.</p>
-    </div>
-</div>
-        
-    
+
+    <div class="contacto-contenedor">
+        <div class="contacto-bloque">
+
+            <div class="contacto-formulario">
                 <h2>Envíanos un mensaje</h2>
 
                 <?php if ($ok): ?>
-                    <p class="contacto-ok">Mensaje enviado correctamente.</p>
+                    <p class="contacto-ok">✅ Mensaje enviado correctamente.</p>
                 <?php endif; ?>
                 <?php if ($error): ?>
-                    <p style="color:red">Error al enviar el mensaje.</p>
+                    <p style="color:red">❌ Error al enviar el mensaje.</p>
                 <?php endif; ?>
 
                 <form method="post" class="formulario" onsubmit="return validarTelefono()">
