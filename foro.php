@@ -1,16 +1,20 @@
 <?php
+// Carga la cabecera y con ella inicia la sesión
 include_once 'includes/header.php';
 require_once 'includes/conexion.php';
 
+// Solo los usuarios logueados pueden acceder al foro
 if (!isset($_SESSION['usuario'])) {
     header("Location: login.php?redirigido=true");
     exit();
 }
 
+// Si se ha enviado un comentario, lo guarda en la base de datos
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nick       = trim($_POST['nick'] ?? '');
+    $nick       = trim($_POST['nick']       ?? '');
     $comentario = trim($_POST['comentario'] ?? '');
 
+    // Solo inserta si los dos campos tienen contenido
     if ($nick && $comentario) {
         $sql = "INSERT INTO foro (nick, comentario) VALUES (:nick, :comentario)";
         $stmt = $conexion->prepare($sql);
@@ -20,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// Obtiene todos los comentarios ordenados del más reciente al más antiguo
 $sql  = "SELECT nick, comentario, fecha FROM foro ORDER BY fecha DESC";
 $stmt = $conexion->prepare($sql);
 $stmt->execute();
@@ -27,7 +32,7 @@ $comentarios = $stmt->fetchAll();
 ?>
 
 <main>
-    <!-- Mensaje de bienvenida, oculto al inicio -->
+    <!-- Mensaje de bienvenida oculto, se muestra con jQuery slideDown al cargar -->
     <div id="bienvenida">
         <strong>¡Bienvenido al foro!</strong> Aquí puedes compartir tu opinión sobre nuestras palas.
         <span id="cerrar-bienvenida">✕</span>
@@ -35,7 +40,7 @@ $comentarios = $stmt->fetchAll();
 
     <h2>Foro</h2>
 
-    <!-- Aquí se muestra la fecha y hora con JavaScript -->
+    <!-- La fecha y hora se escriben aquí mediante JavaScript -->
     <p id="fecha-actual" style="text-align:center; color:#888; margin-bottom:16px; font-size:0.9rem;"></p>
 
     <div class="foro-contenedor">
@@ -56,6 +61,7 @@ $comentarios = $stmt->fetchAll();
             </form>
         </div>
 
+        <!-- Lista de comentarios existentes -->
         <div id="foro">
             <?php foreach ($comentarios as $c): ?>
                 <div class="comentario">
@@ -71,28 +77,26 @@ $comentarios = $stmt->fetchAll();
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-
-    // Cuando la página carga completamente
+    // Espera a que la página cargue completamente antes de ejecutar el código
     $(document).ready(function () {
 
-        // Mostrar el mensaje de bienvenida con efecto slide
+        // Muestra el mensaje de bienvenida con efecto deslizante hacia abajo
         $("#bienvenida").slideDown(1000);
 
-        // Al pulsar la X, ocultar el mensaje
+        // Al pulsar la X, oculta el mensaje con efecto deslizante hacia arriba
         $("#cerrar-bienvenida").click(function () {
             $("#bienvenida").slideUp();
         });
 
-        // Mostrar la fecha y hora actual usando el objeto Date
-        var ahora   = new Date();
-        var fecha   = ahora.toLocaleDateString('es-ES');
-        var hora    = ahora.toLocaleTimeString('es-ES');
+        // Obtiene la fecha y hora actual con el objeto Date de JavaScript
+        var ahora = new Date();
+        var fecha = ahora.toLocaleDateString('es-ES');
+        var hora  = ahora.toLocaleTimeString('es-ES');
 
-        // DOM: escribir la fecha en el elemento
+        // Escribe la fecha y hora en el elemento del DOM
         document.getElementById('fecha-actual').textContent = '📅 ' + fecha + ' — ' + hora;
 
     });
-
 </script>
 
 <?php include_once 'includes/footer.php'; ?>

@@ -1,16 +1,24 @@
 <?php
+// Carga la cabecera y con ella inicia la sesión
 include_once 'includes/header.php';
+
+// Carga la conexión a la base de datos
 require_once 'includes/conexion.php';
 
-$ok = false;
+// Variables para controlar si el mensaje se envió bien o hubo error
+$ok    = false;
 $error = false;
 
+// Si el formulario ha sido enviado, procesa los datos
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Recoge y limpia los datos del formulario
     $nombre   = trim($_POST['nombre']   ?? '');
     $email    = trim($_POST['email']    ?? '');
     $telefono = trim($_POST['telefono'] ?? '');
     $mensaje  = trim($_POST['mensaje']  ?? '');
 
+    // Solo inserta si todos los campos tienen valor
     if ($nombre && $email && $telefono && $mensaje) {
         $sql = "INSERT INTO contacto (nombre, email, telefono, mensaje) VALUES (:nombre, :email, :telefono, :mensaje)";
         $stmt = $conexion->prepare($sql);
@@ -45,13 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="contacto-formulario">
                 <h2>Envíanos un mensaje</h2>
 
+                <!-- Mensaje verde si el formulario se envió correctamente -->
                 <?php if ($ok): ?>
                     <p class="contacto-ok">Mensaje enviado correctamente.</p>
                 <?php endif; ?>
+
+                <!-- Mensaje rojo si hubo un error al guardar en la base de datos -->
                 <?php if ($error): ?>
                     <p style="color:red">Error al enviar el mensaje.</p>
                 <?php endif; ?>
 
+                <!-- onsubmit llama a validarTelefono() antes de enviar el formulario -->
                 <form method="post" class="formulario" onsubmit="return validarTelefono()">
                     <div class="form-grupo">
                         <label>Nombre</label>
@@ -59,12 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="form-grupo">
                         <label>Email</label>
+                        <!-- type="email" valida el formato de email automáticamente -->
                         <input type="email" name="email" placeholder="tu@email.com" required>
                     </div>
                     <div class="form-grupo">
                         <label>Teléfono</label>
                         <input type="text" name="telefono" id="telefono" placeholder="600000000" required>
-                        <span id="telefono-error" style="color:red; font-size:0.85em; display:none;">El teléfono debe tener exactamente 9 dígitos y solo números.</span>
+                        <!-- Mensaje de error oculto que se muestra si el teléfono no es válido -->
+                        <span id="telefono-error" style="color:red; font-size:0.85em; display:none;">
+                            El teléfono debe tener exactamente 9 dígitos y solo números.
+                        </span>
                     </div>
                     <div class="form-grupo">
                         <label>Mensaje</label>
@@ -82,39 +98,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>📞 <a href="tel:+34600000000">+34 666 666 666 | 999 999 999</a></p>
                 <p>✉️ <a href="mailto:padelzone@gmail.com">padelzone@gmail.com</a></p>
                 <p>🕐 Lunes - Viernes: 9:00 - 20:00</p>
+                <!-- Aquí aparece la temperatura cargada por AJAX -->
                 <div id="tiempo"></div>
             </div>
 
         </div>
     </div>
-    
-
 
 </main>
 
 <script>
+// Valida que el teléfono tenga exactamente 9 dígitos antes de enviar el formulario
 function validarTelefono() {
     const telefono = document.getElementById('telefono').value;
     const error    = document.getElementById('telefono-error');
-    const regex    = /^\d{9}$/;
+
+    // La regex comprueba que sean exactamente 9 números, sin letras ni espacios
+    const regex = /^\d{9}$/;
 
     if (!regex.test(telefono)) {
+        // Muestra el mensaje de error y cancela el envío
         error.style.display = 'block';
         return false;
     }
 
+    // Oculta el error y permite el envío
     error.style.display = 'none';
     return true;
 }
 </script>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-// Petición AJAX a la API del tiempo de Crevillente
+// Petición AJAX a la API del tiempo de Crevillente (Open-Meteo, gratuita sin registro)
 $.ajax({
     url: 'https://api.open-meteo.com/v1/forecast?latitude=38.25&longitude=-0.81&current_weather=true',
     type: 'GET',
     success: function (datos) {
-        // Muestra la temperatura actual en el div
+        // Si la petición va bien, extrae la temperatura y la muestra en el div #tiempo
         var temp = datos.current_weather.temperature;
         $('#tiempo').html('🌡️ Temperatura actual en Crevillente: <strong>' + temp + '°C</strong>');
     }

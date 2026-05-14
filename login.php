@@ -1,6 +1,8 @@
 <?php
+// Inicia la sesión para comprobar si el usuario ya está logueado
 session_start();
 
+// Si ya hay sesión activa y no viene del redirigido, manda a su página correspondiente
 if (isset($_SESSION['usuario']) && !isset($_GET['redirigido'])) {
     if ($_SESSION['rol'] === 'admin') {
         header("Location: admin/productos.php");
@@ -12,15 +14,18 @@ if (isset($_SESSION['usuario']) && !isset($_GET['redirigido'])) {
 
 $error = '';
 
+// Si el formulario ha sido enviado, comprueba las credenciales
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'] ?? '';
     $clave   = $_POST['clave']   ?? '';
 
+    // Comprueba si es admin y guarda su rol en la sesión
     if ($usuario === 'admin' && $clave === '1234') {
         $_SESSION['usuario'] = $usuario;
         $_SESSION['rol']     = 'admin';
         header("Location: admin/productos.php");
         exit();
+    // Comprueba si es usuario normal y guarda su rol en la sesión
     } elseif ($usuario === 'usuario' && $clave === '5678') {
         $_SESSION['usuario'] = $usuario;
         $_SESSION['rol']     = 'usuario';
@@ -41,12 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <div class="login-contenedor">
-    <h1 class="login-titulo">Iniciar Sesion</h1>
+    <h1 class="login-titulo">Iniciar Sesión</h1>
 
+    <!-- Aviso cuando el usuario llega al login porque intentó acceder a una página protegida -->
     <?php if (isset($_GET['redirigido'])): ?>
-        <p class="alerta">Identificate para acceder a esa página.</p>
+        <p class="alerta">Identifícate para acceder a esa página.</p>
     <?php endif; ?>
 
+    <!-- Mensaje de error si las credenciales son incorrectas -->
     <?php if ($error): ?>
         <p class="error"><?= htmlspecialchars($error) ?></p>
     <?php endif; ?>

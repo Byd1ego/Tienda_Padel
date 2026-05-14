@@ -1,12 +1,14 @@
 <?php 
+// Carga la cabecera, la conexión y las funciones del panel de administración
 require_once '../includes/header_admin.php';
 require_once '../includes/conexion.php';
 require_once '../includes/funciones.php';
 
-// Filtro por nivel
+// Recoge el filtro de nivel si viene por URL y es un valor válido
+// Si no viene o no es válido, queda vacío y se muestran todos los productos
 $nivel = isset($_GET['nivel']) && in_array($_GET['nivel'], ['principiante', 'intermedio', 'avanzado']) ? $_GET['nivel'] : '';
 
-// Productos
+// Si hay filtro añade WHERE, si no trae todos los productos
 $sql  = "SELECT cod, nombre_corto, descripcion, marca, nivel, forma, peso, pvp, exclusiva, imagen FROM producto" . ($nivel ? " WHERE nivel = :nivel" : "");
 $stmt = $conexion->prepare($sql);
 if ($nivel) $stmt->bindValue(':nivel', $nivel);
@@ -17,6 +19,7 @@ $productos = $stmt->fetchAll();
 <div class="admin-contenedor">
     <h1 class="admin-titulo">Administración de productos</h1>
 
+    <!-- Formulario de filtro: al cambiar el select envía el formulario automáticamente -->
     <form method="get" class="filtro-container">
         <label>Filtrar por nivel:</label>
         <select name="nivel" onchange="this.form.submit()">
@@ -36,13 +39,17 @@ $productos = $stmt->fetchAll();
             </tr>
             <?php foreach ($productos as $p): ?>
                 <?php
+                // Consulta el stock de cada producto en la tienda 1
                 $s = $conexion->prepare("SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1");
                 $s->bindValue(':cod', $p['cod']);
                 $s->execute();
                 $stock    = $s->fetch();
+
+                // Si no hay registro de stock se muestra 0
                 $unidades = $stock ? $stock['unidades'] : 0;
                 ?>
                 <tr>
+                    <!-- Muestra la imagen del producto o un texto si no tiene -->
                     <td><?php echo $p['imagen'] ? "<img src='../static/img/" . htmlspecialchars($p['imagen']) . "' style='max-width:60px; border-radius:6px;'>" : 'Sin imagen'; ?></td>
                     <td><?php echo $p['cod']; ?></td>
                     <td><?php echo $p['nombre_corto']; ?></td>
@@ -51,9 +58,11 @@ $productos = $stmt->fetchAll();
                     <td><?php echo $p['nivel']; ?></td>
                     <td><?php echo $p['forma']; ?></td>
                     <td><?php echo $p['peso']; ?> g</td>
+                    <!-- Formatea el precio con 2 decimales -->
                     <td class='precio-admin'><?php echo number_format($p['pvp'], 2); ?> €</td>
                     <td><?php echo $p['exclusiva'] ? 'Sí' : 'No'; ?></td>
                     <td><?php echo $unidades; ?> ud</td>
+                    <!-- Botones para editar o borrar el producto -->
                     <td class='acciones-admin'>
                         <a class='boton-editar' href='producto_editar.php?cod=<?php echo $p['cod']; ?>'>Editar</a>
                         <a class='boton-borrar' href='producto_borrar.php?cod=<?php echo $p['cod']; ?>'>Borrar</a>

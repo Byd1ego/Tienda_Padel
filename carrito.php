@@ -1,16 +1,19 @@
 <?php
+// Carga la cabecera y con ella inicia la sesión
 include_once 'includes/header.php';
 
+// Si el usuario no está logueado o no es de tipo usuario, lo manda al login
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'usuario') {
     header("Location: login.php?redirigido=true");
     exit();
 }
 
+// Carga la conexión a la base de datos
 require_once 'includes/conexion.php';
 
 $usuario = $_SESSION['usuario'];
 
-// Borrar producto del carrito
+// Si se pulsa el botón borrar, elimina ese producto del carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrar'])) {
     $sql = "DELETE FROM carrito WHERE id = :id AND usuario = :usuario";
     $stmt = $conexion->prepare($sql);
@@ -21,8 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrar'])) {
     exit();
 }
 
-// Pagar: descontar stock y vaciar carrito
+// Si se pulsa el botón pagar, procesa la compra
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pagar'])) {
+
+    // Obtiene todos los productos del carrito del usuario
     $sql = "SELECT c.id, c.producto, c.unidades FROM carrito c WHERE c.usuario = :usuario";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':usuario', $usuario);
@@ -31,21 +36,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pagar'])) {
 
     $error_stock = false;
 
+    // Comprueba que hay stock suficiente para cada producto antes de cobrar
     foreach ($items_pagar as $item) {
-        // Comprobar stock suficiente
         $sql_check = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
         $stmt_check = $conexion->prepare($sql_check);
         $stmt_check->bindValue(':cod', $item['producto']);
         $stmt_check->execute();
         $stock = $stmt_check->fetch();
 
+        // Si no hay stock suficiente, marca el error y para el bucle
         if (!$stock || $stock['unidades'] < $item['unidades']) {
             $error_stock = true;
             break;
         }
     }
 
+    // Si todos los productos tienen stock, realiza la compra
     if (!$error_stock) {
+
+        // Descuenta las unidades compradas del stock
         foreach ($items_pagar as $item) {
             $sql_update = "UPDATE stock SET unidades = unidades - :unidades WHERE producto = :cod AND tienda = 1";
             $stmt_update = $conexion->prepare($sql_update);
@@ -54,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pagar'])) {
             $stmt_update->execute();
         }
 
+        // Vacía el carrito del usuario tras completar la compra
         $sql_vaciar = "DELETE FROM carrito WHERE usuario = :usuario";
         $stmt_vaciar = $conexion->prepare($sql_vaciar);
         $stmt_vaciar->bindValue(':usuario', $usuario);
@@ -63,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pagar'])) {
     }
 }
 
-// Obtener productos del carrito
+// Obtiene los productos del carrito junto con su nombre, precio e imagen
 $sql = "SELECT c.id, c.unidades, p.nombre_corto, p.pvp, p.imagen
         FROM carrito c
         JOIN producto p ON c.producto = p.cod
@@ -73,6 +83,7 @@ $stmt->bindValue(':usuario', $usuario);
 $stmt->execute();
 $items = $stmt->fetchAll();
 
+// Calcula el precio total sumando pvp * unidades de cada producto
 $total = 0;
 foreach ($items as $item) {
     $total += $item['pvp'] * $item['unidades'];
@@ -83,10 +94,12 @@ foreach ($items as $item) {
     <div class="carrito-contenedor">
         <h1 class="carrito-titulo">Mi carrito</h1>
 
+        <!-- Mensaje de éxito si la compra se ha realizado correctamente -->
         <?php if (isset($pagado) && $pagado): ?>
             <p class="contacto-ok">Compra realizada correctamente.</p>
         <?php endif; ?>
 
+        <!-- Mensaje de error si algún producto no tiene stock suficiente -->
         <?php if (isset($error_stock) && $error_stock): ?>
             <p class="error">No hay suficiente stock para alguno de los productos.</p>
         <?php endif; ?>
@@ -97,24 +110,30 @@ foreach ($items as $item) {
             <div class="carrito-lista">
                 <?php foreach ($items as $item): ?>
                     <div class="carrito-item">
+                        <!-- Muestra la imagen del producto o una por defecto si no tiene -->
                         <?php if ($item['imagen']): ?>
                             <img src="static/img/<?php echo htmlspecialchars($item['imagen']); ?>" alt="">
                         <?php else: ?>
                             <img src="static/img/default.jpg" alt="">
                         <?php endif; ?>
+
                         <div class="carrito-info">
                             <p class="carrito-nombre"><?php echo htmlspecialchars($item['nombre_corto']); ?></p>
                             <p class="carrito-precio"><?php echo number_format($item['pvp'], 2, ',', '.'); ?>€ x <?php echo $item['unidades']; ?> ud</p>
+                            <!-- Subtotal = precio unitario x unidades -->
                             <p class="carrito-subtotal">Subtotal: <?php echo number_format($item['pvp'] * $item['unidades'], 2, ',', '.'); ?>€</p>
                         </div>
+
+                        <!-- Botón para eliminar este producto del carrito -->
                         <form method="post">
                             <input type="hidden" name="borrar" value="<?php echo $item['id']; ?>">
-                            <button type="submit" class="boton-borrar"> Borrar</button>
+                            <button type="submit" class="boton-borrar">Borrar</button>
                         </form>
                     </div>
                 <?php endforeach; ?>
             </div>
 
+            <!-- Barra inferior con el total y el botón de pagar -->
             <div class="carrito-total">
                 <p>Total: <strong><?php echo number_format($total, 2, ',', '.'); ?>€</strong></p>
                 <form method="post">

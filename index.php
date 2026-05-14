@@ -1,26 +1,28 @@
 <?php
+// Carga la cabecera y con ella inicia la sesión
 include_once 'includes/header.php';
 require_once 'includes/conexion.php';
 
-// Número de productos por página con cookie
+// Si el usuario ha seleccionado cuántos productos ver, guarda su preferencia en una cookie de 30 días
 if (isset($_GET['por_pagina'])) {
     $productosPorPagina = (int)$_GET['por_pagina'];
     setcookie('productos_por_pagina', $productosPorPagina, time() + 30*24*60*60, '/');
 } else {
+    // Si no hay preferencia en la URL, la lee de la cookie. Si tampoco existe, muestra 6 por defecto
     $productosPorPagina = isset($_COOKIE['productos_por_pagina']) ? (int)$_COOKIE['productos_por_pagina'] : 6;
 }
 
-// Paginación
+// Calcula en qué producto empieza la página actual
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $inicio = ($pagina - 1) * $productosPorPagina;
 
-// Total de productos
+// Cuenta el total de productos no exclusivos para calcular el número de páginas
 $stmtTotal = $conexion->prepare("SELECT COUNT(*) AS total FROM producto WHERE exclusiva = FALSE");
 $stmtTotal->execute();
 $totalProductos = $stmtTotal->fetch()['total'];
 $totalPaginas   = ceil($totalProductos / $productosPorPagina);
 
-// Productos de la página actual
+// Obtiene solo los productos de la página actual usando LIMIT
 $stmt = $conexion->prepare("SELECT cod, nombre_corto, pvp, imagen FROM producto WHERE exclusiva = FALSE LIMIT :inicio, :por_pagina");
 $stmt->bindValue(':inicio',     $inicio,             PDO::PARAM_INT);
 $stmt->bindValue(':por_pagina', $productosPorPagina, PDO::PARAM_INT);
@@ -53,18 +55,22 @@ $ofertas = $stmt->fetchAll();
             </div>
         </div>
     </div>
-    <div id="slideshow">
-    <img src="static/img/metalbone.jpg" alt="Pala">
-    <img src="static/img/Adipower.jpg" alt="Pala">
-    <img src="static/img/viper.jpg" alt="Pala">
-    <img src="static/img/conqueror.jpg" alt="Pala">
-    <img src="static/img/ml10.jpg" alt="Pala">
-    <img src="static/img/explorer.jpg" alt="Pala">
-</div>
 
+    <!-- Slideshow de palas que rota automáticamente cada 2 segundos -->
+    <div id="slideshow">
+        <img src="static/img/metalbone.jpg" alt="Pala">
+        <img src="static/img/Adipower.jpg" alt="Pala">
+        <img src="static/img/viper.jpg" alt="Pala">
+        <img src="static/img/conqueror.jpg" alt="Pala">
+        <img src="static/img/ml10.jpg" alt="Pala">
+        <img src="static/img/explorer.jpg" alt="Pala">
+    </div>
+
+    <!-- Grid con las cards de los productos de la página actual -->
     <div class="contenedorgrid">
         <?php foreach ($ofertas as $p): ?>
             <div class="card">
+                <!-- Muestra la imagen del producto o una por defecto si no tiene -->
                 <?php if ($p['imagen']): ?>
                     <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>"
                         alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
@@ -73,6 +79,7 @@ $ofertas = $stmt->fetchAll();
                 <?php endif; ?>
                 <p><?php echo htmlspecialchars($p['nombre_corto']); ?> <br>
                     <?php echo number_format($p['pvp'], 2, ',', '.'); ?>€</p>
+                <!-- El botón de añadir al carrito solo aparece si el usuario está logueado -->
                 <?php if (isset($_SESSION['usuario']) && $_SESSION['rol'] === 'usuario'): ?>
                     <form method="post" action="añadir_carrito.php">
                         <input type="hidden" name="cod" value="<?php echo htmlspecialchars($p['cod']); ?>">
@@ -84,9 +91,10 @@ $ofertas = $stmt->fetchAll();
         <?php endforeach; ?>
     </div>
 
-    <!-- Paginación + selector -->
+    <!-- Selector de productos por página y botones de paginación -->
     <div class="paginacion-container">
 
+        <!-- Al cambiar el select envía el formulario automáticamente -->
         <form method="get" style="display:flex; align-items:center; gap:8px;">
             <label for="por_pagina">Mostrar</label>
             <select name="por_pagina" id="por_pagina" onchange="this.form.submit()">
@@ -99,6 +107,7 @@ $ofertas = $stmt->fetchAll();
 
         <div class="paginacion">
             <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+                <!-- La página activa se muestra como span, las demás como enlaces -->
                 <?php if ($i == $pagina): ?>
                     <span class="pag-boton pag-activo"><?php echo $i; ?></span>
                 <?php else: ?>
@@ -110,6 +119,7 @@ $ofertas = $stmt->fetchAll();
     </div>
 
 </main>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 $(document).ready(function () {
@@ -119,7 +129,7 @@ $(document).ready(function () {
     // Oculta todas las imágenes menos la primera
     slides.hide().first().show();
 
-    // Cada 2 segundos pasa a la siguiente con fadeIn/fadeOut
+    // Cada 2 segundos pasa a la siguiente imagen con efecto fadeOut/fadeIn
     setInterval(function () {
         slides.eq(actual).fadeOut(500);
         actual = (actual + 1) % slides.length;
