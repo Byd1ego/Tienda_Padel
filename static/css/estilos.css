@@ -148,6 +148,52 @@ footer>p:nth-child(2) {
 #hamburguesa-admin:checked~nav .menu-admin {
     display: flex;
 }
+/* ── FILTRO ── */
+.filtro-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+/* ── PAGINACIÓN ── */
+.paginacion-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.paginacion {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.pag-boton {
+    background-color: white;
+    color: #111;
+    border: 1px solid #ddd;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.pag-boton:hover {
+    background-color: #f0f0f0;
+}
+
+.pag-activo {
+    background-color: #111;
+    color: white;
+    border-color: #111;
+}
 
 /* ── Banner ── */
 .banner-grid {
@@ -216,7 +262,7 @@ footer>p:nth-child(2) {
     color: #111;
 }
 
-.hero-stat span {
+.banner-stat span {
     font-size: 0.8rem;
     color: #888;
     text-transform: uppercase;
@@ -241,6 +287,8 @@ footer>p:nth-child(2) {
 
 .card img {
     width: 100%;
+    height: 220px;
+    object-fit: cover;
     border-radius: 12px;
     margin-bottom: 12px;
 }

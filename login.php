@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <div class="login-contenedor">
-    <h1 class="login-titulo">Acceso al sistema</h1>
+    <h1 class="login-titulo">Iniciar Sesion</h1>
 
     <?php if (isset($_GET['redirigido'])): ?>
-        <p class="alerta">Por favor, identifíquese para acceder a esa página.</p>
+        <p class="alerta">Identificate para acceder a esa página.</p>
     <?php endif; ?>
 
     <?php if ($error): ?>

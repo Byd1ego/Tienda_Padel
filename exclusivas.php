@@ -49,7 +49,7 @@ if (!isset($_SESSION['usuario'])) {
                     <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>"
                         alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>" height="300px" width="300px">
                 <?php else: ?>
-                    <img src="static/img/default.jpg" alt="Sin imagen" height="300px" width="300px">
+                    <img src="static/img/..." alt="...">
                 <?php endif; ?>
                 <p><?php echo htmlspecialchars($p['nombre_corto']); ?> <br>
                     <?php echo number_format($p['pvp'], 2, ',', '.'); ?>€</p>

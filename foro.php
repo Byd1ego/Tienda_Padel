@@ -27,12 +27,16 @@ $comentarios = $stmt->fetchAll();
 ?>
 
 <main>
+    <!-- Mensaje de bienvenida, oculto al inicio -->
     <div id="bienvenida">
         <strong>¡Bienvenido al foro!</strong> Aquí puedes compartir tu opinión sobre nuestras palas.
         <span id="cerrar-bienvenida">✕</span>
     </div>
 
     <h2>Foro</h2>
+
+    <!-- Aquí se muestra la fecha y hora con JavaScript -->
+    <p id="fecha-actual" style="text-align:center; color:#888; margin-bottom:16px; font-size:0.9rem;"></p>
 
     <div class="foro-contenedor">
 
@@ -67,12 +71,28 @@ $comentarios = $stmt->fetchAll();
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+
+    // Cuando la página carga completamente
     $(document).ready(function () {
+
+        // Mostrar el mensaje de bienvenida con efecto slide
         $("#bienvenida").slideDown(1000);
+
+        // Al pulsar la X, ocultar el mensaje
         $("#cerrar-bienvenida").click(function () {
             $("#bienvenida").slideUp();
         });
+
+        // Mostrar la fecha y hora actual usando el objeto Date
+        var ahora   = new Date();
+        var fecha   = ahora.toLocaleDateString('es-ES');
+        var hora    = ahora.toLocaleTimeString('es-ES');
+
+        // DOM: escribir la fecha en el elemento
+        document.getElementById('fecha-actual').textContent = '📅 ' + fecha + ' — ' + hora;
+
     });
+
 </script>
 
 <?php include_once 'includes/footer.php'; ?>

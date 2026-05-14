@@ -20,7 +20,27 @@ INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, form
 ('P017', 'Head Delta Pro', 'Delta Pro', 'Potencia explosiva para ataque', 'Head', 'avanzado', 'diamante', 370, 289.95, TRUE, NULL),
 ('P018', 'Adidas Metalbone', 'Metalbone', 'Tecnología avanzada y gran potencia', 'Adidas', 'avanzado', 'diamante', 368, 299.95, FALSE, NULL),
 ('P019', 'Bullpadel Indiga Control', 'Indiga Ctrl', 'Perfecta para principiantes', 'Bullpadel', 'principiante', 'redonda', 355, 59.95, TRUE, NULL),
-('P020', 'Nox X-One Evo', 'X-One Evo', 'Muy manejable y cómoda', 'Nox', 'principiante', 'lagrima', 360, 99.95, FALSE, NULL);
+('P020', 'Nox X-One Evo', 'X-One Evo', 'Muy manejable y cómoda', 'Nox', 'principiante', 'lagrima', 360, 99.95, FALSE, NULL)
+('P021', 'Bullpadel Hack 02', 'Hack 02', 'Potencia y control para nivel avanzado', 'Bullpadel', 'avanzado', 'diamante', 370, 259.95, FALSE, NULL),
+('P022', 'Adidas Adipower Lite', 'Adipower Lite', 'Pala ligera para jugadores intermedios', 'Adidas', 'intermedio', 'redonda', 355, 149.95, FALSE, NULL),
+('P023', 'Head Alpha Pro', 'Alpha Pro', 'Control total para principiantes avanzados', 'Head', 'principiante', 'lagrima', 358, 99.95, FALSE, NULL),
+('P024', 'Nox ML10 Luxury', 'ML10 Luxury', 'Alta gama para jugadores profesionales', 'Nox', 'avanzado', 'diamante', 368, 289.95, FALSE, NULL),
+('P025', 'Siux Diablo Carbon', 'Diablo Carbon', 'Fibra de carbono para máxima potencia', 'Siux', 'avanzado', 'diamante', 372, 229.95, FALSE, NULL),
+('P026', 'Babolat Viper Air', 'Viper Air', 'Ultraligera para mayor velocidad', 'Babolat', 'intermedio', 'lagrima', 350, 199.95, FALSE, NULL),
+('P027', 'Wilson Bela Team', 'Bela Team', 'Pala oficial del circuito profesional', 'Wilson', 'avanzado', 'redonda', 365, 219.95, FALSE, NULL),
+('P028', 'Drop Shot Synergy', 'Synergy', 'Equilibrio perfecto para todos los niveles', 'Drop Shot', 'intermedio', 'lagrima', 360, 139.95, FALSE, NULL),
+('P029', 'Head Graphene 360', 'Graphene 360', 'Tecnología Graphene para mayor control', 'Head', 'avanzado', 'diamante', 370, 279.95, FALSE, NULL),
+('P030', 'Adidas Match Light', 'Match Light', 'Ideal para iniciarse en el pádel', 'Adidas', 'principiante', 'redonda', 350, 79.95, FALSE, NULL),
+('P031', 'Bullpadel Flow', 'Flow', 'Pala versátil para nivel intermedio', 'Bullpadel', 'intermedio', 'lagrima', 362, 169.95, FALSE, NULL),
+('P032', 'Nox Equation', 'Equation', 'Gran manejabilidad y control', 'Nox', 'intermedio', 'redonda', 358, 159.95, FALSE, NULL),
+('P033', 'Siux Fenix', 'Fenix', 'Pala de alta gama para expertos', 'Siux', 'avanzado', 'diamante', 370, 249.95, FALSE, NULL),
+('P034', 'Babolat Technical Veron Air', 'Veron Air', 'Ligera y potente para atacantes', 'Babolat', 'avanzado', 'diamante', 365, 269.95, FALSE, NULL),
+('P035', 'Wilson Ultra Control', 'Ultra Control', 'Máximo control para defensores', 'Wilson', 'intermedio', 'redonda', 362, 179.95, FALSE, NULL),
+('P036', 'Drop Shot Conqueror Soft', 'Conqueror Soft', 'Núcleo suave para mayor confort', 'Drop Shot', 'principiante', 'lagrima', 355, 89.95, FALSE, NULL),
+('P037', 'Head Delta Elite', 'Delta Elite', 'Para jugadores que buscan potencia', 'Head', 'avanzado', 'diamante', 372, 239.95, FALSE, NULL),
+('P038', 'Adidas Adipower Junior', 'Adipower Junior', 'Perfecta para jugadores jóvenes', 'Adidas', 'principiante', 'redonda', 340, 59.95, FALSE, NULL),
+('P039', 'Bullpadel Comfort', 'Comfort', 'Máxima comodidad para largas sesiones', 'Bullpadel', 'principiante', 'redonda', 352, 69.95, FALSE, NULL),
+('P040', 'Nox Tempo', 'Tempo', 'Pala de iniciación con gran salida de bola', 'Nox', 'principiante', 'lagrima', 355, 74.95, FALSE, NULL);
 
 INSERT INTO stock (producto, tienda, unidades) VALUES
 ('P001', 1, 5),
@@ -42,7 +62,27 @@ INSERT INTO stock (producto, tienda, unidades) VALUES
 ('P017', 1, 3),
 ('P018', 1, 5),
 ('P019', 1, 14),
-('P020', 1, 10);
+('P020', 1, 10)
+('P021', 1, 6),
+('P022', 1, 8),
+('P023', 1, 10),
+('P024', 1, 4),
+('P025', 1, 5),
+('P026', 1, 7),
+('P027', 1, 3),
+('P028', 1, 9),
+('P029', 1, 4),
+('P030', 1, 15),
+('P031', 1, 8),
+('P032', 1, 6),
+('P033', 1, 3),
+('P034', 1, 5),
+('P035', 1, 7),
+('P036', 1, 12),
+('P037', 1, 4),
+('P038', 1, 20),
+('P039', 1, 14),
+('P040', 1, 10);;
 
 -- =========================
 -- TABLA: carrito (ejecutar después de crear la tabla)
