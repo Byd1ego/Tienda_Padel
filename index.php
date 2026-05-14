@@ -32,13 +32,12 @@ $ofertas = $stmt->fetchAll();
 
 <main>
     <div class="banner-grid">
-        <div id="slideshow">
-            <div class="banner-imagen">
-                <img src="static/img/coello.png" alt="Empieza a jugar al mejor precio" class="slide">
-                <img src="static/img/Almejorprecio.png" alt="Empieza a jugar al mejor precio" class="slide">
-            </div>
-        </div>
-        <div class="banner-texto">
+    <div id="slideshow">
+        <img src="static/img/coello.png" alt="" class="slide">
+        <img src="static/img/Almejorprecio.png" alt="" class="slide">
+        <img src="static/img/PROMOCION.png" alt="" class="slide">
+    </div>
+    <div class="banner-texto">
             <span class="banner-tag">Tienda de pádel</span>
             <h1 class="banner-titulo">Palas más vendidas</h1>
             <p class="banner-desc">Descubre nuestra selección de palas para todos los niveles. Calidad profesional al
@@ -59,6 +58,8 @@ $ofertas = $stmt->fetchAll();
             </div>
         </div>
     </div>
+        </div>
+        
 
     <!-- Slideshow de palas que rota automáticamente cada 2 segundos -->
 
