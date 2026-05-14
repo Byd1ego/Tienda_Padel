@@ -46,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h2>Envíanos un mensaje</h2>
 
                 <?php if ($ok): ?>
-                    <p class="contacto-ok">✅ Mensaje enviado correctamente.</p>
+                    <p class="contacto-ok">Mensaje enviado correctamente.</p>
                 <?php endif; ?>
                 <?php if ($error): ?>
-                    <p style="color:red">❌ Error al enviar el mensaje.</p>
+                    <p style="color:red">Error al enviar el mensaje.</p>
                 <?php endif; ?>
 
                 <form method="post" class="formulario" onsubmit="return validarTelefono()">
@@ -82,10 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>📞 <a href="tel:+34600000000">+34 666 666 666 | 999 999 999</a></p>
                 <p>✉️ <a href="mailto:padelzone@gmail.com">padelzone@gmail.com</a></p>
                 <p>🕐 Lunes - Viernes: 9:00 - 20:00</p>
+                <div id="tiempo"></div>
             </div>
 
         </div>
     </div>
+    
+
+
 </main>
 
 <script>
@@ -102,6 +106,19 @@ function validarTelefono() {
     error.style.display = 'none';
     return true;
 }
+</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+// Petición AJAX a la API del tiempo de Crevillente
+$.ajax({
+    url: 'https://api.open-meteo.com/v1/forecast?latitude=38.25&longitude=-0.81&current_weather=true',
+    type: 'GET',
+    success: function (datos) {
+        // Muestra la temperatura actual en el div
+        var temp = datos.current_weather.temperature;
+        $('#tiempo').html('🌡️ Temperatura actual en Crevillente: <strong>' + temp + '°C</strong>');
+    }
+});
 </script>
 
 <?php include_once 'includes/footer.php'; ?>

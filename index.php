@@ -53,6 +53,14 @@ $ofertas = $stmt->fetchAll();
             </div>
         </div>
     </div>
+    <div id="slideshow">
+    <img src="static/img/metalbone.jpg" alt="Pala">
+    <img src="static/img/Adipower.jpg" alt="Pala">
+    <img src="static/img/viper.jpg" alt="Pala">
+    <img src="static/img/conqueror.jpg" alt="Pala">
+    <img src="static/img/ml10.jpg" alt="Pala">
+    <img src="static/img/explorer.jpg" alt="Pala">
+</div>
 
     <div class="contenedorgrid">
         <?php foreach ($ofertas as $p): ?>
@@ -102,5 +110,22 @@ $ofertas = $stmt->fetchAll();
     </div>
 
 </main>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+$(document).ready(function () {
+    var slides = $('#slideshow img');
+    var actual = 0;
+
+    // Oculta todas las imágenes menos la primera
+    slides.hide().first().show();
+
+    // Cada 2 segundos pasa a la siguiente con fadeIn/fadeOut
+    setInterval(function () {
+        slides.eq(actual).fadeOut(500);
+        actual = (actual + 1) % slides.length;
+        slides.eq(actual).fadeIn(500);
+    }, 2000);
+});
+</script>
 
 <?php include_once 'includes/footer.php'; ?>
