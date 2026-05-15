@@ -16,7 +16,18 @@ $cod     = $_POST['cod']     ?? '';
 $usuario = $_SESSION['usuario'];
 
 if ($cod) {
-    // Comprueba si el producto ya está en el carrito del usuario
+    // Recoge la cantidad que quiere añadir, mínimo 1
+    $cantidad = isset($_POST['cantidad']) ? (int)$_POST['cantidad'] : 1;
+
+    // Consulta el stock disponible
+    $sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+    $stmt_stock = $conexion->prepare($sql_stock);
+    $stmt_stock->bindValue(':cod', $cod);
+    $stmt_stock->execute();
+    $stock = $stmt_stock->fetch();
+    $stock_disponible = $stock ? $stock['unidades'] : 0;
+
+    // Comprueba cuántas unidades tiene ya en el carrito
     $sql = "SELECT id, unidades FROM carrito WHERE usuario = :usuario AND producto = :cod";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':usuario', $usuario);
@@ -24,19 +35,26 @@ if ($cod) {
     $stmt->execute();
     $existe = $stmt->fetch();
 
-    if ($existe) {
-        // Si ya existe, suma una unidad al producto en el carrito
-        $sql = "UPDATE carrito SET unidades = unidades + 1 WHERE id = :id";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindValue(':id', $existe['id'], PDO::PARAM_INT);
-        $stmt->execute();
-    } else {
-        // Si no existe, lo añade al carrito con 1 unidad
-        $sql = "INSERT INTO carrito (usuario, producto, unidades) VALUES (:usuario, :cod, 1)";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindValue(':usuario', $usuario);
-        $stmt->bindValue(':cod',     $cod);
-        $stmt->execute();
+    $en_carrito = $existe ? $existe['unidades'] : 0;
+
+    // Calcula cuántas se pueden añadir sin superar el stock
+    $puede_añadir = min($cantidad, $stock_disponible - $en_carrito);
+
+    if ($puede_añadir > 0) {
+        if ($existe) {
+            $sql = "UPDATE carrito SET unidades = unidades + :cantidad WHERE id = :id";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindValue(':cantidad', $puede_añadir, PDO::PARAM_INT);
+            $stmt->bindValue(':id',       $existe['id'], PDO::PARAM_INT);
+            $stmt->execute();
+        } else {
+            $sql = "INSERT INTO carrito (usuario, producto, unidades) VALUES (:usuario, :cod, :cantidad)";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindValue(':usuario', $usuario);
+            $stmt->bindValue(':cod',     $cod);
+            $stmt->bindValue(':cantidad', $puede_añadir, PDO::PARAM_INT);
+            $stmt->execute();
+        }
     }
 }
 

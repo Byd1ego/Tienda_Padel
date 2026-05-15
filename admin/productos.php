@@ -31,45 +31,48 @@ $productos = $stmt->fetchAll();
     </form>
 
     <?php if (count($productos) > 0): ?>
-        <table class='tabla-admin'>
-            <tr>
-                <th>Imagen</th><th>Código</th><th>Nombre</th><th>Descripción</th>
-                <th>Marca</th><th>Nivel</th><th>Forma</th><th>Peso</th>
-                <th>PVP</th><th>Exclusiva</th><th>Stock</th><th>Acciones</th>
-            </tr>
-            <?php foreach ($productos as $p): ?>
-                <?php
-                // Consulta el stock de cada producto en la tienda 1
-                $s = $conexion->prepare("SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1");
-                $s->bindValue(':cod', $p['cod']);
-                $s->execute();
-                $stock    = $s->fetch();
-
-                // Si no hay registro de stock se muestra 0
-                $unidades = $stock ? $stock['unidades'] : 0;
-                ?>
+        <!-- El wrapper permite scroll horizontal sin afectar header ni footer -->
+        <div class="tabla-wrapper">
+            <table class='tabla-admin'>
                 <tr>
-                    <!-- Muestra la imagen del producto o un texto si no tiene -->
-                    <td><?php echo $p['imagen'] ? "<img src='../static/img/" . htmlspecialchars($p['imagen']) . "' style='max-width:60px; border-radius:6px;'>" : 'Sin imagen'; ?></td>
-                    <td><?php echo $p['cod']; ?></td>
-                    <td><?php echo $p['nombre_corto']; ?></td>
-                    <td><?php echo $p['descripcion']; ?></td>
-                    <td><?php echo $p['marca']; ?></td>
-                    <td><?php echo $p['nivel']; ?></td>
-                    <td><?php echo $p['forma']; ?></td>
-                    <td><?php echo $p['peso']; ?> g</td>
-                    <!-- Formatea el precio con 2 decimales -->
-                    <td class='precio-admin'><?php echo number_format($p['pvp'], 2); ?> €</td>
-                    <td><?php echo $p['exclusiva'] ? 'Sí' : 'No'; ?></td>
-                    <td><?php echo $unidades; ?> ud</td>
-                    <!-- Botones para editar o borrar el producto -->
-                    <td class='acciones-admin'>
-                        <a class='boton-editar' href='producto_editar.php?cod=<?php echo $p['cod']; ?>'>Editar</a>
-                        <a class='boton-borrar' href='producto_borrar.php?cod=<?php echo $p['cod']; ?>'>Borrar</a>
-                    </td>
+                    <th>Imagen</th><th>Código</th><th>Nombre</th><th>Descripción</th>
+                    <th>Marca</th><th>Nivel</th><th>Forma</th><th>Peso</th>
+                    <th>PVP</th><th>Exclusiva</th><th>Stock</th><th>Acciones</th>
                 </tr>
-            <?php endforeach; ?>
-        </table>
+                <?php foreach ($productos as $p): ?>
+                    <?php
+                    // Consulta el stock de cada producto en la tienda 1
+                    $s = $conexion->prepare("SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1");
+                    $s->bindValue(':cod', $p['cod']);
+                    $s->execute();
+                    $stock    = $s->fetch();
+
+                    // Si no hay registro de stock se muestra 0
+                    $unidades = $stock ? $stock['unidades'] : 0;
+                    ?>
+                    <tr>
+                        <!-- Muestra la imagen del producto o un texto si no tiene -->
+                        <td><?php echo $p['imagen'] ? "<img src='../static/img/" . htmlspecialchars($p['imagen']) . "' style='max-width:60px; border-radius:6px;'>" : 'Sin imagen'; ?></td>
+                        <td><?php echo $p['cod']; ?></td>
+                        <td><?php echo $p['nombre_corto']; ?></td>
+                        <td><?php echo $p['descripcion']; ?></td>
+                        <td><?php echo $p['marca']; ?></td>
+                        <td><?php echo $p['nivel']; ?></td>
+                        <td><?php echo $p['forma']; ?></td>
+                        <td><?php echo $p['peso']; ?> g</td>
+                        <!-- Formatea el precio con 2 decimales -->
+                        <td class='precio-admin'><?php echo number_format($p['pvp'], 2); ?> €</td>
+                        <td><?php echo $p['exclusiva'] ? 'Sí' : 'No'; ?></td>
+                        <td><?php echo $unidades; ?> ud</td>
+                        <!-- Botones para editar o borrar el producto -->
+                        <td class='acciones-admin'>
+                            <a class='boton-editar' href='producto_editar.php?cod=<?php echo $p['cod']; ?>'>Editar</a>
+                            <a class='boton-borrar' href='producto_borrar.php?cod=<?php echo $p['cod']; ?>'>Borrar</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
     <?php else: ?>
         <p>No hay productos para mostrar.</p>
     <?php endif; ?>

@@ -37,15 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <main>
-    <div class="banner-grid">
-        <div class="banner-imagen">
-            <img src="static/img/contactanos.png" alt="Contáctanos">
-        </div>
-        <div class="banner-texto">
-            <h1 class="banner-titulo">Envíanos un mensaje</h1>
-            <p class="banner-desc">Cualquier problema o consulta, no dudes en contactarnos.</p>
-        </div>
+    <div class="banner-completo">
+    <div class="banner-imagen-estatica">
+        <img src="static/img/contactanos.png" alt="Contáctanos">
     </div>
+    <div class="banner-texto">
+        <h1 class="banner-titulo">Envíanos un mensaje</h1>
+        <p class="banner-desc">Cualquier problema o consulta, no dudes en contactarnos.</p>
+    </div>
+</div>
 
     <div class="contacto-contenedor">
         <div class="contacto-bloque">

@@ -9,6 +9,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
 }
 
 /* El main ocupa el espacio sobrante entre header y footer */
@@ -20,6 +22,7 @@ main {
 main>h2 {
     text-align: center;
     padding: 10px;
+    color: #111111;
 }
 
 /* ── HEADER ── */
@@ -28,10 +31,10 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: white;
-    color: black;
+    background-color: #0A1628;
+    color: white;
     position: relative;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid #C8E000;
 }
 
 /* ── FOOTER ── */
@@ -39,10 +42,14 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border-top: 1px solid black;
+    background-color: #0A1628;
+    color: white;
+    padding: 20px;
+    border-top: 3px solid #C8E000;
+}
+
+footer>p {
+    color: white;
 }
 
 footer>p:nth-child(2) {
@@ -56,29 +63,29 @@ footer>p:nth-child(2) {
     position: absolute;
     top: 8em;
     left: 0;
-    background-color: white;
+    background-color: #0A1628;
     width: 100%;
     display: none;
     flex-direction: column;
     text-align: center;
     z-index: 1000;
-    border-top: 1px solid #eee;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #C8E000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .menu li {
     padding: 15px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .menu>li>a {
-    color: black;
+    color: white;
     text-decoration: none;
     font-size: 1rem;
 }
 
 .menu>li>a:hover {
-    color: #555;
+    color: #C8E000;
 }
 
 /* El checkbox del menú hamburguesa está oculto visualmente */
@@ -90,51 +97,13 @@ footer>p:nth-child(2) {
 #icono {
     cursor: pointer;
     font-size: 29px;
-    color: black;
+    color: white;
 }
 
 /* Cuando el checkbox está marcado, muestra el menú */
 #hamburguesa:checked~.menu,
 #hamburguesa:checked~nav .menu {
     display: flex;
-}
-
-/* ── SLIDESHOW ── */
-/* ── SLIDESHOW ── */
-.banner-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin-bottom: 40px;
-    background-color: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    min-height: 500px;
-}
-
-#slideshow {
-    width: 100%;
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-}
-
-#slideshow img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
-}
-
-
-/* ── TIEMPO ── */
-#tiempo {
-    text-align: center;
-    margin: 1rem 0;
-    font-size: 1rem;
 }
 
 /* ── MENÚ ADMIN ── */
@@ -144,29 +113,29 @@ footer>p:nth-child(2) {
     position: absolute;
     top: 8em;
     left: 0;
-    background-color: white;
+    background-color: #0A1628;
     width: 100%;
     display: none;
     flex-direction: column;
     text-align: center;
     z-index: 1000;
-    border-top: 1px solid #eee;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #C8E000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .menu-admin li {
     padding: 15px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .menu-admin li a {
-    color: black;
+    color: white;
     text-decoration: none;
     font-size: 1rem;
 }
 
 .menu-admin li a:hover {
-    color: #555;
+    color: #C8E000;
 }
 
 #hamburguesa-admin {
@@ -176,22 +145,234 @@ footer>p:nth-child(2) {
 #icono-admin {
     cursor: pointer;
     font-size: 29px;
-    color: black;
+    color: white;
 }
 
 #hamburguesa-admin:checked~nav .menu-admin {
     display: flex;
 }
 
-/* ── FILTRO ── */
-.filtro-container {
+/* ── BANNER COMPLETO (index, exclusivas, contacto) ── */
+/* En móvil imagen arriba y texto abajo, en tablet lado a lado */
+.banner-completo {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 40px;
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border-top: 4px solid #C8E000;
+}
+
+/* ── SLIDESHOW (index) ── */
+#slideshow {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Las imágenes del slideshow se superponen y se muestran de una en una */
+#slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    top: 0;
+    left: 0;
+}
+
+/* ── BANNER IMAGEN ESTÁTICA (exclusivas, contacto) ── */
+.banner-imagen-estatica {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.banner-imagen-estatica img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ── BANNER TEXTO ── */
+.banner-texto {
+    padding: 24px;
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: white;
+}
+
+.banner-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1A73E8;
+}
+
+.banner-titulo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.2;
+}
+
+.banner-desc {
+    font-size: 1rem;
+    color: #555555;
+    line-height: 1.7;
+}
+
+/* Estadísticas del banner (modelos, niveles, marcas) */
+.banner-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 8px;
+}
+
+.banner-stat {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin: 20px 0;
-    font-size: 0.9rem;
-    color: #555;
+    gap: 2px;
+}
+
+.banner-stat strong {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #1A73E8;
+}
+
+.banner-stat span {
+    font-size: 0.8rem;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ── GRID DE PRODUCTOS ── */
+/* En móvil una columna, en tablet dos, en escritorio tres (ver responsive) */
+.contenedorgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* ── CARDS DE PRODUCTO ── */
+.card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    /* Animación suave al pasar el ratón */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: auto;
+    max-width: 320px;
+    border-top: 3px solid #C8E000;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* Quita el subrayado del enlace de la card */
+.card a {
+    text-decoration: none;
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #111111;
+    text-align: center;
+}
+
+/* ── DETALLE PRODUCTO ── */
+.producto-detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #C8E000;
+}
+
+.producto-imagen img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+}
+
+.producto-titulo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111111;
+    margin-bottom: 8px;
+}
+
+.producto-precio {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1A73E8;
+    margin-bottom: 16px;
+}
+
+.producto-desc {
+    color: #555555;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+/* Grid de especificaciones del producto (marca, nivel, forma, peso) */
+.producto-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.spec {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-left: 3px solid #1A73E8;
+}
+
+.spec-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888888;
+    font-weight: 700;
+}
+
+.spec-valor {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111111;
 }
 
 /* ── PAGINACIÓN ── */
@@ -213,7 +394,7 @@ footer>p:nth-child(2) {
 /* Botón de página normal */
 .pag-boton {
     background-color: white;
-    color: #111;
+    color: #111111;
     border: 1px solid #ddd;
     padding: 8px 14px;
     border-radius: 8px;
@@ -223,130 +404,27 @@ footer>p:nth-child(2) {
 }
 
 .pag-boton:hover {
-    background-color: #f0f0f0;
+    background-color: #C8E000;
+    color: #111111;
+    border-color: #C8E000;
 }
 
 /* Botón de la página actualmente seleccionada */
 .pag-activo {
-    background-color: #111;
+    background-color: #1A73E8;
     color: white;
-    border-color: #111;
+    border-color: #1A73E8;
 }
 
-/* ── BANNER ── */
-/* En móvil el banner es de una sola columna */
-.banner-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin-bottom: 40px;
-    background-color: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-}
-
-.banner-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.banner-texto {
-    padding: 32px 24px;
+/* ── FILTRO ── */
+.filtro-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 16px;
-}
-
-.banner-tag {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #888;
-}
-
-.banner-titulo {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #111;
-    line-height: 1.2;
-}
-
-.banner-desc {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.7;
-}
-
-/* Estadísticas del banner (modelos, niveles, marcas) */
-.banner-stats {
-    display: flex;
-    gap: 24px;
-    margin-top: 8px;
-}
-
-.banner-stat {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2px;
-}
-
-.banner-stat strong {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #111;
-}
-
-.banner-stat span {
-    font-size: 0.8rem;
-    color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* ── CARDS DE PRODUCTO ── */
-.card {
-    background-color: white;
-    border-radius: 16px;
-    padding: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    /* Animación suave al pasar el ratón */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: auto;
-    max-width: 320px;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
-}
-
-.card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 12px;
-}
-
-.card p {
-    font-size: 18px;
-    font-weight: bold;
-    color: #111;
-    text-align: center;
-}
-
-/* ── GRID DE PRODUCTOS ── */
-/* En móvil una columna, en tablet dos, en escritorio tres (ver responsive) */
-.contenedorgrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    color: #555555;
 }
 
 /* ── CONTACTO ── */
@@ -356,11 +434,11 @@ footer>p:nth-child(2) {
     padding: 0 16px;
 }
 
-/* En móvil el formulario y la info se apilan, en tablet van en fila (ver responsive) */
+/* En móvil el formulario y la info se apilan, en tablet van en fila */
 .contacto-bloque {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     margin-bottom: 30px;
 }
 
@@ -371,6 +449,7 @@ footer>p:nth-child(2) {
 .contacto-formulario h2,
 .contacto-info h2 {
     margin-bottom: 16px;
+    color: #111111;
 }
 
 .contacto-info p {
@@ -378,7 +457,7 @@ footer>p:nth-child(2) {
 }
 
 .contacto-info a {
-    color: #111;
+    color: #1A73E8;
     text-decoration: none;
 }
 
@@ -397,13 +476,22 @@ footer>p:nth-child(2) {
     width: 100%;
 }
 
-/* Mensaje de éxito al enviar el formulario de contacto */
+/* Mensaje verde de éxito al enviar el formulario */
 .contacto-ok {
     background: #d4edda;
     color: #155724;
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 16px;
+}
+
+/* ── TIEMPO (AJAX) ── */
+#tiempo {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1rem;
+    color: #1A73E8;
+    font-weight: bold;
 }
 
 /* ── FORMULARIOS ── */
@@ -422,6 +510,7 @@ footer>p:nth-child(2) {
 .form-grupo label {
     font-weight: bold;
     font-size: 0.9rem;
+    color: #111111;
 }
 
 .form-grupo input,
@@ -434,6 +523,13 @@ footer>p:nth-child(2) {
     box-sizing: border-box;
 }
 
+/* Borde azul al hacer foco en un campo */
+.form-grupo input:focus,
+.form-grupo textarea:focus {
+    outline: none;
+    border-color: #1A73E8;
+}
+
 .form-grupo textarea {
     resize: vertical;
 }
@@ -444,9 +540,9 @@ footer>p:nth-child(2) {
 }
 
 /* ── BOTONES ── */
-/* Botón principal negro */
+/* Botón principal azul */
 .boton-nuevo {
-    background-color: black;
+    background-color: #1A73E8;
     color: white;
     border: none;
     padding: 10px 24px;
@@ -454,15 +550,16 @@ footer>p:nth-child(2) {
     font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
+    transition: background-color 0.2s;
 }
 
 .boton-nuevo:hover {
-    background-color: #333;
+    background-color: #0A1628;
 }
 
-/* Botón gris para volver a la tienda */
+/* Botón gris oscuro para volver */
 .boton-tienda {
-    background-color: #444;
+    background-color: #444444;
     color: white;
     border: none;
     padding: 10px 24px;
@@ -470,15 +567,16 @@ footer>p:nth-child(2) {
     font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
+    transition: background-color 0.2s;
 }
 
 .boton-tienda:hover {
-    background-color: #666;
+    background-color: #666666;
 }
 
 /* Botón rojo para cancelar */
 .boton-cerrar {
-    background-color: #c0392b;
+    background-color: #C0392B;
     color: white;
     border: none;
     padding: 10px 24px;
@@ -486,6 +584,7 @@ footer>p:nth-child(2) {
     font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
+    transition: background-color 0.2s;
 }
 
 .boton-cerrar:hover {
@@ -494,30 +593,66 @@ footer>p:nth-child(2) {
 
 /* Botón azul para editar un producto */
 .boton-editar {
-    background-color: #2980b9;
+    background-color: #1A73E8;
     color: white;
     padding: 6px 14px;
     border-radius: 6px;
     text-decoration: none;
     font-size: 0.85rem;
+    transition: background-color 0.2s;
 }
 
 .boton-editar:hover {
-    background-color: #3498db;
+    background-color: #0A1628;
 }
 
 /* Botón rojo para borrar un producto */
 .boton-borrar {
-    background-color: #c0392b;
+    background-color: #C0392B;
     color: white;
     padding: 6px 14px;
     border-radius: 6px;
     text-decoration: none;
     font-size: 0.85rem;
+    transition: background-color 0.2s;
 }
 
 .boton-borrar:hover {
     background-color: #e74c3c;
+}
+
+/* Botón azul del carrito */
+.boton-carrito {
+    background-color: #1A73E8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 8px;
+    transition: background-color 0.2s;
+}
+
+.boton-carrito:hover {
+    background-color: #0A1628;
+}
+
+/* Botón verde de pagar */
+.boton-pagar {
+    background-color: #27AE60;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.boton-pagar:hover {
+    background-color: #2ecc71;
 }
 
 /* ── PANEL ADMIN ── */
@@ -530,7 +665,7 @@ footer>p:nth-child(2) {
 .admin-titulo {
     font-size: 2rem;
     margin-bottom: 24px;
-    color: #111;
+    color: #111111;
 }
 
 .admin-barra {
@@ -546,6 +681,12 @@ footer>p:nth-child(2) {
 }
 
 /* ── TABLA ADMIN ── */
+/* El wrapper permite scroll horizontal sin afectar header ni footer */
+.tabla-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
 .tabla-admin {
     width: 100%;
     border-collapse: collapse;
@@ -557,17 +698,18 @@ footer>p:nth-child(2) {
 }
 
 .tabla-admin th {
-    background-color: black;
+    background-color: #0A1628;
     color: white;
     padding: 12px 10px;
     text-align: left;
     font-weight: bold;
+    border-bottom: 3px solid #C8E000;
 }
 
 .tabla-admin td {
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
-    color: #222;
+    color: #222222;
     vertical-align: middle;
 }
 
@@ -575,14 +717,14 @@ footer>p:nth-child(2) {
     border-bottom: none;
 }
 
-/* Fila con fondo gris al pasar el ratón */
+/* Fila con fondo azul claro al pasar el ratón */
 .tabla-admin tr:hover td {
-    background-color: #f5f5f5;
+    background-color: #f0f7ff;
 }
 
 .precio-admin {
     font-weight: bold;
-    color: #111;
+    color: #1A73E8;
 }
 
 .acciones-admin {
@@ -600,6 +742,7 @@ footer>p:nth-child(2) {
     padding: 40px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
+    border-top: 4px solid #C0392B;
 }
 
 /* Mensaje de aviso en rojo para confirmar el borrado */
@@ -631,6 +774,7 @@ footer>p:nth-child(2) {
     padding: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     margin-bottom: 30px;
+    border-top: 4px solid #1A73E8;
 }
 
 /* Cada comentario tiene una línea azul a la izquierda */
@@ -639,12 +783,12 @@ footer>p:nth-child(2) {
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 16px;
-    border-left: 4px solid black;
+    border-left: 4px solid #1A73E8;
 }
 
 .comentario-fecha {
     font-size: 0.8rem;
-    color: #888;
+    color: #888888;
     margin-left: 6px;
 }
 
@@ -652,12 +796,13 @@ footer>p:nth-child(2) {
 /* Oculto por defecto, se muestra con jQuery slideDown al cargar la página */
 #bienvenida {
     display: none;
-    background-color: blue;
+    background-color: #0A1628;
     color: white;
     padding: 15px 40px 15px 20px;
     border-radius: 8px;
     margin-bottom: 20px;
     position: relative;
+    border-left: 4px solid #C8E000;
 }
 
 /* Botón X para cerrar el mensaje de bienvenida */
@@ -666,6 +811,7 @@ footer>p:nth-child(2) {
     top: 10px;
     right: 14px;
     cursor: pointer;
+    color: #C8E000;
 }
 
 /* ── LOGIN ── */
@@ -676,12 +822,14 @@ footer>p:nth-child(2) {
     border-radius: 16px;
     padding: 40px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-top: 4px solid #1A73E8;
 }
 
 .login-titulo {
     text-align: center;
     font-size: 1.8rem;
     margin-bottom: 30px;
+    color: #111111;
 }
 
 /* Mensaje amarillo de aviso (cuando se redirige al login) */
@@ -705,22 +853,6 @@ footer>p:nth-child(2) {
 }
 
 /* ── CARRITO ── */
-.boton-carrito {
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 8px;
-}
-
-.boton-carrito:hover {
-    background-color: #333;
-}
-
 .carrito-contenedor {
     max-width: 800px;
     margin: 40px auto;
@@ -730,12 +862,13 @@ footer>p:nth-child(2) {
 .carrito-titulo {
     font-size: 2rem;
     margin-bottom: 30px;
+    color: #111111;
 }
 
 .carrito-vacio {
     text-align: center;
     font-size: 1.2rem;
-    color: #666;
+    color: #666666;
     margin-top: 40px;
 }
 
@@ -754,6 +887,7 @@ footer>p:nth-child(2) {
     display: flex;
     align-items: center;
     gap: 16px;
+    border-left: 4px solid #1A73E8;
 }
 
 .carrito-item img {
@@ -771,23 +905,24 @@ footer>p:nth-child(2) {
     font-weight: bold;
     font-size: 1rem;
     margin-bottom: 4px;
+    color: #111111;
 }
 
 .carrito-precio {
-    color: #555;
+    color: #555555;
     font-size: 0.9rem;
 }
 
 .carrito-subtotal {
     font-weight: bold;
-    color: #111;
+    color: #1A73E8;
     font-size: 0.95rem;
     margin-top: 4px;
 }
 
 /* Barra inferior del carrito con el total y el botón de pagar */
 .carrito-total {
-    background-color: white;
+    background-color: #0A1628;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -795,22 +930,8 @@ footer>p:nth-child(2) {
     justify-content: space-between;
     align-items: center;
     font-size: 1.2rem;
-}
-
-/* Botón verde de pagar */
-.boton-pagar {
-    background-color: #27ae60;
     color: white;
-    border: none;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.boton-pagar:hover {
-    background-color: #2ecc71;
+    border-top: 3px solid #C8E000;
 }
 
 /* ════════════════════════
@@ -824,15 +945,17 @@ footer>p:nth-child(2) {
     }
 }
 
-/* En tablet la tabla del admin permite scroll horizontal si no cabe */
+/* En tablet el admin-barra cambia de alineación */
 @media (max-width: 1024px) {
-    .tabla-admin {
-        display: block;
-        overflow-x: auto;
-    }
-
     .admin-barra {
         justify-content: flex-start;
+    }
+}
+
+/* A partir de 480px el slideshow crece un poco */
+@media (min-width: 480px) {
+    #slideshow {
+        height: 280px;
     }
 }
 
@@ -842,6 +965,11 @@ footer>p:nth-child(2) {
     /* El grid de productos pasa a 2 columnas */
     .contenedorgrid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* El banner pasa a dos columnas (imagen + texto lado a lado) */
+    .banner-completo {
+        grid-template-columns: 1fr 1fr;
     }
 
     /* Se oculta el icono hamburguesa porque el menú ya cabe en pantalla */
@@ -882,14 +1010,9 @@ footer>p:nth-child(2) {
         height: 350px;
     }
 
-    /* El banner pasa a dos columnas (imagen + texto lado a lado) */
-    .banner-grid {
-        grid-template-columns: 1fr 1fr;
-        min-height: 350px;
-    }
-
+    /* El slideshow crece en tablet */
     #slideshow {
-        height: 100%;
+        height: 380px;
     }
 
     .banner-titulo {
@@ -899,11 +1022,29 @@ footer>p:nth-child(2) {
     .banner-texto {
         padding: 40px 36px;
     }
+
+    /* El detalle del producto pasa a fila (imagen + info lado a lado) */
+    .producto-detalle {
+        flex-direction: row;
+    }
+
+    .producto-imagen {
+        flex: 1;
+    }
+
+    .producto-info {
+        flex: 1;
+    }
 }
 
 /* A partir de 1200px (escritorio) el grid de productos pasa a 3 columnas */
 @media (min-width: 1200px) {
     .contenedorgrid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* El slideshow alcanza su tamaño máximo */
+    #slideshow {
+        height: 420px;
     }
 }
