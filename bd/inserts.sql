@@ -20,7 +20,7 @@ INSERT INTO producto (cod, nombre, nombre_corto, descripcion, marca, nivel, form
 ('P017', 'Head Delta Pro', 'Delta Pro', 'Potencia explosiva para ataque', 'Head', 'avanzado', 'diamante', 370, 289.95, TRUE, NULL),
 ('P018', 'Adidas Metalbone', 'Metalbone', 'Tecnología avanzada y gran potencia', 'Adidas', 'avanzado', 'diamante', 368, 299.95, FALSE, NULL),
 ('P019', 'Bullpadel Indiga Control', 'Indiga Ctrl', 'Perfecta para principiantes', 'Bullpadel', 'principiante', 'redonda', 355, 59.95, TRUE, NULL),
-('P020', 'Nox X-One Evo', 'X-One Evo', 'Muy manejable y cómoda', 'Nox', 'principiante', 'lagrima', 360, 99.95, FALSE, NULL)
+('P020', 'Nox X-One Evo', 'X-One Evo', 'Muy manejable y cómoda', 'Nox', 'principiante', 'lagrima', 360, 99.95, FALSE, NULL),
 ('P021', 'Bullpadel Hack 02', 'Hack 02', 'Potencia y control para nivel avanzado', 'Bullpadel', 'avanzado', 'diamante', 370, 259.95, FALSE, NULL),
 ('P022', 'Adidas Adipower Lite', 'Adipower Lite', 'Pala ligera para jugadores intermedios', 'Adidas', 'intermedio', 'redonda', 355, 149.95, FALSE, NULL),
 ('P023', 'Head Alpha Pro', 'Alpha Pro', 'Control total para principiantes avanzados', 'Head', 'principiante', 'lagrima', 358, 99.95, FALSE, NULL),
@@ -62,7 +62,7 @@ INSERT INTO stock (producto, tienda, unidades) VALUES
 ('P017', 1, 3),
 ('P018', 1, 5),
 ('P019', 1, 14),
-('P020', 1, 10)
+('P020', 1, 10),
 ('P021', 1, 6),
 ('P022', 1, 8),
 ('P023', 1, 10),
