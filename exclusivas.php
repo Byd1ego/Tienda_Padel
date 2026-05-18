@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario'])) {
 <main>
     <div class="banner-completo">
         <div class="banner-imagen-estatica">
-            <img src="static/img/exclusivas.png" alt="Palas exclusivas">
+            <img src="static/img/exclusivas.jpg" alt="Palas exclusivas">
         </div>
         <div class="banner-texto">
             <span class="banner-tag">Tienda de pádel</span>

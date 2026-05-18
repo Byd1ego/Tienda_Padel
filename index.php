@@ -33,9 +33,9 @@ $ofertas = $stmt->fetchAll();
 <main>
     <div class="banner-completo">
         <div id="slideshow">
-            <img src="static/img/coello.png" alt="" class="slide">
-            <img src="static/img/Almejorprecio.png" alt="" class="slide">
-            <img src="static/img/PROMOCION.png" alt="" class="slide">
+            <img src="static/img/coello.jpg" alt="" class="slide">
+            <img src="static/img/Almejorprecio.jpg" alt="" class="slide">
+            <img src="static/img/PROMOCION.jpg" alt="" class="slide">
         </div>
         <div class="banner-texto">
             <span class="banner-tag">Tienda de pádel</span>

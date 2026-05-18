@@ -7,7 +7,7 @@ if ($_SERVER['HTTP_HOST'] === 'localhost') {
 } else {
     define('DB_HOST', 'sql107.infinityfree.com');
     define('DB_USER', 'if0_41953172');
-    define('DB_PASS', 'IOpyoTtBZ06JCSd');
+    define('DB_PASS', 'IOpyoTtBZO6JCSd');
     define('DB_NAME', 'if0_41953172_tienda_padel');
 }
 

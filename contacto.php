@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="banner-completo">
     <div class="banner-imagen-estatica">
-        <img src="static/img/contactanos.png" alt="Contáctanos">
+        <img src="static/img/contactanos.jpg" alt="Contáctanos">
     </div>
     <div class="banner-texto">
         <h1 class="banner-titulo">Envíanos un mensaje</h1>

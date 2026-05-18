@@ -39,6 +39,7 @@ header {
     border-bottom: 3px solid #C8E000;
 }
 
+
 /* ── FOOTER ── */
 footer {
     display: flex;
@@ -48,14 +49,17 @@ footer {
     color: white;
     padding: 20px;
     border-top: 3px solid #C8E000;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-footer>p {
+footer img {
+    width: 120px;
+    max-width: 100%;
+}
+
+footer > p {
     color: white;
-}
-
-footer>p:nth-child(2) {
-    align-self: flex-end;
 }
 
 /* ── MENÚ MÓVIL ── */
