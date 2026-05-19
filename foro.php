@@ -94,7 +94,7 @@ $comentarios = $stmt->fetchAll();
         var hora  = ahora.toLocaleTimeString('es-ES');
 
         // Escribe la fecha y hora en el elemento del DOM
-        document.getElementById('fecha-actual').textContent = '📅 ' + fecha + ' — ' + hora;
+        document.getElementById('fecha-actual').textContent =  fecha + ' — ' + hora;
 
     });
 </script>

@@ -94,10 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="contacto-info">
                 <h2>Dónde estamos</h2>
-                <p>📍 Calle del Pádel, 10 - Crevillente</p>
-                <p>📞 <a href="tel:+34600000000">+34 666 666 666 | 999 999 999</a></p>
-                <p>✉️ <a href="mailto:padelzone@gmail.com">padelzone@gmail.com</a></p>
-                <p>🕐 Lunes - Viernes: 9:00 - 20:00</p>
+                <p> Calle del Pádel, 10 - Crevillente</p>
+                <p>+34 666 666 666 | 999 999 999</p>
+                <p>padelzone@gmail.com</p>
+                <p> Lunes - Viernes: 9:00 - 20:00</p>
                 <!-- Aquí aparece la temperatura cargada por AJAX -->
                 <div id="tiempo"></div>
             </div>
@@ -130,15 +130,10 @@ function validarTelefono() {
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-// Petición AJAX a la API del tiempo de Crevillente (Open-Meteo, gratuita sin registro)
-$.ajax({
-    url: 'https://api.open-meteo.com/v1/forecast?latitude=38.25&longitude=-0.81&current_weather=true',
-    type: 'GET',
-    success: function (datos) {
-        // Si la petición va bien, extrae la temperatura y la muestra en el div #tiempo
-        var temp = datos.current_weather.temperature;
-        $('#tiempo').html('🌡️ Temperatura actual en Crevillente: <strong>' + temp + '°C</strong>');
-    }
+// Pido el tiempo de Crevillente a la API gratuita de Open-Meteo
+$.get('https://api.open-meteo.com/v1/forecast?latitude=38.25&longitude=-0.81&current_weather=true', function(datos) {
+    // Cuando llegan los datos muestro la temperatura en el div #tiempo
+    $('#tiempo').html('Temperatura actual en Crevillente: <strong>' + datos.current_weather.temperature + '°C</strong>');
 });
 </script>
 

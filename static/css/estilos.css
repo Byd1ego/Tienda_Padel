@@ -51,6 +51,7 @@ footer {
     border-top: 3px solid #C8E000;
     width: 100%;
     box-sizing: border-box;
+    margin-top: auto;
 }
 
 footer img {
@@ -448,13 +449,9 @@ footer > p {
 }
 
 .contacto-info a {
-    color: #1A73E8;
     text-decoration: none;
 }
 
-.contacto-info a:hover {
-    text-decoration: underline;
-}
 
 .contacto-mapa {
     height: 250px;
@@ -677,7 +674,6 @@ footer > p {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     gap: 16px;
-    border-left: 4px solid #1A73E8;
 }
 
 .producto-card-img img {
@@ -830,10 +826,10 @@ footer > p {
 /* ── LOGIN ── */
 .login-contenedor {
     max-width: 400px;
-    margin: 80px auto;
+    margin: 40px auto;
     background-color: white;
     border-radius: 16px;
-    padding: 40px;
+    padding: 60px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -942,6 +938,15 @@ footer > p {
     color: white;
     border-top: 3px solid #C8E000;
 }
+/* ── FORMULARIO ADMIN ── */
+
+/* Móvil: una columna, campos apilados */
+.admin-contenedor .formulario {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
 
 /* ════════════════════════
    RESPONSIVE — MOBILE FIRST
@@ -965,7 +970,19 @@ footer > p {
     }
 }
 
+    
 @media (min-width: 768px) {
+    .admin-contenedor .formulario {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Los botones de guardar y cancelar ocupan todo el ancho */
+    .admin-contenedor .formulario .form-botones {
+        grid-column: 1 / -1;
+        justify-content: flex-end;
+    }
+
+
     .contenedorgrid {
         grid-template-columns: repeat(2, 1fr);
     }

@@ -1,6 +1,5 @@
 <?php
-// Inicia la sesión para comprobar si el usuario ya está logueado
-session_start();
+include_once 'includes/header.php';
 
 // Si ya hay sesión activa y no viene del redirigido, manda a su página correspondiente
 if (isset($_SESSION['usuario']) && !isset($_GET['redirigido'])) {
@@ -76,3 +75,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+<?php include_once 'includes/footer.php'; ?>
