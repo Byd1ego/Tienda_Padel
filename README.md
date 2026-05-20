@@ -15,15 +15,12 @@
 6. [Roles y acceso](#roles-y-acceso)
 7. [Páginas y rutas](#páginas-y-rutas)
 8. [Panel de administración](#panel-de-administración)
-9. [Instalación y configuración](#instalación-y-configuración)
-10. [Librerías externas](#librerías-externas)
+9. [Librerías externas](#librerías-externas)
 ---
  
 ## Descripción del proyecto
  
 **PadelZone** es una tienda online especializada en palas de pádel. Permite a los usuarios explorar el catálogo de productos, añadir artículos al carrito y completar compras. Además, incluye un foro de opiniones, una sección de productos exclusivos para usuarios registrados y un panel de administración para gestionar el inventario.
- 
-El proyecto ha sido desarrollado como Trabajo de Fin de Grado del ciclo formativo de **Desarrollo de Aplicaciones Web (DAW)**, aplicando los conocimientos adquiridos a lo largo del ciclo en tecnologías web del lado del servidor y del cliente.
  
 ---
  
@@ -259,34 +256,6 @@ El panel tiene su propia cabecera y pie de página (`header_admin.php` / `footer
  
 ---
  
-## Instalación y configuración
- 
-### Requisitos previos
- 
-- Servidor con PHP 8+ (XAMPP, Laragon, Docker, etc.)
-- MySQL o MariaDB
-### Pasos
- 
-1. **Clona o descomprime** el proyecto en la carpeta raíz de tu servidor web (p. ej. `htdocs/` en XAMPP).
-2. **Crea la base de datos** importando los scripts SQL:
-```sql
--- Desde phpMyAdmin o la terminal MySQL:
-SOURCE /ruta/al/proyecto/bd/bd_tienda.sql;
-SOURCE /ruta/al/proyecto/bd/inserts.sql;
-```
- 
-3. **Configura la conexión** editando `includes/configuracion.php`:
-```php
-define('DB_HOST',    'localhost');
-define('DB_NAME',    'tienda_padel');
-define('DB_USER',    'root');       // tu usuario MySQL
-define('DB_PASS',    '');           // tu contraseña MySQL
-define('DB_CHARSET', 'utf8');
-```
- 
-4. **Arranca el servidor** y accede a `http://localhost/Tienda_Padel/`.
----
- 
 ## Librerías externas
  
 | Librería | Versión | Uso |
@@ -294,14 +263,12 @@ define('DB_CHARSET', 'utf8');
 | [jQuery](https://jquery.com/) | 3.7.1 | Slideshow, efectos, llamadas AJAX |
 | [Font Awesome](https://fontawesome.com/) | 6.5.0 | Iconos (carrito, menú hamburguesa) |
 | [FPDF](http://www.fpdf.org/) | — | Generación de documentos PDF |
-| [Open-Meteo API](https://open-meteo.com/) | — | Temperatura en tiempo real (sin API key) |
+| [Open-Meteo API](https://open-meteo.com/) | — | Temperatura en tiempo real |
  
 ---
  
 ## Autor
  
-Proyecto desarrollado como **Trabajo de Fin de Grado** del ciclo de **Desarrollo de Aplicaciones Web (DAW)**.
- 
+Proyecto desarrollado por **Javier Diego Castello** como **Trabajo de Fin de Grado** del ciclo de **Desarrollo de Aplicaciones Web (DAW)**.
+
 ---
- 
-*Documentación generada para GitHub Pages.*
