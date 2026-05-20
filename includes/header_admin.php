@@ -39,6 +39,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     <nav>
         <ul class="menu-admin">
             <li><a href="productos.php">Productos</a></li>
+            <li><a href="pedidos.php">Pedidos</a></li>
             <li><a href="producto_nuevo.php">Nuevo producto</a></li>
             <li><a href="exportar_pdf.php">Exportar PDF</a></li>
             <li><a href="../index.php">Tienda</a></li>

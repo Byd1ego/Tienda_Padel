@@ -76,3 +76,17 @@ CREATE TABLE carrito (
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (producto) REFERENCES producto(cod)
 );
+
+-- =========================
+-- TABLA: pedido
+-- =========================
+CREATE TABLE pedido (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    producto VARCHAR(12) NOT NULL,
+    nombre_producto VARCHAR(50) NOT NULL,
+    unidades INT NOT NULL,
+    pvp DECIMAL(10,2) NOT NULL,
+    imagen VARCHAR(255),
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP
+);
