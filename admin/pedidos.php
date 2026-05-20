@@ -5,7 +5,7 @@ require_once '../includes/conexion.php';
 
 // Si se pulsa borrar, elimina ese pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrar'])) {
-    $sql = "DELETE FROM pedido WHERE id = :id";
+    $sql = "DELETE FROM pedido WHERE id_pedido = :id";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':id', $_POST['borrar'], PDO::PARAM_INT);
     $stmt->execute();
@@ -44,7 +44,7 @@ $pedidos = $stmt->fetchAll();
                         <p><span class="card-label">Fecha:</span> <?php echo $p['fecha']; ?></p>
                         <form method="post" onsubmit="return confirm('¿Borrar pedido?')">
                             <input type="hidden" name="borrar" value="<?php echo $p['id']; ?>">
-                            <a href="pedido_borrar.php?id=<?php echo $p['id']; ?>" class="boton-borrar">Borrar</a>
+                            <a href="pedido_borrar.php?id=<?php echo $p['id_pedido']; ?>" class="boton-borrar">Borrar</a>
                         </form>
                     </div>
                 </div>
@@ -73,7 +73,7 @@ $pedidos = $stmt->fetchAll();
                                 Sin imagen
                             <?php endif; ?>
                         </td>
-                        <td><?php echo $p['id']; ?></td>
+                        <td><?php echo $p['id_pedido']; ?></td>
                         <td><?php echo htmlspecialchars($p['nombre_producto']); ?></td>
                         <td><?php echo htmlspecialchars($p['usuario']); ?></td>
                         <td><?php echo $p['unidades']; ?></td>
@@ -81,8 +81,8 @@ $pedidos = $stmt->fetchAll();
                         <td><?php echo $p['fecha']; ?></td>
                         <td>
                             <form method="post" onsubmit="return confirm('¿Borrar pedido?')">
-                                <input type="hidden" name="borrar" value="<?php echo $p['id']; ?>">
-                                <a href="pedido_borrar.php?id=<?php echo $p['id']; ?>" class="boton-borrar">Borrar</a>
+                                <input type="hidden" name="borrar" value="<?php echo $p['id_pedido']; ?>">
+                                <a href="pedido_borrar.php?id=<?php echo $p['id_pedido']; ?>" class="boton-borrar">Borrar</a>
                             </form>
                         </td>
                     </tr>

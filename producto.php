@@ -9,7 +9,8 @@ if (!$cod) {
     exit();
 }
 
-$sql  = "SELECT * FROM producto WHERE cod = :cod";
+// Busca el producto por su código
+$sql  = "SELECT * FROM producto WHERE cod_producto = :cod";
 $stmt = $conexion->prepare($sql);
 $stmt->bindValue(':cod', $cod);
 $stmt->execute();
@@ -20,7 +21,8 @@ if (!$p) {
     exit();
 }
 
-$sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+// Consulta el stock en la tienda 1
+$sql_stock = "SELECT unidades FROM stock WHERE cod_producto = :cod AND cod_tienda = 1";
 $stmt_stock = $conexion->prepare($sql_stock);
 $stmt_stock->bindValue(':cod', $cod);
 $stmt_stock->execute();
@@ -69,14 +71,12 @@ $unidades = $stock ? $stock['unidades'] : 0;
 
             <?php if (isset($_SESSION['usuario']) && $_SESSION['rol'] === 'usuario'): ?>
                 <form method="post" action="añadir_carrito.php" style="display:flex; align-items:center; gap:8px; margin-top:20px;">
-                    <input type="hidden" name="cod" value="<?php echo htmlspecialchars($p['cod']); ?>">
-                    <input type="hidden" name="origen" value="producto.php?cod=<?php echo htmlspecialchars($p['cod']); ?>">
+                    <input type="hidden" name="cod" value="<?php echo htmlspecialchars($p['cod_producto']); ?>">
+                    <input type="hidden" name="origen" value="producto.php?cod=<?php echo htmlspecialchars($p['cod_producto']); ?>">
                     <?php if ($unidades > 0): ?>
-                        <!-- Hay stock: muestra input de cantidad y botón -->
                         <input type="number" name="cantidad" min="1" max="<?php echo $unidades; ?>" value="1" style="width:60px; padding:8px; border-radius:6px; border:1px solid #ccc;">
                         <button type="submit" class="boton-carrito" style="max-width:300px;">Añadir al carrito</button>
                     <?php else: ?>
-                        <!-- Sin stock: botón desactivado -->
                         <button class="boton-carrito" disabled style="background-color:#aaa; cursor:not-allowed; max-width:300px;">Sin stock</button>
                     <?php endif; ?>
                 </form>

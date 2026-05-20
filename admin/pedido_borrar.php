@@ -13,7 +13,7 @@ $id = $_GET['id'];
 
 // Si confirma el borrado, elimina el pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sql = "DELETE FROM pedido WHERE id = :id";
+    $sql = "DELETE FROM pedido WHERE id_pedido = :id";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Saca los datos del pedido para mostrarlos en el mensaje
-$sql = "SELECT * FROM pedido WHERE id = :id";
+$sql = "SELECT * FROM pedido WHERE id_pedido = :id";
 $stmt = $conexion->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $stmt->execute();

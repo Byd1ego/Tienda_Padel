@@ -23,7 +23,7 @@ $totalProductos = $stmtTotal->fetch()['total'];
 $totalPaginas = ceil($totalProductos / $productosPorPagina);
 
 // Obtiene solo los productos de la página actual usando LIMIT
-$stmt = $conexion->prepare("SELECT cod, nombre_corto, pvp, imagen FROM producto WHERE exclusiva = FALSE LIMIT :inicio, :por_pagina");
+$stmt = $conexion->prepare("SELECT cod_producto, nombre_corto, pvp, imagen FROM producto WHERE exclusiva = FALSE LIMIT :inicio, :por_pagina");
 $stmt->bindValue(':inicio', $inicio, PDO::PARAM_INT);
 $stmt->bindValue(':por_pagina', $productosPorPagina, PDO::PARAM_INT);
 $stmt->execute();
@@ -61,7 +61,7 @@ $ofertas = $stmt->fetchAll();
     <div class="contenedorgrid">
         <?php foreach ($ofertas as $p): ?>
             <div class="card">
-                <a href="producto.php?cod=<?php echo htmlspecialchars($p['cod']); ?>">
+                <a href="producto.php?cod=<?php echo htmlspecialchars($p['cod_producto']); ?>">
                     <?php if ($p['imagen']): ?>
                         <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
                     <?php else: ?>

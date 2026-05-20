@@ -20,7 +20,7 @@ if ($cod) {
     $cantidad = isset($_POST['cantidad']) ? (int)$_POST['cantidad'] : 1;
 
     // Consulta el stock disponible
-    $sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+    $sql_stock = "SELECT unidades FROM stock WHERE cod_producto = :cod AND cod_tienda = 1";
     $stmt_stock = $conexion->prepare($sql_stock);
     $stmt_stock->bindValue(':cod', $cod);
     $stmt_stock->execute();
@@ -28,7 +28,7 @@ if ($cod) {
     $stock_disponible = $stock ? $stock['unidades'] : 0;
 
     // Comprueba cuántas unidades tiene ya en el carrito
-    $sql = "SELECT id, unidades FROM carrito WHERE usuario = :usuario AND producto = :cod";
+    $sql = "SELECT id_carrito, unidades FROM carrito WHERE usuario = :usuario AND cod_producto = :cod";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':usuario', $usuario);
     $stmt->bindValue(':cod',     $cod);
@@ -42,13 +42,13 @@ if ($cod) {
 
     if ($puede_añadir > 0) {
         if ($existe) {
-            $sql = "UPDATE carrito SET unidades = unidades + :cantidad WHERE id = :id";
+            $sql = "UPDATE carrito SET unidades = unidades + :cantidad WHERE id_carrito = :id";
             $stmt = $conexion->prepare($sql);
             $stmt->bindValue(':cantidad', $puede_añadir, PDO::PARAM_INT);
-            $stmt->bindValue(':id',       $existe['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':id', $existe['id_carrito'], PDO::PARAM_INT);
             $stmt->execute();
         } else {
-            $sql = "INSERT INTO carrito (usuario, producto, unidades) VALUES (:usuario, :cod, :cantidad)";
+            $sql = "INSERT INTO carrito (usuario, cod_producto, unidades) VALUES (:usuario, :cod, :cantidad)";
             $stmt = $conexion->prepare($sql);
             $stmt->bindValue(':usuario', $usuario);
             $stmt->bindValue(':cod',     $cod);

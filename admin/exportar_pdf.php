@@ -13,7 +13,7 @@ require_once '../includes/conexion.php';
 require_once '../includes/fpdf/fpdf.php';
 
 // Obtiene todos los productos de la base de datos
-$sql = "SELECT cod, nombre_corto, marca, nivel, forma, peso, pvp, exclusiva FROM producto";
+$sql = "SELECT cod_producto, nombre_corto, marca, nivel, forma, peso, pvp, exclusiva FROM producto";
 $stmt = $conexion->prepare($sql);
 $stmt->execute();
 $productos = $stmt->fetchAll();
@@ -57,9 +57,9 @@ $fill = false;
 foreach ($productos as $p) {
 
     // Consulta el stock de ese producto en la tienda 1
-    $sql_stock = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+    $sql_stock = "SELECT unidades FROM stock WHERE cod_producto = :cod AND cod_tienda = 1";
     $stmt_stock = $conexion->prepare($sql_stock);
-    $stmt_stock->bindValue(':cod', $p['cod']);
+    $stmt_stock->bindValue(':cod', $p['cod_producto']);
     $stmt_stock->execute();
     $stock = $stmt_stock->fetch();
 
@@ -69,7 +69,7 @@ foreach ($productos as $p) {
     // Fondo azul claro para las filas alternas
     $pdf->SetFillColor(235, 245, 255);
 
-    $pdf->Cell(25,  7, $p['cod'],                             1, 0, 'C', $fill);
+    $pdf->Cell(25,  7, $p['cod_producto'],                             1, 0, 'C', $fill);
     $pdf->Cell(50,  7, $p['nombre_corto'],                    1, 0, 'L', $fill);
     $pdf->Cell(30,  7, $p['marca'],                           1, 0, 'C', $fill);
     $pdf->Cell(25,  7, $p['nivel'],                           1, 0, 'C', $fill);

@@ -15,7 +15,7 @@ $usuario = $_SESSION['usuario'];
 
 // Si se pulsa el botón borrar, elimina ese producto del carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrar'])) {
-    $sql = "DELETE FROM carrito WHERE id = :id AND usuario = :usuario";
+    $sql = "DELETE FROM carrito WHERE id_carrito = :id AND usuario = :usuario";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':id',      $_POST['borrar'], PDO::PARAM_INT);
     $stmt->bindValue(':usuario', $usuario);
@@ -38,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pagar'])) {
 
     // Comprueba que hay stock suficiente para cada producto antes de cobrar
     foreach ($items_pagar as $item) {
-        $sql_check = "SELECT unidades FROM stock WHERE producto = :cod AND tienda = 1";
+        $sql_check = "SELECT unidades FROM stock WHERE cod_producto = :cod AND cod_tienda = 1";
         $stmt_check = $conexion->prepare($sql_check);
-        $stmt_check->bindValue(':cod', $item['producto']);
+        $stmt_check->bindValue(':cod', $item['cod_producto']);
         $stmt_check->execute();
         $stock = $stmt_check->fetch();
 
@@ -57,25 +57,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pagar'])) {
         foreach ($items_pagar as $item) {
 
             // Resta las unidades del stock
-            $sql_update = "UPDATE stock SET unidades = unidades - :unidades WHERE producto = :cod AND tienda = 1";
+            $sql_update = "UPDATE stock SET unidades = unidades - :unidades WHERE cod_producto = :cod AND cod_tienda = 1";
             $stmt_update = $conexion->prepare($sql_update);
             $stmt_update->bindValue(':unidades', $item['unidades'], PDO::PARAM_INT);
-            $stmt_update->bindValue(':cod',      $item['producto']);
+            $stmt_update->bindValue(':cod',      $item['cod_producto']);
             $stmt_update->execute();
 
             // Saca el nombre e imagen del producto por separado
-            $sql_prod = "SELECT nombre_corto, pvp, imagen FROM producto WHERE cod = :cod";
+            $sql_prod = "SELECT nombre_corto, pvp, imagen FROM producto WHERE cod_producto = :cod";
             $stmt_prod = $conexion->prepare($sql_prod);
-            $stmt_prod->bindValue(':cod', $item['producto']);
+            $stmt_prod->bindValue(':cod', $item['cod_producto']);
             $stmt_prod->execute();
             $producto = $stmt_prod->fetch();
 
             // Guarda el pedido con la imagen incluida
-            $sql_pedido = "INSERT INTO pedido (usuario, producto, nombre_producto, unidades, pvp, imagen)
-                           VALUES (:usuario, :producto, :nombre_producto, :unidades, :pvp, :imagen)";
+            $sql_pedido = "INSERT INTO pedido (usuario, cod_producto, nombre_producto, unidades, pvp, imagen)
+                           VALUES (:usuario, :cod_producto, :nombre_producto, :unidades, :pvp, :imagen)";
             $stmt_pedido = $conexion->prepare($sql_pedido);
             $stmt_pedido->bindValue(':usuario',         $usuario);
-            $stmt_pedido->bindValue(':producto',        $item['producto']);
+            $stmt_pedido->bindValue(':cod_producto',    $item['cod_producto']);
             $stmt_pedido->bindValue(':nombre_producto', $producto['nombre_corto']);
             $stmt_pedido->bindValue(':unidades',        $item['unidades'], PDO::PARAM_INT);
             $stmt_pedido->bindValue(':pvp',             $producto['pvp']);
@@ -104,19 +104,19 @@ $items_carrito = $stmt->fetchAll();
 $items = [];
 $total = 0;
 foreach ($items_carrito as $item) {
-    $sql_prod = "SELECT nombre_corto, pvp, imagen FROM producto WHERE cod = :cod";
+    $sql_prod = "SELECT nombre_corto, pvp, imagen FROM producto WHERE cod_producto = :cod";
     $stmt_prod = $conexion->prepare($sql_prod);
-    $stmt_prod->bindValue(':cod', $item['producto']);
+    $stmt_prod->bindValue(':cod', $item['cod_producto']);
     $stmt_prod->execute();
     $producto = $stmt_prod->fetch();
 
     // Junta los datos del carrito con los del producto
     $items[] = [
-        'id'          => $item['id'],
-        'unidades'    => $item['unidades'],
-        'nombre_corto'=> $producto['nombre_corto'],
-        'pvp'         => $producto['pvp'],
-        'imagen'      => $producto['imagen']
+        'id'           => $item['id_carrito'],
+        'unidades'     => $item['unidades'],
+        'nombre_corto' => $producto['nombre_corto'],
+        'pvp'          => $producto['pvp'],
+        'imagen'       => $producto['imagen']
     ];
 
     $total += $producto['pvp'] * $item['unidades'];
