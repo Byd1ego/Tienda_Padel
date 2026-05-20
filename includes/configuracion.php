@@ -1,4 +1,6 @@
+
 <?php
+//a los buenos dias
 if ($_SERVER['HTTP_HOST'] === 'localhost') {
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
