@@ -1,7 +1,9 @@
 <?php 
 require_once '../includes/header_admin.php';
 require_once '../includes/conexion.php';
-require_once '../includes/funciones.php'; 
+require_once '../includes/funciones.php';
+
+$error = '';
 ?>
 
 <div class="admin-contenedor">
@@ -14,7 +16,6 @@ require_once '../includes/funciones.php';
 
     $cod = $_GET['cod'];
 
-    // Busca el producto por su código
     $sql = "SELECT * FROM producto WHERE cod_producto = :cod";
     $stmt = $conexion->prepare($sql);
     $stmt->bindValue(':cod', $cod);
@@ -25,7 +26,6 @@ require_once '../includes/funciones.php';
         die("Producto no encontrado.");
     }
 
-    // Consulta el stock actual en la tienda 1
     $sql_stock = "SELECT unidades FROM stock WHERE cod_producto = :cod AND cod_tienda = 1";
     $stmt_stock = $conexion->prepare($sql_stock);
     $stmt_stock->bindValue(':cod', $cod);
@@ -35,66 +35,79 @@ require_once '../includes/funciones.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $imagen = $producto['imagen'];
+        // Comprueba si el nombre corto ya existe en otro producto
+        $sqlCheck = "SELECT cod_producto FROM producto WHERE nombre_corto = :nombre_corto AND cod_producto != :cod";
+        $stmtCheck = $conexion->prepare($sqlCheck);
+        $stmtCheck->bindValue(':nombre_corto', $_POST['nombre_corto']);
+        $stmtCheck->bindValue(':cod',          $cod);
+        $stmtCheck->execute();
 
-        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
-            $extension       = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-            $nombre_original = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME);
-            $nombre_archivo  = $nombre_original . '.' . $extension;
-            $destino         = '../static/img/' . $nombre_archivo;
-            if (!file_exists($destino)) {
-                move_uploaded_file($_FILES['imagen']['tmp_name'], $destino);
+        if ($stmtCheck->fetch()) {
+            $error = "Ya existe otro producto con ese nombre corto.";
+        } else {
+
+            $imagen = $producto['imagen'];
+            if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+                $extension       = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+                $nombre_original = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME);
+                $nombre_archivo  = $nombre_original . '.' . $extension;
+                $destino         = '../static/img/' . $nombre_archivo;
+                if (!file_exists($destino)) {
+                    move_uploaded_file($_FILES['imagen']['tmp_name'], $destino);
+                }
+                $imagen = $nombre_archivo;
             }
-            $imagen = $nombre_archivo;
-        }
 
-        // Actualiza el producto en la base de datos
-        $sql = "UPDATE producto
-                SET nombre       = :nombre,
-                    nombre_corto = :nombre_corto,
-                    descripcion  = :descripcion,
-                    marca        = :marca,
-                    nivel        = :nivel,
-                    forma        = :forma,
-                    peso         = :peso,
-                    pvp          = :pvp,
-                    exclusiva    = :exclusiva,
-                    imagen       = :imagen
-                WHERE cod_producto = :cod";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindValue(':cod',          $cod);
-        $stmt->bindValue(':nombre',       $_POST['nombre']);
-        $stmt->bindValue(':nombre_corto', $_POST['nombre_corto']);
-        $stmt->bindValue(':descripcion',  $_POST['descripcion']);
-        $stmt->bindValue(':marca',        $_POST['marca']);
-        $stmt->bindValue(':nivel',        $_POST['nivel']);
-        $stmt->bindValue(':forma',        $_POST['forma']);
-        $stmt->bindValue(':peso',         $_POST['peso'],  PDO::PARAM_INT);
-        $stmt->bindValue(':pvp',          $_POST['pvp'],   PDO::PARAM_STR);
-        $stmt->bindValue(':exclusiva',    isset($_POST['exclusiva']) ? 1 : 0, PDO::PARAM_INT);
-        $stmt->bindValue(':imagen',       $imagen);
+            $sql = "UPDATE producto
+                    SET nombre       = :nombre,
+                        nombre_corto = :nombre_corto,
+                        descripcion  = :descripcion,
+                        marca        = :marca,
+                        nivel        = :nivel,
+                        forma        = :forma,
+                        peso         = :peso,
+                        pvp          = :pvp,
+                        exclusiva    = :exclusiva,
+                        imagen       = :imagen
+                    WHERE cod_producto = :cod";
+            $stmt = $conexion->prepare($sql);
+            $stmt->bindValue(':cod',          $cod);
+            $stmt->bindValue(':nombre',       $_POST['nombre']);
+            $stmt->bindValue(':nombre_corto', $_POST['nombre_corto']);
+            $stmt->bindValue(':descripcion',  $_POST['descripcion']);
+            $stmt->bindValue(':marca',        $_POST['marca']);
+            $stmt->bindValue(':nivel',        $_POST['nivel']);
+            $stmt->bindValue(':forma',        $_POST['forma']);
+            $stmt->bindValue(':peso',         $_POST['peso'],  PDO::PARAM_INT);
+            $stmt->bindValue(':pvp',          $_POST['pvp'],   PDO::PARAM_STR);
+            $stmt->bindValue(':exclusiva',    isset($_POST['exclusiva']) ? 1 : 0, PDO::PARAM_INT);
+            $stmt->bindValue(':imagen',       $imagen);
 
-        try {
-            $stmt->execute();
+            try {
+                $stmt->execute();
 
-            // Actualiza o inserta el stock
-            if ($stock) {
-                $sql_stock = "UPDATE stock SET unidades = :unidades WHERE cod_producto = :cod AND cod_tienda = 1";
-            } else {
-                $sql_stock = "INSERT INTO stock (cod_producto, cod_tienda, unidades) VALUES (:cod, 1, :unidades)";
+                if ($stock) {
+                    $sql_stock = "UPDATE stock SET unidades = :unidades WHERE cod_producto = :cod AND cod_tienda = 1";
+                } else {
+                    $sql_stock = "INSERT INTO stock (cod_producto, cod_tienda, unidades) VALUES (:cod, 1, :unidades)";
+                }
+                $stmt_stock = $conexion->prepare($sql_stock);
+                $stmt_stock->bindValue(':cod',      $cod);
+                $stmt_stock->bindValue(':unidades', $_POST['unidades'], PDO::PARAM_INT);
+                $stmt_stock->execute();
+
+                header("Location: productos.php");
+                exit();
+            } catch (Exception $e) {
+                $error = "Error al actualizar: " . $e->getMessage();
             }
-            $stmt_stock = $conexion->prepare($sql_stock);
-            $stmt_stock->bindValue(':cod',      $cod);
-            $stmt_stock->bindValue(':unidades', $_POST['unidades'], PDO::PARAM_INT);
-            $stmt_stock->execute();
-
-            header("Location: productos.php");
-            exit();
-        } catch (Exception $e) {
-            echo "<p style='color:red'>Error al actualizar: " . $e->getMessage() . "</p>";
         }
     }
     ?>
+
+    <?php if ($error): ?>
+        <p class="error"><?php echo $error; ?></p>
+    <?php endif; ?>
 
     <form method="post" class="formulario" enctype="multipart/form-data">
         <div class="form-grupo">
