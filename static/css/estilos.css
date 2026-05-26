@@ -19,13 +19,16 @@ main {
     padding: 20px;
 }
 
+/* Título de las páginas principales */
 main>h2 {
     text-align: center;
     padding: 10px;
     color: #111111;
 }
 
-/* ── HEADER ── */
+/* ── HEADER ──
+   Barra superior fija con logo y menú
+   position sticky hace que se quede pegada arriba al hacer scroll */
 header {
     display: flex;
     align-items: center;
@@ -39,8 +42,9 @@ header {
     border-bottom: 3px solid #C8E000;
 }
 
-
-/* ── FOOTER ── */
+/* ── FOOTER ──
+   Barra inferior con email, logo y dirección
+   margin-top auto lo empuja siempre al fondo de la página */
 footer {
     display: flex;
     align-items: center;
@@ -54,16 +58,20 @@ footer {
     margin-top: auto;
 }
 
+/* Logo del footer */
 footer img {
     width: 120px;
     max-width: 100%;
 }
 
+/* Textos del footer en blanco */
 footer > p {
     color: white;
 }
 
-/* ── MENÚ MÓVIL ── */
+/* ── MENÚ MÓVIL ──
+   En móvil el menú se oculta y aparece al pulsar el icono hamburguesa
+   Se posiciona justo debajo del header */
 .menu {
     list-style: none;
     position: absolute;
@@ -79,37 +87,44 @@ footer > p {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Cada opción del menú con separador */
 .menu li {
     padding: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Enlaces del menú en blanco */
 .menu>li>a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
 }
 
+/* Color verde amarillo al pasar el ratón */
 .menu>li>a:hover {
     color: #C8E000;
 }
 
+/* El checkbox que controla el menú hamburguesa está oculto */
 #hamburguesa {
     display: none;
 }
 
+/* Icono de tres rayas visible solo en móvil */
 #icono {
     cursor: pointer;
     font-size: 29px;
     color: white;
 }
 
+/* Cuando el checkbox está marcado, muestra el menú */
 #hamburguesa:checked~.menu,
 #hamburguesa:checked~nav .menu {
     display: flex;
 }
 
-/* ── MENÚ ADMIN ── */
+/* ── MENÚ ADMIN ──
+   Igual que el menú normal pero para el panel de administración */
 .menu-admin {
     list-style: none;
     position: absolute;
@@ -140,21 +155,26 @@ footer > p {
     color: #C8E000;
 }
 
+/* Checkbox oculto del menú admin */
 #hamburguesa-admin {
     display: none;
 }
 
+/* Icono hamburguesa del admin */
 #icono-admin {
     cursor: pointer;
     font-size: 29px;
     color: white;
 }
 
+/* Cuando se marca el checkbox del admin, muestra el menú admin */
 #hamburguesa-admin:checked~nav .menu-admin {
     display: flex;
 }
 
-/* ── BANNER ── */
+/* ── BANNER ──
+   Contenedor principal del banner de cada página
+   En móvil una columna, en tablet y escritorio dos columnas (imagen + texto) */
 .banner-completo {
     display: grid;
     grid-template-columns: 1fr;
@@ -166,7 +186,9 @@ footer > p {
     border-top: 4px solid #C8E000;
 }
 
-/* ── SLIDESHOW ── */
+/* ── SLIDESHOW ──
+   Contenedor del carrusel de imágenes del index
+   Las imágenes se apilan con position absolute y se muestran con jQuery */
 #slideshow {
     width: 100%;
     height: 200px;
@@ -174,6 +196,7 @@ footer > p {
     overflow: hidden;
 }
 
+/* Cada imagen del slideshow ocupa todo el contenedor */
 #slideshow img {
     position: absolute;
     width: 100%;
@@ -184,7 +207,9 @@ footer > p {
     left: 0;
 }
 
-/* ── BANNER IMAGEN ESTÁTICA ── */
+/* ── BANNER IMAGEN ESTÁTICA ──
+   Imagen fija que se usa en contacto y exclusivas
+   object-fit cover recorta la imagen para que rellene el espacio */
 .banner-imagen-estatica {
     width: 100%;
     height: 300px;
@@ -197,7 +222,17 @@ footer > p {
     object-fit: cover;
 }
 
-/* ── BANNER TEXTO ── */
+/* Clase extra para exclusivas para que la imagen no se corte en tablet */
+.banner-exclusivas {
+    height: 100%;
+}
+
+.banner-exclusivas img {
+    height: 100%;
+}
+
+/* ── BANNER TEXTO ──
+   Parte derecha del banner con título, descripción y estadísticas */
 .banner-texto {
     padding: 24px;
     display: flex;
@@ -206,6 +241,7 @@ footer > p {
     background-color: white;
 }
 
+/* Etiqueta pequeña encima del título */
 .banner-tag {
     font-size: 0.8rem;
     font-weight: 700;
@@ -214,6 +250,7 @@ footer > p {
     color: #1A73E8;
 }
 
+/* Título grande del banner */
 .banner-titulo {
     font-size: 1rem;
     font-weight: 600;
@@ -221,18 +258,21 @@ footer > p {
     line-height: 1.2;
 }
 
+/* Descripción del banner */
 .banner-desc {
     font-size: 1rem;
     color: #555555;
     line-height: 1.7;
 }
 
+/* Fila de estadísticas debajo de la descripción */
 .banner-stats {
     display: flex;
     gap: 24px;
     margin-top: 8px;
 }
 
+/* Cada estadística en columna con número y texto */
 .banner-stat {
     display: flex;
     flex-direction: column;
@@ -240,12 +280,14 @@ footer > p {
     gap: 2px;
 }
 
+/* Número grande de cada estadística */
 .banner-stat strong {
     font-size: 1.6rem;
     font-weight: 800;
     color: #1A73E8;
 }
 
+/* Texto pequeño debajo del número */
 .banner-stat span {
     font-size: 0.8rem;
     color: #888888;
@@ -253,14 +295,18 @@ footer > p {
     letter-spacing: 1px;
 }
 
-/* ── GRID DE PRODUCTOS ── */
+/* ── GRID DE PRODUCTOS ──
+   Cuadrícula que muestra las cards de producto
+   En móvil una columna, en tablet dos, en escritorio tres */
 .contenedorgrid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
 }
 
-/* ── CARDS DE PRODUCTO ── */
+/* ── CARDS DE PRODUCTO ──
+   Cada tarjeta de producto con imagen, nombre y precio
+   El efecto hover la eleva un poco al pasar el ratón */
 .card {
     background-color: white;
     border-radius: 16px;
@@ -272,15 +318,18 @@ footer > p {
     border-top: 3px solid #C8E000;
 }
 
+/* Efecto al pasar el ratón: sube la card y aumenta la sombra */
 .card:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
+/* Quita el subrayado de los enlaces dentro de la card */
 .card a {
     text-decoration: none;
 }
 
+/* Imagen de la card con altura fija y recorte centrado */
 .card img {
     width: 100%;
     height: 220px;
@@ -289,6 +338,7 @@ footer > p {
     margin-bottom: 12px;
 }
 
+/* Nombre y precio del producto dentro de la card */
 .card p {
     font-size: 18px;
     font-weight: bold;
@@ -296,7 +346,9 @@ footer > p {
     text-align: center;
 }
 
-/* ── DETALLE PRODUCTO ── */
+/* ── DETALLE PRODUCTO ──
+   Página de detalle de un producto con imagen a la izquierda e info a la derecha
+   En móvil en columna, en tablet y escritorio en fila */
 .producto-detalle {
     display: flex;
     flex-direction: column;
@@ -310,6 +362,7 @@ footer > p {
     border-top: 4px solid #C8E000;
 }
 
+/* Imagen del producto centrada y con fondo gris */
 .producto-imagen img {
     width: 100%;
     max-height: 400px;
@@ -318,6 +371,7 @@ footer > p {
     background-color: #f5f5f5;
 }
 
+/* Título del producto */
 .producto-titulo {
     font-size: 1.8rem;
     font-weight: 800;
@@ -325,6 +379,7 @@ footer > p {
     margin-bottom: 8px;
 }
 
+/* Precio del producto en azul grande */
 .producto-precio {
     font-size: 2rem;
     font-weight: 800;
@@ -332,6 +387,7 @@ footer > p {
     margin-bottom: 16px;
 }
 
+/* Descripción del producto */
 .producto-desc {
     color: #555555;
     font-size: 1rem;
@@ -339,6 +395,7 @@ footer > p {
     margin-bottom: 24px;
 }
 
+/* Cuadrícula de especificaciones técnicas (marca, nivel, forma...) */
 .producto-specs {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -346,6 +403,7 @@ footer > p {
     margin-bottom: 24px;
 }
 
+/* Cada especificación con fondo gris y borde azul izquierdo */
 .spec {
     background-color: #f5f5f5;
     border-radius: 8px;
@@ -356,6 +414,7 @@ footer > p {
     border-left: 3px solid #1A73E8;
 }
 
+/* Etiqueta de la especificación en gris pequeño */
 .spec-label {
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -364,13 +423,15 @@ footer > p {
     font-weight: 700;
 }
 
+/* Valor de la especificación en negro */
 .spec-valor {
     font-size: 1rem;
     font-weight: 600;
     color: #111111;
 }
 
-/* ── PAGINACIÓN ── */
+/* ── PAGINACIÓN ──
+   Barra inferior del index con selector de productos por página y botones de página */
 .paginacion-container {
     display: flex;
     justify-content: space-between;
@@ -380,12 +441,14 @@ footer > p {
     margin-top: 30px;
 }
 
+/* Fila de botones de página */
 .paginacion {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
 }
 
+/* Botón de página individual */
 .pag-boton {
     background-color: white;
     color: #111111;
@@ -397,19 +460,22 @@ footer > p {
     transition: background-color 0.2s;
 }
 
+/* Botón de página al pasar el ratón */
 .pag-boton:hover {
     background-color: #C8E000;
     color: #111111;
     border-color: #C8E000;
 }
 
+/* Botón de la página activa en azul */
 .pag-activo {
     background-color: #1A73E8;
     color: white;
     border-color: #1A73E8;
 }
 
-/* ── FILTRO ── */
+/* ── FILTRO ──
+   Barra de filtro por nivel en el panel admin */
 .filtro-container {
     display: flex;
     align-items: center;
@@ -420,13 +486,15 @@ footer > p {
     color: #555555;
 }
 
-/* ── CONTACTO ── */
+/* ── CONTACTO ──
+   Página de contacto con formulario a la izquierda e info a la derecha */
 .contacto-contenedor {
     max-width: 1100px;
     margin: 30px auto;
     padding: 0 16px;
 }
 
+/* En móvil en columna, en tablet en fila */
 .contacto-bloque {
     display: flex;
     flex-direction: column;
@@ -434,36 +502,42 @@ footer > p {
     margin-bottom: 30px;
 }
 
+/* Info de contacto centrada */
 .contacto-info {
     text-align: center;
 }
 
+/* Títulos del formulario e info */
 .contacto-formulario h2,
 .contacto-info h2 {
     margin-bottom: 16px;
     color: #111111;
 }
 
+/* Párrafos de la info de contacto */
 .contacto-info p {
     margin: 12px 0;
 }
 
+/* Enlaces de la info sin subrayado */
 .contacto-info a {
     text-decoration: none;
 }
 
-
+/* Contenedor del mapa */
 .contacto-mapa {
     height: 250px;
     border-radius: 12px;
     overflow: hidden;
 }
 
+/* El mapa ocupa todo el contenedor */
 #mapa {
     height: 100%;
     width: 100%;
 }
 
+/* Mensaje verde de éxito al enviar el formulario */
 .contacto-ok {
     background: #d4edda;
     color: #155724;
@@ -472,7 +546,8 @@ footer > p {
     margin-bottom: 16px;
 }
 
-/* ── TIEMPO (AJAX) ── */
+/* ── TIEMPO (AJAX) ──
+   Div donde se muestra la temperatura de Crevillente cargada por AJAX */
 #tiempo {
     text-align: center;
     margin: 1rem 0;
@@ -481,25 +556,29 @@ footer > p {
     font-weight: bold;
 }
 
-/* ── FORMULARIOS ── */
+/* ── FORMULARIOS ──
+   Estilos comunes para todos los formularios de la web */
 .formulario {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
+/* Cada campo del formulario con su label e input en columna */
 .form-grupo {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
+/* Etiqueta del campo en negrita */
 .form-grupo label {
     font-weight: bold;
     font-size: 0.9rem;
     color: #111111;
 }
 
+/* Inputs y textareas con borde redondeado */
 .form-grupo input,
 .form-grupo textarea {
     padding: 10px;
@@ -510,22 +589,28 @@ footer > p {
     box-sizing: border-box;
 }
 
+/* Borde azul al hacer foco en un campo */
 .form-grupo input:focus,
 .form-grupo textarea:focus {
     outline: none;
     border-color: #1A73E8;
 }
 
+/* El textarea se puede redimensionar solo verticalmente */
 .form-grupo textarea {
     resize: vertical;
 }
 
+/* Botones del formulario alineados a la derecha */
 .form-botones {
     display: flex;
     justify-content: flex-end;
 }
 
-/* ── BOTONES ── */
+/* ── BOTONES ──
+   Estilos de los distintos tipos de botones de la web */
+
+/* Botón azul para acciones principales como guardar o enviar */
 .boton-nuevo {
     background-color: #1A73E8;
     color: white;
@@ -542,6 +627,7 @@ footer > p {
     background-color: #0A1628;
 }
 
+/* Botón gris oscuro para volver a la tienda */
 .boton-tienda {
     background-color: #444444;
     color: white;
@@ -558,6 +644,7 @@ footer > p {
     background-color: #666666;
 }
 
+/* Botón rojo para cerrar sesión */
 .boton-cerrar {
     background-color: #C0392B;
     color: white;
@@ -574,6 +661,7 @@ footer > p {
     background-color: #e74c3c;
 }
 
+/* Botón azul pequeño para editar un producto */
 .boton-editar {
     background-color: #1A73E8;
     color: white;
@@ -588,6 +676,7 @@ footer > p {
     background-color: #0A1628;
 }
 
+/* Botón rojo pequeño para borrar un producto o pedido */
 .boton-borrar {
     background-color: #C0392B;
     color: white;
@@ -602,6 +691,7 @@ footer > p {
     background-color: #e74c3c;
 }
 
+/* Botón azul ancho para añadir al carrito */
 .boton-carrito {
     background-color: #1A73E8;
     color: white;
@@ -619,6 +709,7 @@ footer > p {
     background-color: #0A1628;
 }
 
+/* Botón verde para confirmar el pago */
 .boton-pagar {
     background-color: #27AE60;
     color: white;
@@ -634,32 +725,38 @@ footer > p {
     background-color: #2ecc71;
 }
 
-/* ── PANEL ADMIN ── */
+/* ── PANEL ADMIN ──
+   Contenedor principal de todas las páginas del panel de administración */
 .admin-contenedor {
     max-width: 1300px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
+/* Título de cada página del admin */
 .admin-titulo {
     font-size: 2rem;
     margin-bottom: 24px;
     color: #111111;
 }
 
+/* Barra de acciones del admin con botones a la derecha */
 .admin-barra {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 24px;
 }
 
+/* Fila de botones del admin */
 .admin-botones {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
 }
 
-/* ── TARJETAS ADMIN (móvil) ── */
+/* ── TARJETAS ADMIN (móvil) ──
+   Vista de productos en tarjetas para pantallas pequeñas
+   En escritorio se ocultan y se muestra la tabla */
 .productos-cards {
     display: flex;
     flex-direction: column;
@@ -667,6 +764,7 @@ footer > p {
     margin-bottom: 20px;
 }
 
+/* Cada tarjeta con imagen a la izquierda y datos a la derecha */
 .producto-card-admin {
     background-color: white;
     border-radius: 12px;
@@ -676,6 +774,7 @@ footer > p {
     gap: 16px;
 }
 
+/* Imagen cuadrada de la tarjeta admin */
 .producto-card-img img {
     width: 80px;
     height: 80px;
@@ -683,6 +782,7 @@ footer > p {
     border-radius: 8px;
 }
 
+/* Datos del producto en la tarjeta admin */
 .producto-card-body {
     flex: 1;
     display: flex;
@@ -691,16 +791,19 @@ footer > p {
     font-size: 0.9rem;
 }
 
+/* Etiqueta en negrita dentro de la tarjeta */
 .card-label {
     font-weight: bold;
     color: #555555;
 }
 
-/* ── TABLA ADMIN (escritorio) ── */
+/* ── TABLA ADMIN (escritorio) ──
+   Tabla completa visible solo en pantallas grandes */
 .tabla-wrapper {
     display: none;
 }
 
+/* Tabla con bordes redondeados y sombra */
 .tabla-admin {
     width: 100%;
     border-collapse: collapse;
@@ -711,6 +814,7 @@ footer > p {
     font-size: 0.95rem;
 }
 
+/* Cabecera de la tabla con fondo oscuro y borde verde amarillo */
 .tabla-admin th {
     background-color: #0A1628;
     color: white;
@@ -720,6 +824,7 @@ footer > p {
     border-bottom: 3px solid #C8E000;
 }
 
+/* Celdas de la tabla con separador inferior */
 .tabla-admin td {
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
@@ -727,26 +832,31 @@ footer > p {
     vertical-align: middle;
 }
 
+/* La última fila no tiene separador */
 .tabla-admin tr:last-child td {
     border-bottom: none;
 }
 
+/* Fondo azul claro al pasar el ratón por una fila */
 .tabla-admin tr:hover td {
     background-color: #f0f7ff;
 }
 
+/* Precio en azul y negrita dentro de la tabla */
 .precio-admin {
     font-weight: bold;
     color: #1A73E8;
 }
 
+/* Fila de botones de acciones en la tabla */
 .acciones-admin {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
 }
 
-/* ── CONFIRMACIÓN BORRAR ── */
+/* ── CONFIRMACIÓN BORRAR ──
+   Página de confirmación antes de borrar un producto o pedido */
 .borrar-contenedor {
     max-width: 500px;
     margin: 80px auto;
@@ -758,6 +868,7 @@ footer > p {
     border-top: 4px solid #C0392B;
 }
 
+/* Mensaje de advertencia en rojo claro */
 .borrar-mensaje {
     background-color: #f8d7da;
     color: #721c24;
@@ -768,18 +879,21 @@ footer > p {
     line-height: 1.5;
 }
 
+/* Botones de cancelar y confirmar centrados */
 .borrar-botones {
     display: flex;
     justify-content: center;
     gap: 16px;
 }
 
-/* ── FORO ── */
+/* ── FORO ──
+   Página del foro con formulario arriba y comentarios abajo */
 .foro-contenedor {
     max-width: 700px;
     margin: 0 auto;
 }
 
+/* Caja del formulario para escribir un comentario */
 .foro-formulario {
     background-color: white;
     border-radius: 12px;
@@ -789,6 +903,7 @@ footer > p {
     border-top: 4px solid #1A73E8;
 }
 
+/* Cada comentario publicado con borde azul izquierdo */
 .comentario {
     background-color: white;
     border-radius: 12px;
@@ -797,13 +912,15 @@ footer > p {
     border-left: 4px solid #1A73E8;
 }
 
+/* Fecha del comentario en gris pequeño */
 .comentario-fecha {
     font-size: 0.8rem;
     color: #888888;
     margin-left: 6px;
 }
 
-/* ── BIENVENIDA FORO ── */
+/* ── BIENVENIDA FORO ──
+   Mensaje de bienvenida que aparece con efecto slideDown al entrar al foro */
 #bienvenida {
     display: none;
     background-color: #0A1628;
@@ -815,6 +932,7 @@ footer > p {
     border-left: 4px solid #C8E000;
 }
 
+/* Botón de cerrar el mensaje de bienvenida */
 #cerrar-bienvenida {
     position: absolute;
     top: 10px;
@@ -823,7 +941,8 @@ footer > p {
     color: #C8E000;
 }
 
-/* ── LOGIN ── */
+/* ── LOGIN ──
+   Caja centrada con el formulario de inicio de sesión */
 .login-contenedor {
     max-width: 400px;
     margin: 40px auto;
@@ -833,6 +952,7 @@ footer > p {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Título del login centrado */
 .login-titulo {
     text-align: center;
     font-size: 1.8rem;
@@ -840,6 +960,7 @@ footer > p {
     color: #111111;
 }
 
+/* Mensaje amarillo de aviso */
 .alerta {
     background-color: #fff3cd;
     color: #856404;
@@ -849,6 +970,7 @@ footer > p {
     text-align: center;
 }
 
+/* Mensaje rojo de error */
 .error {
     background-color: #f8d7da;
     color: #721c24;
@@ -858,19 +980,22 @@ footer > p {
     text-align: center;
 }
 
-/* ── CARRITO ── */
+/* ── CARRITO ──
+   Página del carrito con lista de productos y total al final */
 .carrito-contenedor {
     max-width: 800px;
     margin: 40px auto;
     padding: 0 16px;
 }
 
+/* Título del carrito */
 .carrito-titulo {
     font-size: 2rem;
     margin-bottom: 30px;
     color: #111111;
 }
 
+/* Mensaje cuando el carrito está vacío */
 .carrito-vacio {
     text-align: center;
     font-size: 1.2rem;
@@ -878,6 +1003,7 @@ footer > p {
     margin-top: 40px;
 }
 
+/* Lista de productos del carrito */
 .carrito-lista {
     display: flex;
     flex-direction: column;
@@ -885,6 +1011,7 @@ footer > p {
     margin-bottom: 30px;
 }
 
+/* Cada producto del carrito con imagen, info y botón de borrar */
 .carrito-item {
     background-color: white;
     border-radius: 12px;
@@ -896,6 +1023,7 @@ footer > p {
     border-left: 4px solid #1A73E8;
 }
 
+/* Imagen cuadrada del producto en el carrito */
 .carrito-item img {
     width: 80px;
     height: 80px;
@@ -903,10 +1031,12 @@ footer > p {
     border-radius: 8px;
 }
 
+/* Bloque de texto con nombre, precio y subtotal */
 .carrito-info {
     flex: 1;
 }
 
+/* Nombre del producto en el carrito */
 .carrito-nombre {
     font-weight: bold;
     font-size: 1rem;
@@ -914,11 +1044,13 @@ footer > p {
     color: #111111;
 }
 
+/* Precio unitario y unidades */
 .carrito-precio {
     color: #555555;
     font-size: 0.9rem;
 }
 
+/* Subtotal del producto en azul */
 .carrito-subtotal {
     font-weight: bold;
     color: #1A73E8;
@@ -926,6 +1058,7 @@ footer > p {
     margin-top: 4px;
 }
 
+/* Barra inferior con el total y el botón de pagar */
 .carrito-total {
     background-color: #0A1628;
     border-radius: 12px;
@@ -938,64 +1071,72 @@ footer > p {
     color: white;
     border-top: 3px solid #C8E000;
 }
-/* ── FORMULARIO ADMIN ── */
 
-/* Móvil: una columna, campos apilados */
+/* ── FORMULARIO ADMIN ──
+   En móvil los campos van uno debajo del otro */
 .admin-contenedor .formulario {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
 }
 
-
 /* ════════════════════════
    RESPONSIVE — MOBILE FIRST
+   Los estilos de abajo solo se aplican a partir del tamaño indicado
 ════════════════════════ */
 
+/* En móvil el header tiene menos padding */
 @media (max-width: 767px) {
     header {
         padding: 10px 16px;
     }
 }
 
+/* En tablet la barra del admin se alinea a la izquierda */
 @media (max-width: 1024px) {
     .admin-barra {
         justify-content: flex-start;
     }
 }
 
+/* A partir de 480px el slideshow crece un poco */
 @media (min-width: 480px) {
     #slideshow {
         height: 280px;
     }
 }
 
-    
+/* A partir de 768px (tablet) */
 @media (min-width: 768px) {
+
+    /* El formulario admin pasa a dos columnas */
     .admin-contenedor .formulario {
         grid-template-columns: 1fr 1fr;
     }
 
-    /* Los botones de guardar y cancelar ocupan todo el ancho */
+    /* Los botones del formulario admin ocupan todo el ancho */
     .admin-contenedor .formulario .form-botones {
         grid-column: 1 / -1;
         justify-content: flex-end;
     }
 
-
+    /* El grid de productos pasa a dos columnas */
     .contenedorgrid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* El banner pasa a dos columnas: imagen y texto */
     .banner-completo {
         grid-template-columns: 1fr 1fr;
     }
 
+    /* El icono hamburguesa se oculta en tablet y escritorio */
     #icono,
     #icono-admin {
         display: none;
     }
 
+    /* El menú se muestra en fila horizontal en tablet y escritorio */
     .menu,
     .menu-admin {
         position: static;
@@ -1008,40 +1149,49 @@ footer > p {
         border: none;
     }
 
+    /* Los items del menú sin separadores en horizontal */
     .menu li,
     .menu-admin li {
         border: none;
         padding: 0;
     }
 
+    /* El bloque de contacto pasa a fila en tablet */
     .contacto-bloque {
         flex-direction: row;
     }
 
+    /* El formulario de contacto ocupa más espacio que la info */
     .contacto-formulario {
         flex: 2;
     }
 
+    /* El mapa crece en tablet */
     .contacto-mapa {
         height: 350px;
     }
 
+    /* El slideshow crece en tablet */
     #slideshow {
         height: 380px;
     }
 
+    /* El título del banner crece en tablet */
     .banner-titulo {
         font-size: 2.6rem;
     }
 
+    /* Más padding en el texto del banner en tablet */
     .banner-texto {
         padding: 40px 36px;
     }
 
+    /* El detalle del producto pasa a fila en tablet */
     .producto-detalle {
         flex-direction: row;
     }
 
+    /* Imagen e info del producto ocupan el mismo espacio */
     .producto-imagen {
         flex: 1;
     }
@@ -1051,7 +1201,10 @@ footer > p {
     }
 }
 
+/* A partir de 1024px (escritorio) */
 @media (min-width: 1024px) {
+
+    /* Las tarjetas del admin se ocultan y se muestra la tabla */
     .productos-cards {
         display: none;
     }
@@ -1062,11 +1215,15 @@ footer > p {
     }
 }
 
+/* A partir de 1200px (escritorio grande) */
 @media (min-width: 1200px) {
+
+    /* El grid de productos pasa a tres columnas */
     .contenedorgrid {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    /* El slideshow alcanza su tamaño máximo */
     #slideshow {
         height: 420px;
     }
