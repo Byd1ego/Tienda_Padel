@@ -1,8 +1,8 @@
 <?php 
 // Carga la cabecera, la conexión y las funciones del panel de administración
-require_once '../includes/header_admin.php';
-require_once '../includes/conexion.php';
-require_once '../includes/funciones.php';
+require_once '../static/header_admin.php';
+require_once '../static/conexion.php';
+require_once '../static/funciones.php';
 
 // Variable para guardar mensajes de error
 $error = '';
@@ -62,7 +62,7 @@ $error = '';
                 $extension       = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
                 $nombre_original = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME);
                 $nombre_archivo  = $nombre_original . '.' . $extension;
-                $destino         = '../static/img/' . $nombre_archivo;
+                $destino         = '../includes/img/' . $nombre_archivo;
                 // Solo mueve el archivo si no existe ya uno con ese nombre
                 if (!file_exists($destino)) {
                     move_uploaded_file($_FILES['imagen']['tmp_name'], $destino);
@@ -187,7 +187,7 @@ $error = '';
             <label>Imagen actual</label>
             <!-- Muestra la imagen actual si existe -->
             <?php if ($producto['imagen']): ?>
-                <img src="../static/img/<?php echo htmlspecialchars($producto['imagen']); ?>" style="max-width:120px; border-radius:8px;">
+                <img src="../includes/img/<?php echo htmlspecialchars($producto['imagen']); ?>" style="max-width:120px; border-radius:8px;">
             <?php else: ?>
                 <p>Sin imagen</p>
             <?php endif; ?>
@@ -201,4 +201,4 @@ $error = '';
     </form>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

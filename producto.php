@@ -1,6 +1,6 @@
 <?php
-include_once 'includes/header.php';
-require_once 'includes/conexion.php';
+include_once 'static/header.php';
+require_once 'static/conexion.php';
 
 $cod = $_GET['cod'] ?? '';
 
@@ -35,9 +35,9 @@ $unidades = $stock ? $stock['unidades'] : 0;
 
         <div class="producto-imagen">
             <?php if ($p['imagen']): ?>
-                <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
+                <img src="includes/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
             <?php else: ?>
-                <img src="static/img/default.jpg" alt="Sin imagen">
+                <img src="includes/img/default.jpg" alt="Sin imagen">
             <?php endif; ?>
         </div>
 
@@ -90,4 +90,4 @@ $unidades = $stock ? $stock['unidades'] : 0;
     </div>
 </main>
 
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

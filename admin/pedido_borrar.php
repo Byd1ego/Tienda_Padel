@@ -1,7 +1,7 @@
 <?php
 // Carga cabecera y conexión
-require_once '../includes/header_admin.php';
-require_once '../includes/conexion.php';
+require_once '../static/header_admin.php';
+require_once '../static/conexion.php';
 
 // Si no llega el id por URL, para
 if (!isset($_GET['id'])) {
@@ -47,4 +47,4 @@ if (!$pedido) {
     </div>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

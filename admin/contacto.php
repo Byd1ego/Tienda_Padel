@@ -1,7 +1,7 @@
 <?php
 // Carga cabecera y conexión
-require_once '../includes/header_admin.php';
-require_once '../includes/conexion.php';
+require_once '../static/header_admin.php';
+require_once '../static/conexion.php';
 
 // Si se pulsa borrar, elimina el mensaje
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrar'])) {
@@ -83,4 +83,4 @@ $mensajes = $stmt->fetchAll();
     <?php endif; ?>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Borra la imagen de la carpeta si existe
         if ($producto['imagen']) {
-            $ruta = '../static/img/' . $producto['imagen'];
+            $ruta = '../includes/img/' . $producto['imagen'];
             if (file_exists($ruta)) {
                 unlink($ruta);
             }
@@ -66,4 +66,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

@@ -9,8 +9,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 }
 
 // Carga la conexión a la base de datos y la librería para crear PDFs
-require_once '../includes/conexion.php';
-require_once '../includes/fpdf/fpdf.php';
+require_once '../static/conexion.php';
+require_once '../static/fpdf/fpdf.php';
 
 // Obtiene todos los productos de la base de datos
 $sql = "SELECT cod_producto, nombre_corto, marca, nivel, forma, peso, pvp, exclusiva FROM producto";

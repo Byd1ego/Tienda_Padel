@@ -1,7 +1,7 @@
 <?php 
-require_once '../includes/header_admin.php';
-require_once '../includes/conexion.php';
-require_once '../includes/funciones.php';
+require_once '../static/header_admin.php';
+require_once '../static/conexion.php';
+require_once '../static/funciones.php';
 
 $nivel = isset($_GET['nivel']) && in_array($_GET['nivel'], ['principiante', 'intermedio', 'avanzado']) ? $_GET['nivel'] : '';
 
@@ -41,7 +41,7 @@ $productos = $stmt->fetchAll();
                 ?>
                 <div class="producto-card-admin">
                     <div class="producto-card-img">
-                        <?php echo $p['imagen'] ? "<img src='../static/img/" . htmlspecialchars($p['imagen']) . "'>" : 'Sin imagen'; ?>
+                        <?php echo $p['imagen'] ? "<img src='../includes/img/" . htmlspecialchars($p['imagen']) . "'>" : 'Sin imagen'; ?>
                     </div>
                     <div class="producto-card-body">
                         <p><strong><?php echo $p['nombre_corto']; ?></strong></p>
@@ -80,7 +80,7 @@ $productos = $stmt->fetchAll();
                     $unidades = $stock ? $stock['unidades'] : 0;
                     ?>
                     <tr>
-                        <td><?php echo $p['imagen'] ? "<img src='../static/img/" . htmlspecialchars($p['imagen']) . "' style='max-width:60px; border-radius:6px;'>" : 'Sin imagen'; ?></td>
+                        <td><?php echo $p['imagen'] ? "<img src='../includes/img/" . htmlspecialchars($p['imagen']) . "' style='max-width:60px; border-radius:6px;'>" : 'Sin imagen'; ?></td>
                         <td><?php echo $p['cod_producto']; ?></td>
                         <td><?php echo $p['nombre_corto']; ?></td>
                         <td><?php echo $p['descripcion']; ?></td>
@@ -105,4 +105,4 @@ $productos = $stmt->fetchAll();
     <?php endif; ?>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

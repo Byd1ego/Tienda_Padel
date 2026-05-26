@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/header.php';
+include_once 'static/header.php';
 
 // Si ya hay sesión activa y no viene del redirigido, manda a su página correspondiente
 if (isset($_SESSION['usuario']) && !isset($_GET['redirigido'])) {
@@ -75,4 +75,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

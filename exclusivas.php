@@ -1,6 +1,6 @@
 <?php
 // Carga la cabecera y con ella inicia la sesión
-include_once 'includes/header.php';
+include_once 'static/header.php';
 
 // Solo los usuarios logueados pueden ver las exclusivas
 if (!isset($_SESSION['usuario'])) {
@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario'])) {
 <main>
     <div class="banner-completo">
         <div class="banner-imagen-estatica">
-            <img src="static/img/exclusivas.jpg" alt="Palas exclusivas">
+            <img src="includes/img/exclusivas.jpg" alt="Palas exclusivas">
         </div>
         <div class="banner-texto">
             <span class="banner-tag">Tienda de pádel</span>
@@ -24,7 +24,7 @@ if (!isset($_SESSION['usuario'])) {
 
     <?php
     // Carga la conexión y obtiene solo los productos marcados como exclusivos
-    require_once 'includes/conexion.php';
+    require_once 'static/conexion.php';
     $sql = "SELECT cod_producto, nombre_corto, pvp, imagen FROM producto WHERE exclusiva = TRUE";
     $stmt = $conexion->prepare($sql);
     $stmt->execute();
@@ -36,9 +36,9 @@ if (!isset($_SESSION['usuario'])) {
             <div class="card">
                 <a href="producto.php?cod=<?php echo htmlspecialchars($p['cod_producto']); ?>">
                     <?php if ($p['imagen']): ?>
-                        <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
+                        <img src="includes/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
                     <?php else: ?>
-                        <img src="static/img/default.jpg" alt="Sin imagen">
+                        <img src="includes/img/default.jpg" alt="Sin imagen">
                     <?php endif; ?>
                     <p><?php echo htmlspecialchars($p['nombre_corto']); ?> <br>
                         <?php echo number_format($p['pvp'], 2, ',', '.'); ?>€</p>
@@ -48,4 +48,4 @@ if (!isset($_SESSION['usuario'])) {
     </div>
 </main>
 
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

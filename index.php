@@ -1,7 +1,7 @@
 <?php
 // Carga la cabecera y con ella inicia la sesión
-include_once 'includes/header.php';
-require_once 'includes/conexion.php';
+include_once 'static/header.php';
+require_once 'static/conexion.php';
 
 // Si el usuario ha seleccionado cuántos productos ver, guarda su preferencia en una cookie de 30 días
 if (isset($_GET['por_pagina'])) {
@@ -37,9 +37,9 @@ $ofertas = $stmt->fetchAll();
 <main>
     <div class="banner-completo">
         <div id="slideshow">
-            <img src="static/img/coello.jpg" alt="" class="slide">
-            <img src="static/img/Almejorprecio.jpg" alt="" class="slide">
-            <img src="static/img/PROMOCION.jpg" alt="" class="slide">
+            <img src="includes/img/coello.jpg" alt="" class="slide">
+            <img src="includes/img/Almejorprecio.jpg" alt="" class="slide">
+            <img src="includes/img/PROMOCION.jpg" alt="" class="slide">
         </div>
         <div class="banner-texto">
             <span class="banner-tag">Tienda de pádel</span>
@@ -69,9 +69,9 @@ $ofertas = $stmt->fetchAll();
             <div class="card">
                 <a href="producto.php?cod=<?php echo htmlspecialchars($p['cod_producto']); ?>">
                     <?php if ($p['imagen']): ?>
-                        <img src="static/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
+                        <img src="includes/img/<?php echo htmlspecialchars($p['imagen']); ?>" alt="<?php echo htmlspecialchars($p['nombre_corto']); ?>">
                     <?php else: ?>
-                        <img src="static/img/default.jpg" alt="Sin imagen">
+                        <img src="includes/img/default.jpg" alt="Sin imagen">
                     <?php endif; ?>
                     <p><?php echo htmlspecialchars($p['nombre_corto']); ?> <br>
                         <?php echo number_format($p['pvp'], 2, ',', '.'); ?>€</p>
@@ -144,4 +144,4 @@ $(document).ready(function () {
 });
 </script>
 
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

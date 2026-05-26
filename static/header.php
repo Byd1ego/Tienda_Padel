@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <!-- Carga los iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="static/css/estilos.css">
+    <link rel="stylesheet" href="includes/css/estilos.css">
     <!-- Hace que la web se vea bien en móvil -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Pádel</title>
@@ -19,7 +19,7 @@ session_start();
     <header>
         <!-- Checkbox oculto que controla el menú hamburguesa en móvil -->
         <input type="checkbox" id="hamburguesa">
-        <img src="static/img/logo.png" alt="Logo" width="180">
+        <img src="includes/img/logo.png" alt="Logo" width="180">
 
         <!-- Icono de menú hamburguesa, visible solo en móvil -->
         <label for="hamburguesa" id="icono">

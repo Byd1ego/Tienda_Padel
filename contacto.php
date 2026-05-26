@@ -1,9 +1,9 @@
 <?php
 // Carga la cabecera y con ella inicia la sesión
-include_once 'includes/header.php';
+include_once 'static/header.php';
 
 // Carga la conexión a la base de datos
-require_once 'includes/conexion.php';
+require_once 'static/conexion.php';
 
 // Variables para controlar si el mensaje se envió bien o hubo error
 $ok    = false;
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="banner-completo">
     <div class="banner-imagen-estatica">
-        <img src="static/img/contactanos.jpg" alt="Contáctanos">
+        <img src="includes/img/contactanos.jpg" alt="Contáctanos">
     </div>
     <div class="banner-texto">
         <h1 class="banner-titulo">Envíanos un mensaje</h1>
@@ -137,4 +137,4 @@ $.get('https://api.open-meteo.com/v1/forecast?latitude=38.25&longitude=-0.81&cur
 });
 </script>
 
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

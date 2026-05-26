@@ -1,7 +1,7 @@
 <?php
 // Carga cabecera y conexión
-require_once '../includes/header_admin.php';
-require_once '../includes/conexion.php';
+require_once '../static/header_admin.php';
+require_once '../static/conexion.php';
 
 // Si se pulsa borrar, elimina ese pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['borrar'])) {
@@ -31,7 +31,7 @@ $pedidos = $stmt->fetchAll();
                 <div class="producto-card-admin">
                     <div class="producto-card-img">
                         <?php if ($p['imagen']): ?>
-                            <img src="../static/img/<?php echo htmlspecialchars($p['imagen']); ?>">
+                            <img src="../includes/img/<?php echo htmlspecialchars($p['imagen']); ?>">
                         <?php else: ?>
                             Sin imagen
                         <?php endif; ?>
@@ -68,7 +68,7 @@ $pedidos = $stmt->fetchAll();
                     <tr>
                         <td>
                             <?php if ($p['imagen']): ?>
-                                <img src="../static/img/<?php echo htmlspecialchars($p['imagen']); ?>" style="max-width:60px; border-radius:6px;">
+                                <img src="../includes/img/<?php echo htmlspecialchars($p['imagen']); ?>" style="max-width:60px; border-radius:6px;">
                             <?php else: ?>
                                 Sin imagen
                             <?php endif; ?>
@@ -95,4 +95,4 @@ $pedidos = $stmt->fetchAll();
     <?php endif; ?>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

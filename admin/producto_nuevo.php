@@ -1,10 +1,10 @@
 <?php 
 // Carga la cabecera del panel de administración (también comprueba que es admin)
-require_once '../includes/header_admin.php';
+require_once '../static/header_admin.php';
 
 // Carga la conexión a la base de datos y funciones auxiliares
-require_once '../includes/conexion.php';
-require_once '../includes/funciones.php';
+require_once '../static/conexion.php';
+require_once '../static/funciones.php';
 
 // Variable para guardar el mensaje de error si lo hay
 $error = '';
@@ -36,7 +36,7 @@ $error = '';
                 $extension       = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
                 $nombre_original = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME);
                 $nombre_archivo  = $nombre_original . '.' . $extension;
-                $destino         = '../static/img/' . $nombre_archivo;
+                $destino         = '../includes/img/' . $nombre_archivo;
 
                 // Solo mueve el archivo si no existe ya uno con el mismo nombre
                 if (!file_exists($destino)) {
@@ -156,4 +156,4 @@ $error = '';
     </form>
 </div>
 
-<?php require_once '../includes/footer_admin.php'; ?>
+<?php require_once '../static/footer_admin.php'; ?>

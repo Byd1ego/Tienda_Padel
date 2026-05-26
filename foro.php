@@ -1,7 +1,7 @@
 <?php
 // Carga la cabecera y con ella inicia la sesión
-include_once 'includes/header.php';
-require_once 'includes/conexion.php';
+include_once 'static/header.php';
+require_once 'static/conexion.php';
 
 // Solo los usuarios logueados pueden acceder al foro
 if (!isset($_SESSION['usuario'])) {

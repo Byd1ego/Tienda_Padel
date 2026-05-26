@@ -1,6 +1,6 @@
 <?php
 // Carga la cabecera y con ella inicia la sesión
-include_once 'includes/header.php';
+include_once 'static/header.php';
 
 // Si el usuario no está logueado o no es de tipo usuario, lo manda al login
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'usuario') {
@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'usuario') {
 }
 
 // Carga la conexión a la base de datos
-require_once 'includes/conexion.php';
+require_once 'static/conexion.php';
 
 $usuario = $_SESSION['usuario'];
 
@@ -145,9 +145,9 @@ foreach ($items_carrito as $item) {
                     <div class="carrito-item">
                         <!-- Muestra la imagen del producto o una por defecto si no tiene -->
                         <?php if ($item['imagen']): ?>
-                            <img src="static/img/<?php echo htmlspecialchars($item['imagen']); ?>" alt="">
+                            <img src="includes/img/<?php echo htmlspecialchars($item['imagen']); ?>" alt="">
                         <?php else: ?>
-                            <img src="static/img/default.jpg" alt="">
+                            <img src="includes/img/default.jpg" alt="">
                         <?php endif; ?>
 
                         <div class="carrito-info">
@@ -178,4 +178,4 @@ foreach ($items_carrito as $item) {
     </div>
 </main>
 
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

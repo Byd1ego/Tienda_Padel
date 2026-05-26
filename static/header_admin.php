@@ -16,7 +16,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Carga los iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../static/css/estilos.css">
+    <link rel="stylesheet" href="../includes/css/estilos.css">
     <title>Admin - Tienda Pádel</title>
 </head>
 <body>
@@ -27,7 +27,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
     <!-- Logo que lleva a la tienda -->
     <a href="../index.php">
-        <img src="../static/img/logo.png" alt="Logo" width="180">
+        <img src="../includes/img/logo.png" alt="Logo" width="180">
     </a>
 
     <!-- Icono de menú hamburguesa, visible solo en móvil -->
