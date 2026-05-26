@@ -4,7 +4,7 @@ session_start();
 
 // Si el usuario no es admin, lo manda al login
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: ../login.php?redirigido=true");
+    header("Location: ../index.php?acceso_denegado=1");
     exit();
 }
 

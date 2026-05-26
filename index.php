@@ -29,7 +29,11 @@ $stmt->bindValue(':por_pagina', $productosPorPagina, PDO::PARAM_INT);
 $stmt->execute();
 $ofertas = $stmt->fetchAll();
 ?>
-
+<?php if (isset($_GET['acceso_denegado'])): ?>
+    <p class="alerta" style="text-align:center; margin: 10px 0;">
+        No tienes permisos para acceder a esa página.
+    </p>
+<?php endif; ?>
 <main>
     <div class="banner-completo">
         <div id="slideshow">
@@ -57,6 +61,8 @@ $ofertas = $stmt->fetchAll();
             </div>
         </div>
     </div>
+    
+    
 
     <div class="contenedorgrid">
         <?php foreach ($ofertas as $p): ?>

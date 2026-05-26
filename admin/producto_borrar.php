@@ -11,7 +11,7 @@ if (!isset($_GET['cod'])) {
 $cod = $_GET['cod'];
 
 // Busca el producto para mostrar su nombre en la confirmación
-$sql = "SELECT cod_producto, nombre_corto FROM producto WHERE cod_producto = :cod";
+$sql = "SELECT cod_producto, nombre_corto, imagen FROM producto WHERE cod_producto = :cod";
 $stmt = $conexion->prepare($sql);
 $stmt->bindValue(':cod', $cod);
 $stmt->execute();
@@ -23,13 +23,21 @@ if (!$producto) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Primero borra el stock (necesario por la clave foránea)
+        // Borra la imagen de la carpeta si existe
+        if ($producto['imagen']) {
+            $ruta = '../static/img/' . $producto['imagen'];
+            if (file_exists($ruta)) {
+                unlink($ruta);
+            }
+        }
+
+        // Borra el stock del producto
         $sql_stock = "DELETE FROM stock WHERE cod_producto = :cod";
         $stmt_stock = $conexion->prepare($sql_stock);
         $stmt_stock->bindValue(':cod', $cod);
         $stmt_stock->execute();
 
-        // Luego borra el producto
+        // Borra el producto
         $sql = "DELETE FROM producto WHERE cod_producto = :cod";
         $stmt = $conexion->prepare($sql);
         $stmt->bindValue(':cod', $cod);

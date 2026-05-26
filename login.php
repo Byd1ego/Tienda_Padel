@@ -6,7 +6,7 @@ if (isset($_SESSION['usuario']) && !isset($_GET['redirigido'])) {
     if ($_SESSION['rol'] === 'admin') {
         header("Location: admin/productos.php");
     } else {
-        header("Location: index.php");
+        header("Location: index.php?acceso_denegado=1");
     }
     exit();
 }

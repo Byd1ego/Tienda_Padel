@@ -5,7 +5,7 @@ require_once 'includes/conexion.php';
 
 // Solo los usuarios logueados pueden acceder al foro
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php?redirigido=true");
+    header("Location: index.php?acceso_denegado=1");
     exit();
 }
 

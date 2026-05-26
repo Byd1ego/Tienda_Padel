@@ -2,9 +2,9 @@
 // Inicia la sesión para poder leer los datos del usuario logueado
 session_start();
 
-// Si el usuario no es admin, lo manda al login y detiene la ejecución
+// Si el usuario no es admin, lo manda al index y detiene la ejecución
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: ../login.php?redirigido=true");
+    header("Location: ../index.php?acceso_denegado=1");
     exit();
 }
 ?>
