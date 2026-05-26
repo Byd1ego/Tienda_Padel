@@ -1,6 +1,6 @@
 <?php 
-require_once '../includes/header_admin.php';
-require_once '../includes/conexion.php';
+require_once '../static/header_admin.php';
+require_once '../static/conexion.php';
 ?>
 
 <?php

@@ -99,4 +99,4 @@ $comentarios = $stmt->fetchAll();
     });
 </script>
 
-<?php include_once 'includes/footer.php'; ?>
+<?php include_once 'static/footer.php'; ?>

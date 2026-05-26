@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="text" name="telefono" id="telefono" placeholder="600000000" required>
                         <!-- Mensaje de error oculto que se muestra si el teléfono no es válido -->
                         <span id="telefono-error" style="color:red; font-size:0.85em; display:none;">
-                            El teléfono debe tener exactamente 9 dígitos y solo números.
+                            El teléfono debe tener exactamente 9 dígitos, solo números y empezar por 6.
                         </span>
                     </div>
                     <div class="form-grupo">
@@ -114,7 +114,7 @@ function validarTelefono() {
     const error    = document.getElementById('telefono-error');
 
     // La regex comprueba que sean exactamente 9 números, sin letras ni espacios
-    const regex = /^\d{9}$/;
+    const regex = /^6\d{8}$/;
 
     if (!regex.test(telefono)) {
         // Muestra el mensaje de error y cancela el envío

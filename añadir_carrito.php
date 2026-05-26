@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'usuario') {
 }
 
 // Carga la conexión a la base de datos
-require_once 'includes/conexion.php';
+require_once 'static/conexion.php';
 
 // Recoge el código del producto y el usuario de la sesión
 $cod     = $_POST['cod']     ?? '';
