@@ -4,7 +4,7 @@ include_once 'static/header.php';
 
 // Si el usuario no está logueado o no es de tipo usuario, lo manda al login
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'usuario') {
-    header("Location: login.php?redirigido=true");
+header("Location: index.php?acceso_denegado=1");
     exit();
 }
 

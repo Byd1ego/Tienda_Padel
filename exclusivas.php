@@ -4,7 +4,7 @@ include_once 'static/header.php';
 
 // Solo los usuarios logueados pueden ver las exclusivas
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php?redirigido=true");
+    header("Location: index.php?acceso_denegado=1");
     exit();
 }
 ?>
