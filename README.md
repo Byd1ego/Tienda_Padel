@@ -58,7 +58,7 @@ Tienda_Padel/
 │   ├── producto_nuevo.php     # Formulario para crear un producto
 │   └── producto_editar.php    # Formulario para editar un producto
 │
-├── includes/
+├── static/
 │   ├── conexion.php           # Conexión PDO a la base de datos
 │   ├── configuracion.php      # Constantes de conexión (host, user, pass, dbname)
 │   ├── header.php             # Cabecera HTML + inicio de sesión
@@ -68,7 +68,7 @@ Tienda_Padel/
 │   ├── funciones.php          # Funciones auxiliares
 │   └── fpdf/                  # Librería FPDF para generación de PDFs
 │
-├── static/
+├── includes/
 │   ├── css/
 │   │   └── estilos.css        # Hoja de estilos principal
 │   └── img/                   # Imágenes de productos y banners
