@@ -43,7 +43,7 @@ $pedidos = $stmt->fetchAll();
                         <p><span class="card-label">Total:</span> <?php echo number_format($p['pvp'] * $p['unidades'], 2, ',', '.'); ?>€</p>
                         <p><span class="card-label">Fecha:</span> <?php echo $p['fecha']; ?></p>
                         <form method="post" onsubmit="return confirm('¿Borrar pedido?')">
-                            <input type="hidden" name="borrar" value="<?php echo $p['id']; ?>">
+                            <input type="hidden" name="borrar" value="<?php echo $p['id_pedido']; ?>">
                             <a href="pedido_borrar.php?id=<?php echo $p['id_pedido']; ?>" class="boton-borrar">Borrar</a>
                         </form>
                     </div>
